@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="lblTitle.Help" xml:space="preserve">
+    <value>Specify a title to give the report here</value>
+  </data>
+  <data name="ControlTitle_settings.Text" xml:space="preserve">
+    <value>Report Settings</value>
+  </data>
+  <data name="ModuleHelp.Text" xml:space="preserve">
+    <value>&lt;h1&gt;Reports Module Settings&lt;/h1&gt;
+&lt;p&gt;In the Settings page, Users can set options for the Report Data Source as well as how the Data should be presented. The &lt;strong&gt;Report Settings&lt;/strong&gt; contains the settings specific to the Reports Module&lt;/p&gt;
+&lt;h2&gt;Data Source Settings&lt;/h2&gt;
+&lt;p&gt;In Data Source Settings, Users can configure how the data for the report is retrieved, and how long it is cached. Fields in this section do not affect how the Report appears to users and can 
+&lt;strong&gt;only&lt;/strong&gt; be modified by SuperUser Accounts (Host Users).&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;Title&lt;/em&gt; and &lt;em&gt;Description&lt;/em&gt; fields are used entirely for Import/Export functionality so that when a user Imports a report, they can view a description of the Report's intention and the title of the Report. The &lt;em&gt;Query&lt;/em&gt; field provides the SQL Query that will be run against the database in order to get the data to display, in future this may be extended to allow querying against other Data Sources but at this time Reports can only be based on data in the DotNetNuke database. 
+The &lt;em&gt;Query&lt;/em&gt; field also uses the &lt;em&gt;{databaseOwner}&lt;/em&gt; and &lt;em&gt;{objectQualifier}&lt;/em&gt; expansion tokens. Finally, the &lt;em&gt;Caching&lt;/em&gt; field allows Users to enable and disable caching, as well as configure the number of minutes data will be cached if it is enabled. Note that if Caching is enabled but the duration set to 0, Caching will not occur.&lt;/p&gt;
+&lt;h2&gt;Display Settings&lt;/h2&gt;
+&lt;p&gt;In Display Settings, Users can configure one of many Visualizers to display the data retrieved from the Data Source. Each Visualizer provides its own settings to configure how the data is displayed.&lt;/p&gt;
+&lt;h3&gt;Grid Visualizer&lt;/h3&gt;
+&lt;p&gt;This visualizer displays a simple Grid for the data retrieved from the Data Source. This grid takes column names from the data returned from the SQL Query (use the 'AS' keyword in your SQL script to give each column a different name). The &lt;em&gt;Enable Paging&lt;/em&gt; option allows you to enable the paging of the data displayed. The size of each page can be configured using the &lt;em&gt;Page Size&lt;/em&gt; option. This visualizer also supports sorting which can be enabled using the &lt;em&gt;Enable Sorting&lt;/em&gt; checkbox. This configures the grid to allow the user to click the column headers to sort the data by that column. Finally, the &lt;em&gt;Show Header&lt;/em&gt; field allows you to disable the column headers. If this setting is disabled, the &lt;em&gt;Enable Sorting&lt;/em&gt; field has no effect.&lt;/p&gt;
+&lt;h3&gt;HTML Template Visualizer&lt;/h3&gt;
+&lt;p&gt;This visualizer uses an HTML Template to determine how the data will be displayed. The &lt;em&gt;Template File&lt;/em&gt; field lets you specify the template to use.&lt;/p&gt;
+&lt;p&gt;HTML Templates used by this module use a token-based replacement system, similar to the DotNetNuke Skinning Engine. Tokens of the form: 
+&lt;strong&gt;[columnname]&lt;/strong&gt; are replaced with the value of the &lt;em&gt;columnname&lt;/em&gt; column in the results of the Query. So the token '&lt;strong&gt;[DisplayName]&lt;/strong&gt;' would be replaced with the value of the 
+&lt;em&gt;DisplayName&lt;/em&gt; column for that row. The Template is repeated for each row in the results.&lt;/p&gt;
+&lt;h3&gt;XSLT Transform Visualizer&lt;/h3&gt;
+&lt;p&gt;This visualizer uses an XSLT Transform to transform Xml produced from the data 
+returned by the Data Source. The Xml that the Data Source returns is of the 
+following format:&lt;/p&gt;
+&lt;pre&gt;&amp;lt;DocumentElement&amp;gt;
+    &amp;lt;QueryResults&amp;gt; &amp;lt;!-- Each QueryResults element under DocumentElement 
+        represents one row of data --&amp;gt;
+        &amp;lt;column1-name&amp;gt;column1-value&amp;lt;/column1-name&amp;gt; &amp;lt;!-- Each element under QueryResults
+            represents one column in the row --&amp;gt;
+        ...
+    &amp;lt;/QueryResults&amp;gt;
+    ...
+&amp;lt;/DocumentElement&amp;gt;&lt;/pre&gt;
+&lt;p&gt;This visualizer takes the XSLT file specified in the &lt;em&gt;Transform File&lt;/em&gt; field 
+and applies it to this Xml. Note that in order to use a URL to specify the XSLT 
+(i.e. the file is located on a different server) the system must be running 
+under a trust level higher than &amp;quot;&lt;strong&gt;Medium Trust&lt;/strong&gt;&amp;quot; (contact your 
+hosting provider for details). Your transformed output must produce HTML, and 
+any JavaScript in the output will be removed for security reasons.&lt;/p&gt;
+
+&lt;h2&gt;Externally Dependant Visualizers&lt;/h2&gt;
+&lt;p&gt;The following two Visualizers are "Externally Dependant" Visualizers, that is they depend on components
+provided by third-parties which cannot be redistributed with this module. Please view, or ask your host to
+view if you do not have FTP access to your DotNetNuke installation,
+the INSTALL.txt file in the "DesktopModules/Reports/ExtVisualizers" folder of your DotNetNuke installation in
+order to install these visualizers.&lt;/p&gt;
+&lt;h3&gt;Chart Visualizer&lt;/h3&gt;
+&lt;p&gt;This visualizer displays a chart of the data retrieved from the database. Each row is transformed into a bar
+in a bar chart (horizontal or vertical, sorry no line and other charts in this version). The &lt;em&gt;Bar Name Column&lt;/em&gt;
+field specifies the name of the column that will be used as the name of each bar, while the &lt;em&gt;Bar Value Column&lt;/em&gt; field
+specifies the name of the column that will be used as the value (or height) of each bar.&lt;/p&gt;
+&lt;p&gt;There are also two "coloring" modes that can be used. &lt;em&gt;One Color for every Bar&lt;/em&gt; mode uses the same color
+for each bar in the chart. &lt;em&gt;One Color per Bar&lt;/em&gt; allows you to add coloring logic to your SQL code and display
+a separate color in each bar. By setting the &lt;em&gt;Bar Color Column&lt;/em&gt; to the name of a column in the data returned,
+the value in that column will be treated as a standard HTML color (of the form "#RRGGBB") and used as the color for
+the bar representing that row.&lt;/p&gt;
+&lt;h3&gt;Reporting Services Visualizer&lt;/h3&gt;
+&lt;p&gt;This is a &lt;strong&gt;BETA&lt;/strong&gt; visualizer which should not be used in production environments without testing.
+Please visit the &lt;a href="http://www.dotnetnuke.com/Community/ForumsDotNetNuke/tabid/795/forumid/136/scope/threads/Default.aspx"&gt;Using the Reports Module&lt;/a&gt; forums at 
+&lt;a href="http://forums.dotnetnuke.com"&gt;http://forums.dotnetnuke.com&lt;/a&gt; and
+ask any questions you have regarding the usage of this visualizer.&lt;/p&gt;</value>
+  </data>
+  <data name="DataSource.Section" xml:space="preserve">
+    <value>Data Source Settings</value>
+  </data>
+  <data name="Display.Section" xml:space="preserve">
+    <value>Display and Caching Settings</value>
+  </data>
+  <data name="lblDescription.Help" xml:space="preserve">
+    <value>Specify a short description of the report here</value>
+  </data>
+  <data name="lblDescription.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="SuperUsersOnly.Text" xml:space="preserve">
+    <value>For security and privacy reasons, only Host Users (SuperUsers) are permitted to edit these settings</value>
+  </data>
+  <data name="WarningMessage.Text" xml:space="preserve">
+    <value>Warning! Anyone who can view this module will be able to view the results of the report. Queries entered here can pull data from any table in the database, be aware of privacy and security issues when writing them.</value>
+  </data>
+  <data name="lblCacheDuration.Help" xml:space="preserve">
+    <value>Specifies if caching is enabled and how long, in minutes, the results of the query will be cached.</value>
+  </data>
+  <data name="lblCacheDuration.Text" xml:space="preserve">
+    <value>Caching</value>
+  </data>
+  <data name="Visualizer.Text" xml:space="preserve">
+    <value>{0} Visualizer</value>
+  </data>
+  <data name="lblPageData.Help" xml:space="preserve">
+    <value>Check this box to enable paging</value>
+  </data>
+  <data name="lblPageData.Text" xml:space="preserve">
+    <value>Enable Paging?</value>
+  </data>
+  <data name="lblPageSize.Help" xml:space="preserve">
+    <value>Specify the number of records in a page of data</value>
+  </data>
+  <data name="lblPageSize.Text" xml:space="preserve">
+    <value>Page Size</value>
+  </data>
+  <data name="lblShowHeader.Help" xml:space="preserve">
+    <value>Check this box to display the header (column names) of the report</value>
+  </data>
+  <data name="lblShowHeader.Text" xml:space="preserve">
+    <value>Show Header?</value>
+  </data>
+  <data name="lblSortData.Help" xml:space="preserve">
+    <value>Check this box to enable sorting</value>
+  </data>
+  <data name="lblSortData.Text" xml:space="preserve">
+    <value>Enable Sorting?</value>
+  </data>
+  <data name="CacheFor.Text" xml:space="preserve">
+    <value>Cache the data for</value>
+  </data>
+  <data name="Minutes.Text" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="lblVisualizer.Help" xml:space="preserve">
+    <value>Select the Visualizer to use to display this report's data. This setting can be different for multiple instances of the same Reports Module on different Pages</value>
+  </data>
+  <data name="lblVisualizer.Text" xml:space="preserve">
+    <value>Active Visualizer</value>
+  </data>
+  <data name="btnHideTestResults.Text" xml:space="preserve">
+    <value>Hide Results</value>
+  </data>
+  <data name="btnTestDataSource.Text" xml:space="preserve">
+    <value>Test Data Source</value>
+  </data>
+  <data name="TestDSFail.Message" xml:space="preserve">
+    <value>There was an error executing the data source: {0}</value>
+  </data>
+  <data name="TestDSSuccess.Message" xml:space="preserve">
+    <value>Test successful, {0} records returned.</value>
+  </data>
+  <data name="NoVisualizer.Text" xml:space="preserve">
+    <value>&lt;No Visualizer&gt;</value>
+  </data>
+  <data name="VisualizerNotConfigured.Text" xml:space="preserve">
+    <value>There is no active visualizer configured for this module</value>
+  </data>
+  <data name="btnHideXmlSource.Text" xml:space="preserve">
+    <value>Hide Xml Source</value>
+  </data>
+  <data name="btnShowXml.Text" xml:space="preserve">
+    <value>Show Xml Source</value>
+  </data>
+  <data name="lblXmlSource.Help" xml:space="preserve">
+    <value>The Xml Source used in XSLT transformations of the data</value>
+  </data>
+  <data name="lblXmlSource.Text" xml:space="preserve">
+    <value>Xml Source</value>
+  </data>
+  <data name="btnTestDataSource.Confirm" xml:space="preserve">
+    <value>WARNING! This action will run your Data Source. Any SQL or other Query Language code configured for the Data Source will be executed. Do you want to continue?</value>
+  </data>
+  <data name="lblDataSource.Help" xml:space="preserve">
+    <value>Select the Data Source to use to generate this report's data.</value>
+  </data>
+  <data name="lblDataSource.Text" xml:space="preserve">
+    <value>Active Data Source</value>
+  </data>
+  <data name="NoDataSource.Text" xml:space="preserve">
+    <value>&lt;No Data Source&gt;</value>
+  </data>
+  <data name="DataSource.Text" xml:space="preserve">
+    <value>{0} Data Source</value>
+  </data>
+  <data name="DataSourceNotConfigured.Text" xml:space="preserve">
+    <value>There is no active data source configured for this module</value>
+  </data>
+  <data name="DataSourceNotLoaded.Text" xml:space="preserve">
+    <value>Data Source could not be loaded</value>
+  </data>
+  <data name="UnknownError.Text" xml:space="preserve">
+    <value>Unknown Error executing data source: {0}</value>
+  </data>
+  <data name="CacheWarning.Text" xml:space="preserve">
+    <value>Warning! Enabling Caching when using parameters is a security and privacy risk. See the Reports Module documentation for details</value>
+  </data>
+  <data name="CacheWithParametersEnabled.Text" xml:space="preserve">
+    <value>Warning! The use of Parameters while supporting Caching has been enabled by your Host. Be warned that the cached data is global to all users of this module on all tabs. The use of the @UserID and @TabID parameters is a known security and privacy risk</value>
+  </data>
+  <data name="Converters.Section" xml:space="preserve">
+    <value>Converters</value>
+  </data>
+  <data name="lblHtmlDecode.Help" xml:space="preserve">
+    <value>Enter a comma-separated list of columns to be Html Decoded</value>
+  </data>
+  <data name="lblHtmlDecode.Text" xml:space="preserve">
+    <value>Html Decode</value>
+  </data>
+  <data name="lblHtmlEncode.Help" xml:space="preserve">
+    <value>Enter a comma-separated list of columns to be Html Encoded</value>
+  </data>
+  <data name="lblHtmlEncode.Text" xml:space="preserve">
+    <value>Html Encode</value>
+  </data>
+  <data name="lblAutoRunReport.Help" xml:space="preserve">
+    <value>Check this box to have the report automatically run when  the page is loaded. If this is not set, ensure you set the Show Controls setting to allow the user to run the report</value>
+  </data>
+  <data name="lblAutoRunReport.Text" xml:space="preserve">
+    <value>Auto Run Report</value>
+  </data>
+  <data name="lblTokenReplace.Help" xml:space="preserve">
+    <value>Check this box to have execute the standard DNN TokenReplace on the data for columns that are not read-only.</value>
+  </data>
+  <data name="lblTokenReplace.Text" xml:space="preserve">
+    <value>Enable DNN token replacement</value>
+  </data>
+  <data name="lblShowControls.Help" xml:space="preserve">
+    <value>Check this box to show the Run Report and Hide Report Results buttons on the main page. If Auto Run Report is disabled, you should ensure this setting is set, otherwise you report cannot be executed</value>
+  </data>
+  <data name="lblShowControls.Text" xml:space="preserve">
+    <value>Show Controls</value>
+  </data>
+  <data name="lblShowInfoPane.Help" xml:space="preserve">
+    <value>Check this box to display an informational pane at the top of the module containing the Title and Description entered above</value>
+  </data>
+  <data name="lblShowInfoPane.Text" xml:space="preserve">
+    <value>Show Info Pane</value>
+  </data>
+  <data name="lblParameters.Help" xml:space="preserve">
+    <value>A comma separated list of URL QueryString parameters which can be used in the query.  Url Parameter names will be prefixed with "url_", plus any data source specific prefix (such as "@" for SQL Server)</value>
+  </data>
+  <data name="lblParameters.Text" xml:space="preserve">
+    <value>Allowed Url Parameters</value>
+  </data>
+</root>

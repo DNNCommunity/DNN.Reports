@@ -1,0 +1,20 @@
+﻿<h2>Reports Module 05.07.01</h2>
+<p>DNN Reports 05.07.01 will work for any DNN version <strong>7.1.2</strong> and up. Full details on the changes can be found in great detail at <a href="http://dnnreports.codeplex.com/workitem/list/basic">http://dnnreports.codeplex.com/workitem/list/basic</a>. </p>
+<p><strong>Releasenotes 05.07.01</strong></p>
+<p>
+ENHA: Token Replacement also works for calculated (normally read only) columns.<br />
+ENHA: Cleanup on uninstall improved, so the complete module files will be removed.<br />
+</p>
+<p><strong>Releasenotes 05.07.00</strong></p>
+<p>
+ENHA: Added token support in data display, enable by a setting. If there are tokens in the data that is retrieved, they can be replaced. Google for <em>DNN Token list</em> to find a list of available standard DNN tokens.<br />
+CHNG: Removed outdated install files of additional visualizers<br />
+BGFX: Reports URL parameter generated error<br />
+BGFX: Hide header checkbox in Grid incorrectly handled<br />
+</p>
+<p><strong>Releasenotes 05.06.00</strong></p>
+<p>
+ENHA: Made the dataprovider scripts SQL Azure compliant<br />
+BGFX: Fixed xslt visualizer xsl file retrieval<br />
+BGFX: Fixed HTML visualizer html file retrieval<br />
+</p>

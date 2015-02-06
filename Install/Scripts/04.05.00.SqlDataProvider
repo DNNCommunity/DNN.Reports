@@ -1,0 +1,116 @@
+﻿/************************************************************/
+/*****                                                  *****/
+/*****      SqlDataProvider Install/Upgrade for         *****/
+/*****      Reports module 04.05.00                     *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search AND replace operation     *****/
+/*****       for {databaseOwner} AND {objectQualifier}  *****/
+/*****       or use 'SQL' FROM Host Menu AND run this.  *****/
+/*****                                                  *****/
+/************************************************************/
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Grid_EnablePaging'
+WHERE	SettingName = 'dnn_Reports_Grid_EnablePaging'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Grid_EnableSorting'
+WHERE	SettingName = 'dnn_Reports_Grid_EnableSorting'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Grid_PageSize'
+WHERE	SettingName = 'dnn_Reports_Grid_PageSize'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Grid_ShowHeader'
+WHERE	SettingName = 'dnn_Reports_Grid_ShowHeader'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_HTML_ShowHeader'
+WHERE	SettingName = 'dnn_Reports_HTML_TemplateFile'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_XSLT_TransformFile'
+WHERE	SettingName = 'dnn_Reports_XSLT_TransformFile'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_ReportingServices_Mode'
+WHERE	SettingName = 'dnn_Reports_ReportingServices_Mode'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_ReportingServices_LocalFile'
+WHERE	SettingName = 'dnn_Reports_ReportingServices_LocalFile'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_ReportingServices_ServerUrl'
+WHERE	SettingName = 'dnn_Reports_ReportingServices_ServerUrl'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_ReportingServices_ServerPath'
+WHERE	SettingName = 'dnn_Reports_ReportingServices_ServerPath'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_ReportingServices_DataSourceName'
+WHERE	SettingName = 'dnn_Reports_ReportingServices_DataSourceName'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Chart_Type'
+WHERE	SettingName = 'dnn_Reports_Chart_Type'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Chart_BarNameColumn'
+WHERE	SettingName = 'dnn_Reports_Chart_BarNameColumn'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Chart_BarValueColumn'
+WHERE	SettingName = 'dnn_Reports_Chart_BarValueColumn'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Chart_ColorMode'
+WHERE	SettingName = 'dnn_Reports_Chart_ColorMode'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Chart_BarColorColumn'
+WHERE	SettingName = 'dnn_Reports_Chart_BarColorColumn'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Chart_BarColor'
+WHERE	SettingName = 'dnn_Reports_Chart_BarColor'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Chart_XAxisTitle'
+WHERE	SettingName = 'dnn_Reports_Chart_XAxisTitle'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Chart_YAxisTitle'
+WHERE	SettingName = 'dnn_Reports_Chart_YAxisTitle'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_Reports_Renderer'
+WHERE	SettingName = 'dnn_Reports_Visualizer'
+GO
+
+UPDATE {databaseOwner}{objectQualifier}TabModuleSettings
+SET		SettingName = 'dnn_ReportsVis_Grid_ShowHeader'
+WHERE	SettingName = 'dnn_Reports_Grid_ShowHeader'
+GO

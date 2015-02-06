@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="MSBuild.Community.Tasks.Targets" />
+  
+  <ItemGroup>
+    <AvailableItemName Include="Package" />
+    <AvailableItemName Include="SourcePackage" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <DNNInstallPackageName Condition="'$(DNNInstallPackageName)' == ''">$(DNNPackageOutputPath)\$(MSBuildProjectName)_$(DNNVersion)_Install.zip</DNNInstallPackageName>
+    <DNNSourcePackageName Condition="'$(DNNSourcePackageName)' == ''">$(DNNPackageOutputPath)\$(MSBuildProjectName)_$(DNNVersion)_Source.zip</DNNSourcePackageName>
+    <ResourceFileName Condition="'$(ResourceFileName)' == ''">resources.zip</ResourceFileName>
+  </PropertyGroup>
+
+  <Target Name="CleanPackages">
+    <Delete Files="$(DNNInstallPackageName);$(DNNSourcePackageName)" />
+  </Target>
+
+  <Target Name="PreparePackageFiles">
+    <CreateItem Include="$(ResourceFileName)">
+      <Output TaskParameter="Include" ItemName="Package" />
+    </CreateItem>
+    <Copy SourceFiles="@(MainAssembly)" DestinationFiles="@(MainAssembly->'$(DNNPackageBinDest)%(FileName)%(Extension)')" />
+    <CreateItem Include="@(MainAssembly->'$(DNNPackageBinDest)%(FileName)%(Extension)')">
+      <Output TaskParameter="Include" ItemName="Package"/>
+    </CreateItem>
+  </Target>
+
+  <Target Name="CreateInstallPackage">
+    <Zip Files="@(Content)" ZipFileName="$(ResourceFileName)" />
+    <Zip Files="@(Package)" ZipFileName="$(DNNInstallPackageName)" />
+    <Message Text="$(MSBuildProjectName) -> $(DNNInstallPackageName)" />
+    <Delete Files="$(ResourceFileName)" />
+  </Target>
+
+  <Target Name="CreateSourcePackage">
+    <Message Text="Creating Source Package: $(DNNSourcePackageName)" />
+    <Zip Files="@(Content);@(Compile);@(EmbeddedResource);$(MSBuildProjectFile);@(SourcePackage)" ZipFileName="$(ResourceFileName)" />
+    <Zip Files="@(Package);" ZipFileName="$(DNNSourcePackageName)" />
+    <Message Text="$(MSBuildProjectName) -> $(DNNSourcePackageName)" />
+    <Delete Files="$(ResourceFileName)" />
+  </Target>
+
+  <Target Name="AfterBuild" DependsOnTargets="PrepareOutput;CleanPackages;PreparePackageFiles;CreateInstallPackage;CreateSourcePackage">
+    <Delete Files="@(MainAssembly->'$(DNNPackageBinDest)%(FileName)%(Extension)')" />
+  </Target>
+
+  <Target Name="PrepareOutput">
+    <MakeDir Directories="$(DNNPackageOutputPath)" />
+  </Target>
+</Project>

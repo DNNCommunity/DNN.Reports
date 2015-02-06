@@ -1,0 +1,64 @@
+﻿/************************************************************/
+/*****                                                  *****/
+/*****      SqlDataProvider Install/Upgrade for         *****/
+/*****      Reports module 04.04.02                     *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search AND replace operation     *****/
+/*****       for {databaseOwner} AND {objectQualifier}  *****/
+/*****       or use 'SQL' FROM Host Menu AND run this.  *****/
+/*****                                                  *****/
+/************************************************************/
+
+UPDATE {databaseOwner}[{objectQualifier}ModuleSettings]
+SET		SettingName = 'dnn_Reports_CreatedBy'
+WHERE	SettingName = 'dnn_ReportCreatedBy'
+
+GO
+
+UPDATE {databaseOwner}[{objectQualifier}ModuleSettings]
+SET		SettingName = 'dnn_Reports_CreatedOn'
+WHERE	SettingName = 'dnn_ReportCreatedOn' 
+
+GO
+
+UPDATE {databaseOwner}[{objectQualifier}ModuleSettings]
+SET		SettingName = 'dnn_Reports_Description'
+WHERE	SettingName = 'dnn_ReportDescription'
+
+GO
+
+UPDATE {databaseOwner}[{objectQualifier}ModuleSettings]
+SET		SettingName = 'dnn_Reports_Query'
+WHERE	SettingName = 'dnn_ReportQuery'
+
+GO
+
+UPDATE {databaseOwner}[{objectQualifier}ModuleSettings]
+SET		SettingName = 'dnn_Reports_Title'
+WHERE	SettingName = 'dnn_ReportTitle'
+
+GO
+
+UPDATE {databaseOwner}[{objectQualifier}TabModuleSettings]
+SET		SettingName = 'dnn_Reports_Grid_EnablePaging'
+WHERE	SettingName = 'dnn_ReportEnablePaging'
+
+GO
+
+UPDATE {databaseOwner}[{objectQualifier}TabModuleSettings]
+SET		SettingName = 'dnn_Reports_Grid_EnableSorting'
+WHERE	SettingName = 'dnn_ReportEnableSorting'
+
+GO
+
+UPDATE {databaseOwner}[{objectQualifier}TabModuleSettings]
+SET		SettingName = 'dnn_Reports_Grid_PageSize'
+WHERE	SettingName = 'dnn_ReportPageSize'
+
+GO
+
+UPDATE {databaseOwner}[{objectQualifier}TabModuleSettings]
+SET		SettingName = 'dnn_Reports_Grid_ShowHeader'
+WHERE	SettingName = 'dnn_ReportShowHeader'
+GO

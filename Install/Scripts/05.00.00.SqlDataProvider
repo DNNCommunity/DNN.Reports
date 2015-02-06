@@ -1,0 +1,43 @@
+﻿/************************************************************/
+/*****                                                  *****/
+/*****      SqlDataProvider Install/Upgrade for         *****/
+/*****      Reports module 04.05.00                     *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search AND replace operation     *****/
+/*****       for {databaseOwner} AND {objectQualifier}  *****/
+/*****       or use 'SQL' FROM Host Menu AND run this.  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}PackageTypes WHERE PackageType='DNN_Reports_DataSource')
+BEGIN
+	INSERT INTO {databaseOwner}{objectQualifier}PackageTypes(PackageType, Description, SecurityAccessLevel)
+	VALUES ('DNN_Reports_DataSource', 'DNN Reports Data Source', 3)
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}PackageTypes WHERE PackageType='DNN_Reports_Visualizer')
+BEGIN
+	INSERT INTO {databaseOwner}{objectQualifier}PackageTypes(PackageType, Description, SecurityAccessLevel )
+	VALUES ('DNN_Reports_Visualizer', 'DNN Reports Visualizer', 3)
+END
+GO
+
+-- Set Modules to use DNN Data Source by default
+INSERT INTO {databaseOwner}{objectQualifier}ModuleSettings(ModuleID, SettingName, SettingValue)
+SELECT  M.ModuleID, 'dnn_Reports_DataSource' as SettingName, 'DotNetNuke' as SettingValue
+FROM (SELECT ModuleId FROM {databaseOwner}{objectQualifier}ModuleSettings WHERE SettingName = 'dnn_Reports_Query') AS M
+GO
+
+-- Set Modules to use DNN Data Source by default
+INSERT INTO {databaseOwner}{objectQualifier}ModuleSettings(ModuleID, SettingName, SettingValue)
+SELECT  M.ModuleID, 'dnn_Reports_DataSourceClass' as SettingName, 'DotNetNuke.Modules.Reports.DataSources.DotNetNuke.DotNetNukeDataSource' as SettingValue
+FROM (SELECT ModuleId FROM {databaseOwner}{objectQualifier}ModuleSettings WHERE SettingName = 'dnn_Reports_Query') AS M
+GO
+
+-- Convert query settings
+UPDATE {databaseOwner}{objectQualifier}ModuleSettings
+SET SettingName = 'dnn_ReportsDS_DotNetNuke_Query'
+WHERE SettingName = 'dnn_Reports_Query'
+GO
