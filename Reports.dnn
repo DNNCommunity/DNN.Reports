@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿  <?xml version="1.0" encoding="utf-8" ?>
 <dotnetnuke type="Package" version="5.0">
   <packages>
     <package name="DNN_Reports" type="Module" version="5.7.1">

@@ -10,14 +10,14 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("DotNetNuke Reports Module")> 
 <Assembly: AssemblyDescription("DotNetNuke Reports Module")> 
 <Assembly: AssemblyCompany("DotNetNuke Corporation")> 
-<Assembly: AssemblyProduct("http://www.dotnetnuke.com")> 
-<Assembly: AssemblyCopyright("DotNetNuke Reports Module is copyright 2002-2011 by DotNetNuke Corporation. All Rights Reserved")> 
+<Assembly: AssemblyProduct("http://www.dotnetnuke.com")>
+<Assembly: AssemblyCopyright("DotNetNuke Reports Module is copyright 2002-2016 by DotNetNuke Corporation. All Rights Reserved")>
 <Assembly: AssemblyTrademark("DotNetNuke")> 
 
 <Assembly: ComVisible(False)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("334e9cee-0d47-4d70-924b-b5098a3432cb")> 
+<Assembly: Guid("334e9cee-0d47-4d70-924b-b5098a3432cb")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -30,8 +30,8 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("5.7.1.0")> 
-<Assembly: AssemblyFileVersion("5.7.1.0")> 
+<Assembly: AssemblyVersion("5.8.0.0")>
+<Assembly: AssemblyFileVersion("5.8.0.0")>
 <Assembly: WebResource("dnn.reports.js", "text/javascript")> 
 <Assembly: WebResource("CssForm.css", "test/css")> 
 <Assembly: WebResource("CssForm.debug.css", "text/css")> 
