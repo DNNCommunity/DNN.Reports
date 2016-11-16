@@ -553,6 +553,11 @@ Namespace DotNetNuke.Modules.Reports
         Public Shared Function BuildParameters(ByVal SrcModule As PortalModuleBase, ByVal Report As ReportInfo) As Dictionary(Of String, Object)
             Dim dict As New Dictionary(Of String, Object)
 
+            Dim params As String() = { }
+            If Not String.IsNullOrEmpty(Report.Parameters.Trim()) Then
+                params = Report.Parameters.Split(","c)
+            End If
+
             If SrcModule IsNot Nothing Then
 
                 dict.Add("PortalID", SrcModule.PortalId)
@@ -560,19 +565,24 @@ Namespace DotNetNuke.Modules.Reports
                 dict.Add("ModuleID", SrcModule.ModuleId)
                 dict.Add("UserID", SrcModule.UserId)
 
-                If Not String.IsNullOrEmpty(Report.Parameters.Trim()) Then
+                For Each param As String In params
+                    ' Get the value from the request
+                    Dim value As Object = SrcModule.Request.Params(param)
 
-                    Dim params As String() = Report.Parameters.Split(","c)
+                    ' Add the parameter
+                    dict.Add("url_" + param, If(value, DbNull.Value))
+                Next
 
-                    For Each param As String In params
-                        ' Get the value from the request
-                        Dim value As String = SrcModule.Request.Params(param)
+            Else
 
-                        ' Add the parameter
-                        dict.Add("url_" + param, value)
-                    Next
+                dict.Add("PortalID", DbNull.Value)
+                dict.Add("TabID", DbNull.Value)
+                dict.Add("ModuleID", DbNull.Value)
+                dict.Add("UserID", DbNull.Value)
 
-                End If
+                For Each param As String In params
+                    dict.Add("url_" + param, DbNull.Value)
+                Next
 
             End If
 
