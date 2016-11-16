@@ -575,9 +575,10 @@ Namespace DotNetNuke.Modules.Reports
 
             Else
 
-                dict.Add("PortalID", DbNull.Value)
-                dict.Add("TabID", DbNull.Value)
-                dict.Add("ModuleID", DbNull.Value)
+                Dim moduleInfo = New ModuleController().GetModule(Report.ModuleID)
+                dict.Add("PortalID", moduleInfo.PortalID)
+                dict.Add("TabID", moduleInfo.TabID)
+                dict.Add("ModuleID", Report.ModuleID)
                 dict.Add("UserID", DbNull.Value)
 
                 For Each param As String In params
