@@ -1,7 +1,7 @@
 ﻿  <?xml version="1.0" encoding="utf-8" ?>
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DNN_Reports" type="Module" version="5.7.1">
+    <package name="DNN_Reports" type="Module" version="5.7.2">
       <friendlyName>Reports</friendlyName>
       <description>
         The ReportsModule allows users to quickly display data retrieved from many data sources. An extensible architecture allows the use of custom Data Sources and Visualization systems to display data from any tabular data source, in many ways.
@@ -108,7 +108,7 @@
             <assembly>
               <name>DotNetNuke.Modules.Reports.dll</name>
               <sourceFileName>DotNetNuke.Modules.Reports.dll</sourceFileName>
-              <version>05.07.01</version>
+              <version>05.07.02</version>
             </assembly>
           </assemblies>
         </component>
@@ -127,9 +127,9 @@
           <resourceFiles>
             <basePath>DesktopModules\Reports</basePath>
             <resourceFile>
-              <name>Reports_05.07.01_Resources.zip</name>
+              <name>Reports_05.07.02_Resources.zip</name>
               <!-- Without this, the resources file must be in DesktopModules\Reports in the ZIP file too -->
-              <sourceFileName>Reports_05.07.01_Resources.zip</sourceFileName>
+              <sourceFileName>Reports_05.07.02_Resources.zip</sourceFileName>
             </resourceFile>
           </resourceFiles>
         </component>
@@ -307,6 +307,14 @@
             </file>
             <file>
               <name>Reports_05.07.00_Source.zip</name>
+            </file>
+          </files>
+        </component>
+        <component type="Cleanup" version="05.07.02">
+          <files>
+            <basePath>DesktopModules\Reports</basePath>
+            <file>
+              <name>Reports_05.07.01_Resources.zip.manifest</name>
             </file>
           </files>
         </component>

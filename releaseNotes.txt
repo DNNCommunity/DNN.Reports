@@ -1,5 +1,9 @@
-﻿<h2>Reports Module 05.07.01</h2>
-<p>DNN Reports 05.07.01 will work for any DNN version <strong>7.1.2</strong> and up. Full details on the changes can be found in great detail at <a href="http://dnnreports.codeplex.com/workitem/list/basic">http://dnnreports.codeplex.com/workitem/list/basic</a>. </p>
+﻿<h2>Reports Module 05.07.02</h2>
+<p>DNN Reports 05.07.02 will work for any DNN version <strong>7.1.2</strong> and up. Full details on the changes can be found in great detail at <a href="http://dnnreports.codeplex.com/workitem/list/basic">http://dnnreports.codeplex.com/workitem/list/basic</a>. </p>
+<p><strong>Releasenotes 05.07.02</strong></p>
+<p>
+BGFX: Missing parameters (e.g. from the URL) will be sent to the SQL script as <code>NULL</code>, instead of throwing an error.<br />
+</p>
 <p><strong>Releasenotes 05.07.01</strong></p>
 <p>
 ENHA: Token Replacement also works for calculated (normally read only) columns.<br />

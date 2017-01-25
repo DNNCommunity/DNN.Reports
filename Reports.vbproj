@@ -25,7 +25,7 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
-    <DNNVersion>05.07.01</DNNVersion>
+    <DNNVersion>05.07.02</DNNVersion>
     <DNNPackageOutputPath>Packages</DNNPackageOutputPath>
     <ResourceFileName>$(MSBuildProjectName)_$(DNNVersion)_Resources.zip</ResourceFileName>
     <FileUpgradeFlags>
@@ -373,7 +373,7 @@
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Import Project="$(MSBuildProjectDirectory)\BuildSupport\DotNetNuke.Common.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
