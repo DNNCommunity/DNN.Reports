@@ -1,0 +1,15 @@
+<h2>Release notes DNN Reports 06.00.00</h2>
+<p>DNN Reports 06.00.00 will work for any DNN version <strong>7.3.2</strong> and up. 
+Full details on the changes can be found in great detail at <a href="https://github.com/DNNCommunity/DNN.Reports/releases">https://github.com/DNNCommunity/DNN.Reports/releases</a>. </p>
+<p>This is a complete overhaul of the DNNReports module. Not only is de module converted from VB.net to C#, also all deprecated DNN API Calls are replaced by the new DNN API calls where possible. The module build has also been completely changed by applying the DNNtc.MSBuild V1.9 build structure for DNN modules. This means that the DNN manifest and the install zip file are  automatically defined and created by attributes in de source code. ALl dependencies are included in the solution, including the required DNN DLL files. This means that the module can be build right out of the box, no need for a full DNN site to build the module version.
+<h3>BUG FIXES</h3>
+<ul>
+	<li>Broken search indexer now stripped to only convey a minimal dataset so that it will function without errors in the event log</li>	
+</ul>
+<h3>CHANGES</h3>
+<ul>
+	<li>Code module changed from VB to C#.</li>
+	<li>DNNtc.MSBuild structure and attrributes build in</li>
+	<li>Solutions is now self contained</li>
+	<li>All (since DNN 9.2) deprecated and removed API calls replaced by new API calls</li>
+</ul>

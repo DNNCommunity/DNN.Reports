@@ -1,33 +1,23 @@
-﻿.form_row
-{
-	clear: left;
+﻿.form_row { clear: left; }
+
+.dnn_rpt_form_label {
+    min-width: 11em !important;
+    vertical-align: top;
+    width: 15em;
 }
 
-.dnn_rpt_form_label
-{
-	vertical-align: top;
-	min-width: 11em !important;
-	width: 15em;
+.dnn_rpt_form_field { }
+
+.dnn_rpt_form_field input { }
+
+.dnn_rpt_active_extension {
+    padding-bottom: 0.5em;
+    padding-top: 0.5em
 }
 
-.dnn_rpt_form_field
-{
-}
-
-.dnn_rpt_form_field input
-{
-}
-
-.dnn_rpt_active_extension
-{
-	padding-bottom: 0.5em;
-	padding-top: 0.5em
-}
-
-.dnn_rpt_test_results
-{
-    padding-top: 10px;
+.dnn_rpt_test_results {
     padding-bottom: 10px;
-	text-align: center;
-	width: 100%;
+    padding-top: 10px;
+    text-align: center;
+    width: 100%;
 }

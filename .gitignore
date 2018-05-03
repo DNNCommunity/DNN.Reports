@@ -18,6 +18,9 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+.vs
+web.*.config
+web.config
 
 # Roslyn cache directories
 *.ide/

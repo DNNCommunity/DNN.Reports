@@ -1,0 +1,9 @@
+DesktopModules\Reports\AppCodeCleanup.txt
+DesktopModules\Reports\Reports_05.06.00_Resources.zip.manifest
+DesktopModules\Reports\Reports_05.07.00_Resources.zip.manifest
+DesktopModules\Reports\Installation\Visualizers\Reporting Services_02.00.00_Source.zip
+DesktopModules\Reports\Installation\Visualizers\Reporting Services_02.00.00_Install.zip
+DesktopModules\Reports\Installation\Visualizers\Chart_01.02.00_Source.zip
+DesktopModules\Reports\Installation\Visualizers\Chart_01.02.00_Install.zip
+Install\Module\Reports_05.07.00_Install.zip
+Install\Module\Reports_05.07.00_Source.zip

@@ -1,0 +1,4 @@
+DesktopModules\Reports\Reports_05.07.01_Resources.zip.manifest
+DesktopModules\Reports\license.txt
+DesktopModules\Reports\releaseNotes.txt
+DesktopModules\Reports\Install\
