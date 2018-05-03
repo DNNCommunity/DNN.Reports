@@ -1,2 +1,2 @@
-<%@ Control Language="VB" AutoEventWireup="false" Inherits="DotNetNuke.Modules.Reports.Visualizers.Xslt.Visualizer" Codebehind="Visualizer.ascx.vb" %>
+<%@ Control Language="C#" AutoEventWireup="true" Inherits="DotNetNuke.Modules.Reports.Visualizers.Xslt.Visualizer" Codebehind="Visualizer.ascx.cs" %>
 <asp:Literal ID="litContent" runat="server"></asp:Literal>

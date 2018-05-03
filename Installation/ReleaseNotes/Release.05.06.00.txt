@@ -1,0 +1,13 @@
+<h2>Release notes DNN Reports 05.06.00</h2>
+<p>Full details on the changes can be found in 
+great detail at <a href="http://dnnreports.codeplex.com/workitem/list/basic">http://dnnreports.codeplex.com/workitem/list/basic</a>. </p>
+<h3>BUG FIXES</h3>
+<ul>
+	<li>Fixed xslt visualizer xsl file retrieval</li>
+	<li>Fixed HTML visualizer html file retrieval</li>
+</ul>
+
+<h3>ENHANCEMENTS</h3>
+<ul>
+	<li>Made the dataprovider scripts SQL Azure compliant</li>	
+</ul>

@@ -1,0 +1,18 @@
+<h2>Release notes DNN Reports 05.07.00</h2>
+<p>Full details on the changes can be found in 
+great detail at <a href="http://dnnreports.codeplex.com/workitem/list/basic">http://dnnreports.codeplex.com/workitem/list/basic</a>. </p>
+<h3>BUG FIXES</h3>
+<ul>
+	<li>Reports URL parameter generated error</li>
+	<li>Hide header checkbox in Grid incorrectly handled</li>	
+</ul>
+
+<h3>ENHANCEMENTS</h3>
+<ul>
+	<li>Added token support in data display, enable by a setting. If there are tokens in the data that is retrieved, they can be replaced. Google for <em>DNN Token list</em> to find a list of available standard DNN tokens.</li>	
+</ul>
+
+<h3>CHANGES</h3>
+<ul>
+	<li>Removed outdated install files of additional visualizers</li>	
+</ul>
