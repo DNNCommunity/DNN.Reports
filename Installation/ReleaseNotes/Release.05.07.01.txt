@@ -1,0 +1,8 @@
+<h2>Release notes DNN Reports 05.07.01</h2>
+<p>Full details on the changes can be found in 
+great detail at <a href="http://dnnreports.codeplex.com/workitem/list/basic">http://dnnreports.codeplex.com/workitem/list/basic</a>. </p>
+<h3>ENHANCEMENTS</h3>
+<ul>
+	<li>Token Replacement also works for calculated (normally read only) columns.</li>
+	<li>Cleanup on uninstall improved, so the complete module files will be removed.</li>	
+</ul>
