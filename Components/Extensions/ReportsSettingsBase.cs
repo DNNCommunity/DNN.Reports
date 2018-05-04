@@ -24,6 +24,7 @@
 namespace DotNetNuke.Modules.Reports.Extensions
 {
     using System.Collections.Generic;
+    using Components;
 
     /// -----------------------------------------------------------------------------
     /// <summary>
@@ -37,9 +38,7 @@ namespace DotNetNuke.Modules.Reports.Extensions
     /// -----------------------------------------------------------------------------
     public class ReportsSettingsBase : ReportsControlBase, IReportsSettingsControl
     {
-        public const string FILENAME_SettingsASCX = "Settings.ascx";
-
-        protected override string ASCXFileName => FILENAME_SettingsASCX;
+        protected override string ASCXFileName => ReportsConstants.FILENAME_SettingsASCX;
 
         /// -----------------------------------------------------------------------------
         /// <summary>

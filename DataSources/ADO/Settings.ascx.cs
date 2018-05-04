@@ -28,6 +28,7 @@ namespace DotNetNuke.Modules.Reports.DataSources.ADO
     using System.Data;
     using System.Data.Common;
     using System.Web.UI.WebControls;
+    using Components;
     using global::DotNetNuke.Modules.Reports.Extensions;
 
     /// -----------------------------------------------------------------------------
@@ -45,16 +46,16 @@ namespace DotNetNuke.Modules.Reports.DataSources.ADO
         {
             this.ConnStrTextBox.Text =
                 Convert.ToString(
-                    SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_ConnectionString,
+                    SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_ConnectionString,
                                                       string.Empty));
             this.ParamPrefixTextBox.Text =
                 Convert.ToString(
-                    SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_ADO_ParamPrefix,
+                    SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_ADO_ParamPrefix,
                                                       string.Empty));
 
             var provider =
                 Convert.ToString(
-                    SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_ADO_ProviderName,
+                    SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_ADO_ProviderName,
                                                       string.Empty));
             this.EnsureProviderDropDown();
             if (this.ProviderNameDropDown.Items.FindByValue(provider) != null)
@@ -68,9 +69,9 @@ namespace DotNetNuke.Modules.Reports.DataSources.ADO
         public override void SaveSettings(Dictionary<string, string> Settings)
         {
             Settings.Clear();
-            Settings.Add(ReportsController.SETTING_ConnectionString, this.ConnStrTextBox.Text);
-            Settings.Add(ReportsController.SETTING_ADO_ProviderName, this.ProviderNameDropDown.SelectedValue);
-            Settings.Add(ReportsController.SETTING_ADO_ParamPrefix, this.ParamPrefixTextBox.Text);
+            Settings.Add(ReportsConstants.SETTING_ConnectionString, this.ConnStrTextBox.Text);
+            Settings.Add(ReportsConstants.SETTING_ADO_ProviderName, this.ProviderNameDropDown.SelectedValue);
+            Settings.Add(ReportsConstants.SETTING_ADO_ParamPrefix, this.ParamPrefixTextBox.Text);
             this.SqlDataSourceCommonSettingsControl.SaveSettings(Settings);
         }
 

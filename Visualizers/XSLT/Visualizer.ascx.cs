@@ -30,6 +30,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Xslt
     using System.Xml;
     using System.Xml.XPath;
     using System.Xml.Xsl;
+    using Components;
     using DotNetNuke.Security;
     using DotNetNuke.Services.Exceptions;
 
@@ -93,7 +94,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Xslt
 
                 // Get the Xslt Url
                 var sXsl = SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
-                                                             ReportsController.SETTING_Xslt_TransformFile,
+                                                             ReportsConstants.SETTING_Xslt_TransformFile,
                                                              string.Empty);
                 if (string.IsNullOrEmpty(sXsl))
                 {

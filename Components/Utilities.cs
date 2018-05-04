@@ -32,6 +32,7 @@ namespace DotNetNuke.Modules.Reports
     using System.Text.RegularExpressions;
     using System.Web.UI;
     using System.Web.UI.WebControls;
+    using Components;
     using DotNetNuke.Common;
     using DotNetNuke.Entities.Portals;
     using DotNetNuke.Modules.Reports.Converters;
@@ -295,8 +296,8 @@ namespace DotNetNuke.Modules.Reports
         {
             var gridLines =
                 Convert.ToString(SettingsUtil.GetDictionarySetting(VisualizerSettings,
-                                                                   ReportsController.SETTING_Grid_GridLines,
-                                                                   ReportsController.DEFAULT_Grid_GridLines));
+                                                                   ReportsConstants.SETTING_Grid_GridLines,
+                                                                   ReportsConstants.DEFAULT_Grid_GridLines));
             if (bool.TrueString.Equals(gridLines, StringComparison.InvariantCultureIgnoreCase))
             {
                 return GridLines.Both;

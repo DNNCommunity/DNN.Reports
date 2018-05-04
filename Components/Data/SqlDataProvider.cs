@@ -28,6 +28,7 @@ namespace DotNetNuke.Modules.Reports.Data
     using System.Data.Common;
     using System.Data.SqlClient;
     using System.Transactions;
+    using Components;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Framework.Providers;
     using DotNetNuke.Modules.Reports.Visualizers.Xslt;
@@ -49,7 +50,7 @@ namespace DotNetNuke.Modules.Reports.Data
 
         public SqlDataProvider()
         {
-            this._providerConfiguration = ProviderConfiguration.GetProviderConfiguration(ProviderType);
+            this._providerConfiguration = ProviderConfiguration.GetProviderConfiguration(ReportsConstants.ProviderType);
 
 
             // Read the configuration specific information for this provider
@@ -140,8 +141,6 @@ namespace DotNetNuke.Modules.Reports.Data
         }
 
         #region Private Members
-
-        private const string ProviderType = "data";
 
         private readonly ProviderConfiguration _providerConfiguration;
 

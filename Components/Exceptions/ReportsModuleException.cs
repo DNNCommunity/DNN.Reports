@@ -26,6 +26,7 @@ namespace DotNetNuke.Modules.Reports.Exceptions
     using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+    using Components;
 
     /// <summary>
     ///     Base class for exceptions which include information for localizing their text,
@@ -34,8 +35,6 @@ namespace DotNetNuke.Modules.Reports.Exceptions
     [Serializable]
     public abstract class ReportsModuleException : ApplicationException
     {
-        private const string SER_KEY_LocalizedText = "LocalizedText";
-
         #region  Private Fields
 
         private readonly LocalizedText _localizedMessage;
@@ -109,13 +108,13 @@ namespace DotNetNuke.Modules.Reports.Exceptions
 
         public ReportsModuleException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            this._localizedMessage = info.GetValue(SER_KEY_LocalizedText, typeof(LocalizedText)) as LocalizedText;
+            this._localizedMessage = info.GetValue(ReportsConstants.SER_KEY_LocalizedText, typeof(LocalizedText)) as LocalizedText;
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue(SER_KEY_LocalizedText, this._localizedMessage, typeof(LocalizedText));
+            info.AddValue(ReportsConstants.SER_KEY_LocalizedText, this._localizedMessage, typeof(LocalizedText));
         }
 
         #region  Public Properties
