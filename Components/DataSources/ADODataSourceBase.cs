@@ -26,6 +26,7 @@ namespace DotNetNuke.Modules.Reports.DataSources
     using System;
     using System.Data;
     using System.Data.Common;
+    using Components;
     using global::DotNetNuke.Modules.Reports.Converters;
     using global::DotNetNuke.Modules.Reports.Exceptions;
 
@@ -49,7 +50,7 @@ namespace DotNetNuke.Modules.Reports.DataSources
                 var cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText =
-                    Convert.ToString(this.CurrentReport.DataSourceSettings[ReportsController.SETTING_Query]);
+                    Convert.ToString(this.CurrentReport.DataSourceSettings[ReportsConstants.SETTING_Query]);
 
                 // Configure parameters
                 foreach (var pair in this.Parameters)
@@ -118,9 +119,9 @@ namespace DotNetNuke.Modules.Reports.DataSources
         protected virtual string CreateConnectionString()
         {
             // Check the connection string setting
-            if (this.CurrentReport.DataSourceSettings.ContainsKey(ReportsController.SETTING_ConnectionString))
+            if (this.CurrentReport.DataSourceSettings.ContainsKey(ReportsConstants.SETTING_ConnectionString))
             {
-                return this.CurrentReport.DataSourceSettings[ReportsController.SETTING_ConnectionString];
+                return this.CurrentReport.DataSourceSettings[ReportsConstants.SETTING_ConnectionString];
             }
             return string.Empty;
         }

@@ -25,16 +25,17 @@ namespace DotNetNuke.Modules.Reports.Exceptions
 {
     using System;
     using System.Runtime.Serialization;
+    using Components;
     using DotNetNuke.Services.Localization;
 
     [Serializable]
     public class LocalizedText : ISerializable
     {
-        public LocalizedText(string resourceKey) : this(resourceKey, RESX_ModuleCommon)
+        public LocalizedText(string resourceKey) : this(resourceKey, ReportsConstants.RESX_ModuleCommon)
         { }
 
         public LocalizedText(string resourceKey, string[] formatArguments) : this(
-            resourceKey, RESX_ModuleCommon, formatArguments)
+            resourceKey, ReportsConstants.RESX_ModuleCommon, formatArguments)
         { }
 
         public LocalizedText(string resourceKey, string resourceFile, params string[] formatArguments)
@@ -46,14 +47,14 @@ namespace DotNetNuke.Modules.Reports.Exceptions
 
         public LocalizedText(SerializationInfo info, StreamingContext context)
         {
-            this.ResourceKey = info.GetString(SER_KEY_ResourceKey);
-            this.ResourceFile = info.GetString(SER_KEY_ResourceFile);
+            this.ResourceKey = info.GetString(ReportsConstants.SER_KEY_ResourceKey);
+            this.ResourceFile = info.GetString(ReportsConstants.SER_KEY_ResourceFile);
 
-            var count = info.GetInt32(SER_KEY_FormatArgsCount);
+            var count = info.GetInt32(ReportsConstants.SER_KEY_FormatArgsCount);
             this.FormatArguments = new string[count + 1];
             for (var i = 0; i <= count; i++)
             {
-                this.FormatArguments[i] = info.GetString(string.Concat(SER_KEY_FormatArgs, i.ToString()));
+                this.FormatArguments[i] = info.GetString(string.Concat(ReportsConstants.SER_KEY_FormatArgs, i.ToString()));
             }
         }
 
@@ -65,12 +66,12 @@ namespace DotNetNuke.Modules.Reports.Exceptions
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue(SER_KEY_ResourceKey, this.ResourceKey);
-            info.AddValue(SER_KEY_ResourceFile, this.ResourceFile);
-            info.AddValue(SER_KEY_FormatArgsCount, this.FormatArguments.Length);
+            info.AddValue(ReportsConstants.SER_KEY_ResourceKey, this.ResourceKey);
+            info.AddValue(ReportsConstants.SER_KEY_ResourceFile, this.ResourceFile);
+            info.AddValue(ReportsConstants.SER_KEY_FormatArgsCount, this.FormatArguments.Length);
             for (var i = 0; i <= this.FormatArguments.Length; i++)
             {
-                info.AddValue(string.Concat(SER_KEY_FormatArgs, i.ToString()), this.FormatArguments[i]);
+                info.AddValue(string.Concat(ReportsConstants.SER_KEY_FormatArgs, i.ToString()), this.FormatArguments[i]);
             }
         }
 
@@ -91,15 +92,5 @@ namespace DotNetNuke.Modules.Reports.Exceptions
             }
             return localized;
         }
-
-        #region  Constants
-
-        private const string SER_KEY_ResourceKey = "ResourceKey";
-        private const string SER_KEY_ResourceFile = "ResourceFile";
-        private const string SER_KEY_FormatArgs = "FormatArg";
-        private const string SER_KEY_FormatArgsCount = "FormatArgsCount";
-        private const string RESX_ModuleCommon = "~/DesktopModules/Reports/App_LocalResources/SharedResources.resx";
-
-        #endregion
     }
 }

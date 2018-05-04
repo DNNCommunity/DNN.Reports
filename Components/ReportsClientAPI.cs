@@ -41,8 +41,6 @@ namespace DotNetNuke.Modules.Reports
     /// -----------------------------------------------------------------------------
     public class ReportsClientAPI
     {
-        public const string ReportsScript = "~/DesktopModules/Reports/js/dnn.reports.js";
-
         public static bool IsSupported => ClientAPI.BrowserSupportsFunctionality(ClientAPI.ClientFunctionality.DHTML);
 
         public static void Import(Page page)

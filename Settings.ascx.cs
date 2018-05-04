@@ -31,6 +31,7 @@ namespace DotNetNuke.Modules.Reports
     using System.Web.Configuration;
     using System.Web.UI;
     using System.Web.UI.WebControls;
+    using Components;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Modules.Reports.Converters;
@@ -94,9 +95,9 @@ namespace DotNetNuke.Modules.Reports
                     // Load the Data Source Settings
                     var temp_extensionName = this.Report.DataSource;
                     this.LoadExtensionSettings("DataSource", ref temp_extensionName, "DataSourceName.Text",
-                                               "DataSource.Text", DEFAULT_DataSource, this.DataSourceDropDown,
+                                               "DataSource.Text", ReportsConstants.DEFAULT_DataSource, this.DataSourceDropDown,
                                                this.DataSourceSettings, this.DataSourceNotConfiguredView,
-                                               this.Report.DataSourceSettings, FILENAME_RESX_DataSource, true);
+                                               this.Report.DataSourceSettings, ReportsConstants.FILENAME_RESX_DataSource, true);
                     this.Report.DataSource = temp_extensionName;
 
                     // Load the filtering settings
@@ -153,9 +154,9 @@ namespace DotNetNuke.Modules.Reports
                 // Load Visualizer Settings
                 var temp_extensionName2 = this.Report.Visualizer;
                 this.LoadExtensionSettings("Visualizer", ref temp_extensionName2, "VisualizerName.Text",
-                                           "Visualizer.Text", DEFAULT_Visualizer, this.VisualizerDropDown,
+                                           "Visualizer.Text", ReportsConstants.DEFAULT_Visualizer, this.VisualizerDropDown,
                                            this.VisualizerSettings, null, this.Report.VisualizerSettings,
-                                           FILENAME_RESX_Visualizer, false);
+                                           ReportsConstants.FILENAME_RESX_Visualizer, false);
                 this.Report.Visualizer = temp_extensionName2;
             }
         }
@@ -178,7 +179,7 @@ namespace DotNetNuke.Modules.Reports
                 this.UpdateDataSourceSettings();
 
                 // Save the report definition
-                ReportsController.UpdateReportDefinition(this.ModuleId, this.Report);
+                UpdateModuleSettings(this.ModuleId, this.ModuleConfiguration, this.Report);
             }
 
             // Non-SuperUsers can change TabModuleSettings (display settings)
@@ -212,26 +213,16 @@ namespace DotNetNuke.Modules.Reports
             ReportsController.ClearCachedResults(this.ModuleId);
         }
 
-        #region  Constants
-
-        private const string DEFAULT_Visualizer = "Grid";
-        private const string DEFAULT_DataSource = "DotNetNuke";
-        private const string FILENAME_RESX_DataSource = "DataSource.ascx.resx";
-        private const string FILENAME_RESX_Visualizer = "Visualizer.ascx.resx";
-        private const string FILENAME_RESX_Settings = "Settings.ascx.resx";
-
-        #endregion
-
         #region  Event Handlers
 
         protected void Page_Init(object sender, EventArgs e)
         {
             // Setup the extension lists
             this.VisualizerDropDown.Items.Clear();
-            this.BuildExtensionList("Visualizer", FILENAME_RESX_Visualizer, "VisualizerName.Text",
+            this.BuildExtensionList("Visualizer", ReportsConstants.FILENAME_RESX_Visualizer, "VisualizerName.Text",
                                     "Visualizer.Text", this.VisualizerDropDown, this.VisualizerSettings, true, false);
 
-            this.BuildExtensionList("DataSource", FILENAME_RESX_DataSource, "DataSourceName.Text",
+            this.BuildExtensionList("DataSource", ReportsConstants.FILENAME_RESX_DataSource, "DataSourceName.Text",
                                     "DataSource.Text", this.DataSourceDropDown, this.DataSourceSettings, true, true);
 
             // Register Confirm Messages
@@ -260,7 +251,7 @@ namespace DotNetNuke.Modules.Reports
                 this.btnShowXml.Visible = haveDataSource;
 
                 if ("True".Equals(
-                    WebConfigurationManager.AppSettings[ReportsController.APPSETTING_AllowCachingWithParameters]))
+                    WebConfigurationManager.AppSettings[ReportsConstants.APPSETTING_AllowCachingWithParameters]))
                 {
                     this.CacheWarningLabel.Attributes["ResourceKey"] = "CacheWithParametersEnabled.Text";
                 }
@@ -369,6 +360,58 @@ namespace DotNetNuke.Modules.Reports
 
         #region  Private Methods
 
+        // Internal version of SaveReportDefinition to allow SaveReport to use
+        // the same ModuleController instance for both method calls
+        private static void UpdateModuleSettings(int ModuleId, ModuleInfo configuration, ReportInfo objReport)
+        {
+            var reportsModuleSettingsRepository = new ReportsModuleSettingsRepository();
+            var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(configuration);
+
+            // Update the module settings with the data from the report
+            reportsModuleSettings.Title = objReport.Title;
+            reportsModuleSettings.Description = objReport.Description;
+            reportsModuleSettings.Parameters = objReport.Parameters;
+            reportsModuleSettings.DataSource = objReport.DataSource;
+            reportsModuleSettings.DataSourceClass = objReport.DataSourceClass;
+            reportsModuleSettings.CreatedOn = objReport.CreatedOn;
+            reportsModuleSettings.CreatedBy = objReport.CreatedBy;
+
+            reportsModuleSettingsRepository.SaveSettings(configuration, reportsModuleSettings);
+
+            // Update data source settings
+            // Can't do this in a common way because we must call a different method to
+            // update Visualizer Settings and Data Source Settings
+            var ctrl = new ModuleController();
+
+            if (!string.IsNullOrEmpty(objReport.DataSource))
+            {
+                var prefix = string.Format("{0}{1}_", ReportsConstants.PREFIX_DataSource, objReport.DataSource);
+                foreach (var pair in objReport.DataSourceSettings)
+                {
+                    ctrl.UpdateModuleSetting(ModuleId, string.Concat(prefix, pair.Key), Convert.ToString(pair.Value));
+                }
+            }
+
+            // Update Converter settigns
+            var ConverterBuilder = new StringBuilder();
+            foreach (var list in objReport.Converters.Values)
+            {
+                foreach (var Converter in list)
+                {
+                    ConverterBuilder.Append(Converter.FieldName);
+                    ConverterBuilder.Append("|");
+                    ConverterBuilder.Append(Converter.ConverterName);
+                    if (Converter.Arguments != null && Converter.Arguments.Length > 0)
+                    {
+                        ConverterBuilder.Append("|");
+                        ConverterBuilder.Append(string.Join(",", Converter.Arguments));
+                    }
+                    ConverterBuilder.Append(";");
+                }
+            }
+            ctrl.UpdateModuleSetting(ModuleId, ReportsConstants.SETTING_Converters, ConverterBuilder.ToString());
+        }
+
         private void UpdateDataSourceSettings()
         {
             // Load the data source settings into the report
@@ -476,7 +519,7 @@ namespace DotNetNuke.Modules.Reports
             else
             {
                 // Otherwise, find the view with the new active view name
-                newActiveView = (View) multiView.FindControl(newActiveViewName);
+                newActiveView = (View)multiView.FindControl(newActiveViewName);
             }
 
             // Set that view as the active view

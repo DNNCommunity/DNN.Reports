@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DNN_Reports" type="Module" version="6.0.0">
+    <package name="DNN_Reports" type="Module" version="6.1.0">
       <friendlyName>Reports</friendlyName>
       <description>The ReportsModule allows users to quickly display data retrieved from many data sources. An extensible architecture allows the use of custom Data Sources and Visualization systems to display data from any tabular data source, in many ways.</description>
       <iconFile>DesktopModules\Reports\DNN_Reports.png</iconFile>
@@ -11,7 +11,7 @@
         <email>support@dnnsoftware.com</email>
       </owner>
       <license src="License.txt"></license>
-      <releaseNotes src="Release.06.00.00.txt"></releaseNotes>
+      <releaseNotes src="Release.06.01.00.txt"></releaseNotes>
       <azureCompatible>true</azureCompatible>
       <dependencies>
         <dependency type="CoreVersion">7.3.2</dependency>

@@ -26,6 +26,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Grid
     using System;
     using System.Data;
     using System.Web.UI.WebControls;
+    using Components;
     using DotNetNuke.Common.Utilities;
 
     /// -----------------------------------------------------------------------------
@@ -187,25 +188,25 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Grid
             // Load Paging and Sorting data from Visualizer Settings
             this.grdResults.AllowPaging =
                 Convert.ToBoolean(SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
-                                                                    ReportsController.SETTING_Grid_EnablePaging,
+                                                                    ReportsConstants.SETTING_Grid_EnablePaging,
                                                                     false));
             this.grdResults.AllowSorting =
                 Convert.ToBoolean(SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
-                                                                    ReportsController.SETTING_Grid_EnableSorting,
+                                                                    ReportsConstants.SETTING_Grid_EnableSorting,
                                                                     false));
             this.grdResults.PageSize =
                 Convert.ToInt32(SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
-                                                                  ReportsController.SETTING_Grid_PageSize, 10));
+                                                                  ReportsConstants.SETTING_Grid_PageSize, 10));
             this.grdResults.ShowHeader =
                 Convert.ToBoolean(SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
-                                                                    ReportsController.SETTING_Grid_ShowHeader, true));
+                                                                    ReportsConstants.SETTING_Grid_ShowHeader, true));
             this.grdResults.CssClass +=
                 Convert.ToString(SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
-                                                                   ReportsController.SETTING_Grid_CSSClass, ""));
+                                                                   ReportsConstants.SETTING_Grid_CSSClass, ""));
 
             var styleString =
                 Convert.ToString(SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
-                                                                   ReportsController.SETTING_Grid_AdditionalCSS, ""));
+                                                                   ReportsConstants.SETTING_Grid_AdditionalCSS, ""));
             foreach (var styleEntry in styleString.Split(';'))
             {
                 var styleArray = styleEntry.Split(':');

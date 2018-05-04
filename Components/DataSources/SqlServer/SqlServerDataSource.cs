@@ -26,6 +26,7 @@ namespace DotNetNuke.Modules.Reports.DataSources.SqlServer
     using System;
     using System.Data.Common;
     using System.Data.SqlClient;
+    using Components;
     using global::DotNetNuke.Modules.Reports.Exceptions;
 
     /// <summary>
@@ -46,23 +47,23 @@ namespace DotNetNuke.Modules.Reports.DataSources.SqlServer
             // First validate the fields
             var server = Convert.ToString(
                 SettingsUtil.GetDictionarySetting(this.CurrentReport.DataSourceSettings,
-                                                  ReportsController.SETTING_Server,
+                                                  ReportsConstants.SETTING_Server,
                                                   string.Empty));
             var database = Convert.ToString(
                 SettingsUtil.GetDictionarySetting(this.CurrentReport.DataSourceSettings,
-                                                  ReportsController.SETTING_Database,
+                                                  ReportsConstants.SETTING_Database,
                                                   string.Empty));
             var useIntegratedSecurity = Convert.ToBoolean(
                 SettingsUtil.GetDictionarySetting(this.CurrentReport.DataSourceSettings,
-                                                  ReportsController.SETTING_Sql_UseIntegratedSecurity,
+                                                  ReportsConstants.SETTING_Sql_UseIntegratedSecurity,
                                                   false));
             var userName = Convert.ToString(
                 SettingsUtil.GetDictionarySetting(this.CurrentReport.DataSourceSettings,
-                                                  ReportsController.SETTING_UserName,
+                                                  ReportsConstants.SETTING_UserName,
                                                   string.Empty));
             var password = Convert.ToString(
                 SettingsUtil.GetDictionarySetting(this.CurrentReport.DataSourceSettings,
-                                                  ReportsController.SETTING_Password,
+                                                  ReportsConstants.SETTING_Password,
                                                   string.Empty));
 
             var csBuilder = new SqlConnectionStringBuilder();
