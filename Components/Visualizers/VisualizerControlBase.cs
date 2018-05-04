@@ -25,6 +25,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers
 {
     using System;
     using System.Data;
+    using Components;
     using DotNetNuke.Modules.Reports.Exceptions;
     using DotNetNuke.Modules.Reports.Extensions;
     using DotNetNuke.Services.Localization;
@@ -44,12 +45,6 @@ namespace DotNetNuke.Modules.Reports.Visualizers
     /// -----------------------------------------------------------------------------
     public class VisualizerControlBase : ReportsControlBase, IVisualizerControl
     {
-        #region  Public Constants
-
-        public const string FILENAME_VisualizerASCX = "Visualizer.ascx";
-
-        #endregion
-
         //#Region " Event Handlers "
 
         #region  Private Fields
@@ -82,7 +77,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers
         /// </summary>
         public virtual bool AutoExecuteReport => true;
 
-        protected override string ASCXFileName => FILENAME_VisualizerASCX;
+        protected override string ASCXFileName => ReportsConstants.FILENAME_VisualizerASCX;
 
         /// <summary>
         ///     Gets a boolean indicating if the current request is the first one
@@ -126,7 +121,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers
             {
                 this.ReportResults =
                     ReportsController.ExecuteReport(this.Report,
-                                                    string.Concat(ReportsController.CACHEKEY_Reports,
+                                                    string.Concat(ReportsConstants.CACHEKEY_Reports,
                                                                   Convert.ToString(this.ModuleId)), false,
                                                     this.ParentModule, ref this._fromCache);
             }

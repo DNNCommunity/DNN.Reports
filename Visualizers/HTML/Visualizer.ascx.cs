@@ -26,6 +26,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Html
     using System.Data;
     using System.IO;
     using System.Web.UI.HtmlControls;
+    using Components;
     using DotNetNuke.Security;
 
     /// -----------------------------------------------------------------------------
@@ -74,7 +75,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Html
                 this.pnlContent.Visible = true;
                 var sFileID =
                     Convert.ToString(SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
-                                                                       ReportsController.SETTING_Html_TemplateFile,
+                                                                       ReportsConstants.SETTING_Html_TemplateFile,
                                                                        string.Empty));
                 if (!string.IsNullOrEmpty(sFileID))
                 {

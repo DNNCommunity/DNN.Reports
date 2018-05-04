@@ -26,6 +26,7 @@ namespace DotNetNuke.Modules.Reports.DataSources
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using Components;
     using global::DotNetNuke.Entities.Modules;
     using global::DotNetNuke.Modules.Reports.Converters;
     using global::DotNetNuke.Modules.Reports.Exceptions;
@@ -41,7 +42,7 @@ namespace DotNetNuke.Modules.Reports.DataSources
         /// <value></value>
         /// <returns></returns>
         /// <remarks></remarks>
-        protected virtual string QueryKey => ReportsController.SETTING_Query;
+        protected virtual string QueryKey => ReportsConstants.SETTING_Query;
 
         public override DataView ExecuteReport(ReportInfo report,
                                                PortalModuleBase hostModule,

@@ -26,6 +26,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Grid
     using System;
     using System.Collections.Generic;
     using System.Web.UI;
+    using Components;
     using DotNetNuke.Modules.Reports.Extensions;
 
     /// -----------------------------------------------------------------------------
@@ -57,34 +58,34 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Grid
         {
             this.chkPageData.Checked =
                 Convert.ToBoolean(
-                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsController.SETTING_Grid_EnablePaging,
+                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_EnablePaging,
                                                       false));
             this.chkSortData.Checked =
                 Convert.ToBoolean(
-                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsController.SETTING_Grid_EnableSorting,
+                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_EnableSorting,
                                                       false));
             this.txtPageSize.Text =
                 Convert.ToString(
-                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsController.SETTING_Grid_PageSize,
+                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_PageSize,
                                                       "10"));
             this.chkShowHeader.Checked =
                 Convert.ToBoolean(
-                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsController.SETTING_Grid_ShowHeader,
+                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_ShowHeader,
                                                       true));
             this.txtAdditionalCSS.Text =
                 Convert.ToString(
-                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsController.SETTING_Grid_AdditionalCSS,
+                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_AdditionalCSS,
                                                       ""));
             this.txtCSSClass.Text =
                 Convert.ToString(
-                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsController.SETTING_Grid_CSSClass, ""));
+                    SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_CSSClass, ""));
             var gridLines = Convert.ToString(Utilities.GetGridLinesSetting(VisualizerSettings).ToString());
             DropDownUtils.TrySetValue(this.ddlGridLines, Convert.ToString(
                                           SettingsUtil.GetDictionarySetting(
                                               VisualizerSettings,
-                                              ReportsController.SETTING_Grid_GridLines,
-                                              ReportsController.DEFAULT_Grid_GridLines)),
-                                      ReportsController.DEFAULT_Grid_GridLines);
+                                              ReportsConstants.SETTING_Grid_GridLines,
+                                              ReportsConstants.DEFAULT_Grid_GridLines)),
+                                      ReportsConstants.DEFAULT_Grid_GridLines);
             this.UpdatePageSizeText();
         }
 
@@ -95,13 +96,13 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Grid
                 this.txtPageSize.Text = "10";
             }
 
-            VisualizerSettings[ReportsController.SETTING_Grid_EnablePaging] = this.chkPageData.Checked.ToString();
-            VisualizerSettings[ReportsController.SETTING_Grid_EnableSorting] = this.chkSortData.Checked.ToString();
-            VisualizerSettings[ReportsController.SETTING_Grid_PageSize] = this.txtPageSize.Text;
-            VisualizerSettings[ReportsController.SETTING_Grid_ShowHeader] = this.chkShowHeader.Checked.ToString();
-            VisualizerSettings[ReportsController.SETTING_Grid_GridLines] = this.ddlGridLines.SelectedValue;
-            VisualizerSettings[ReportsController.SETTING_Grid_AdditionalCSS] = this.txtAdditionalCSS.Text;
-            VisualizerSettings[ReportsController.SETTING_Grid_CSSClass] = this.txtCSSClass.Text;
+            VisualizerSettings[ReportsConstants.SETTING_Grid_EnablePaging] = this.chkPageData.Checked.ToString();
+            VisualizerSettings[ReportsConstants.SETTING_Grid_EnableSorting] = this.chkSortData.Checked.ToString();
+            VisualizerSettings[ReportsConstants.SETTING_Grid_PageSize] = this.txtPageSize.Text;
+            VisualizerSettings[ReportsConstants.SETTING_Grid_ShowHeader] = this.chkShowHeader.Checked.ToString();
+            VisualizerSettings[ReportsConstants.SETTING_Grid_GridLines] = this.ddlGridLines.SelectedValue;
+            VisualizerSettings[ReportsConstants.SETTING_Grid_AdditionalCSS] = this.txtAdditionalCSS.Text;
+            VisualizerSettings[ReportsConstants.SETTING_Grid_CSSClass] = this.txtCSSClass.Text;
         }
 
         private void UpdatePageSizeText()

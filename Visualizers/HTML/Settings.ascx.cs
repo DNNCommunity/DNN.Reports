@@ -25,6 +25,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Html
 {
     using System;
     using System.Collections.Generic;
+    using Components;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Modules.Reports.Extensions;
 
@@ -46,14 +47,14 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Html
         {
             this.ctlTemplate.Url =
                 Convert.ToString(SettingsUtil.GetDictionarySetting(VisualizerSettings,
-                                                                   ReportsController.SETTING_Html_TemplateFile,
+                                                                   ReportsConstants.SETTING_Html_TemplateFile,
                                                                    Null.NullString));
             this.ctlTemplate.DataBind();
         }
 
         public override void SaveSettings(Dictionary<string, string> VisualizerSettings)
         {
-            VisualizerSettings[ReportsController.SETTING_Html_TemplateFile] = this.ctlTemplate.Url;
+            VisualizerSettings[ReportsConstants.SETTING_Html_TemplateFile] = this.ctlTemplate.Url;
         }
     }
 }
