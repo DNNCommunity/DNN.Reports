@@ -104,7 +104,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Xslt
                 {
                     sXsl = Utilities.MapFileIdPath(this.ParentModule.PortalSettings, sXsl);
                 }
-                else
+                else if (!sXsl.ToLower().StartsWith("http"))
                 {
                     sXsl = Path.Combine(this.ParentModule.PortalSettings.HomeDirectoryMapPath, sXsl.Replace("/", "\\"));
                 }

@@ -5,4 +5,5 @@ Full details on the changes can be found in great detail at <a href="https://git
 <ul>
 	<li>Upgraded to DNN 8.0.0.</li>	
 	<li>Implemented DNN 8.0.0 style modulesettings.</li>
+	<li>Fixed xslt visualizer recognition of external urls.</li>
 </ul>
