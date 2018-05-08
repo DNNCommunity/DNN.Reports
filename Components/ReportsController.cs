@@ -193,12 +193,12 @@ namespace DotNetNuke.Modules.Reports
                 objReport.ShowInfoPane = reportsModuleSettings.ShowInfoPane;
                 objReport.AutoRunReport = reportsModuleSettings.AutoRunReport;
                 objReport.TokenReplace = reportsModuleSettings.TokenReplace;
+                objReport.CacheDuration = reportsModuleSettings.CacheDuration;
 
-                // Read the visualizer name and cache duration
+                // Read the visualizer name
                 objReport.Visualizer =
                     Convert.ToString(
                         SettingsUtil.GetHashtableSetting(objTabModuleSettings, ReportsConstants.SETTING_Visualizer, "Grid"));
-                objReport.CacheDuration = reportsModuleSettings.CacheDuration;
             }
 
             LoadExtensionSettings(objSettings, objTabModuleSettings, objReport);
@@ -652,14 +652,20 @@ namespace DotNetNuke.Modules.Reports
         // the same ModuleController instance for both method calls
         private static void UpdateReportDefinition(ModuleController ctrl, int ModuleId, ReportInfo objReport)
         {
+            var reportsModuleSettingsRepository = new ReportsModuleSettingsRepository();
+            var moduleInfo = ctrl.GetModule(ModuleId);
+            var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(moduleInfo);
+
             // Update the module settings with the data from the report
-            ctrl.UpdateModuleSetting(ModuleId, ReportsConstants.SETTING_ReportTitle, objReport.Title);
-            ctrl.UpdateModuleSetting(ModuleId, ReportsConstants.SETTING_ReportDescription, objReport.Description);
-            ctrl.UpdateModuleSetting(ModuleId, ReportsConstants.SETTING_ReportParameters, objReport.Parameters);
-            ctrl.UpdateModuleSetting(ModuleId, ReportsConstants.SETTING_DataSource, objReport.DataSource);
-            ctrl.UpdateModuleSetting(ModuleId, ReportsConstants.SETTING_DataSourceClass, objReport.DataSourceClass);
-            ctrl.UpdateModuleSetting(ModuleId, ReportsConstants.SETTING_ReportCreatedOn, objReport.CreatedOn.ToString());
-            ctrl.UpdateModuleSetting(ModuleId, ReportsConstants.SETTING_ReportCreatedBy, objReport.CreatedBy.ToString());
+            reportsModuleSettings.Title = objReport.Title;
+            reportsModuleSettings.Description = objReport.Description;
+            reportsModuleSettings.Parameters = objReport.Parameters;
+            reportsModuleSettings.DataSource = objReport.DataSource;
+            reportsModuleSettings.DataSourceClass = objReport.DataSourceClass;
+            reportsModuleSettings.CreatedOn = objReport.CreatedOn;
+            reportsModuleSettings.CreatedBy = objReport.CreatedBy;
+
+            reportsModuleSettingsRepository.SaveSettings(moduleInfo, reportsModuleSettings);
 
             // Update data source settings
             // Can't do this in a common way because we must call a different method to
@@ -697,19 +703,25 @@ namespace DotNetNuke.Modules.Reports
         // the same ModuleController instance for both method calls
         private static void UpdateReportView(ModuleController ctrl, int TabModuleId, ReportInfo objReport)
         {
+            var reportsModuleSettingsRepository = new ReportsModuleSettingsRepository();
+            var moduleInfo = ctrl.GetTabModule(TabModuleId);
+            var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(moduleInfo);
+
             // Update the cache duration if it is specified
             if (!objReport.CacheDuration.Equals(Null.NullInteger))
             {
                 ctrl.UpdateTabModuleSetting(TabModuleId, ReportsConstants.SETTING_CacheDuration, objReport.CacheDuration.ToString());
             }
 
-            ctrl.UpdateTabModuleSetting(TabModuleId, ReportsConstants.SETTING_ShowInfoPane, objReport.ShowInfoPane.ToString());
-            ctrl.UpdateTabModuleSetting(TabModuleId, ReportsConstants.SETTING_ShowControls, objReport.ShowControls.ToString());
-            ctrl.UpdateTabModuleSetting(TabModuleId, ReportsConstants.SETTING_AutoRunReport, objReport.AutoRunReport.ToString());
-            ctrl.UpdateTabModuleSetting(TabModuleId, ReportsConstants.SETTING_TokenReplace, objReport.TokenReplace.ToString());
+            reportsModuleSettings.ShowInfoPane = objReport.ShowInfoPane;
+            reportsModuleSettings.ShowControls = objReport.ShowControls;
+            reportsModuleSettings.AutoRunReport = objReport.AutoRunReport;
+            reportsModuleSettings.TokenReplace = objReport.TokenReplace;
 
-            // Update the visualizer setting
-            ctrl.UpdateTabModuleSetting(TabModuleId, ReportsConstants.SETTING_Visualizer, objReport.Visualizer);
+            //Update the visualizer setting
+            reportsModuleSettings.Visualizer = objReport.Visualizer;
+
+            reportsModuleSettingsRepository.SaveSettings(moduleInfo, reportsModuleSettings);
 
             // Update the Visualizer Settings
             // Can't do this in a common way because we must call a different method to

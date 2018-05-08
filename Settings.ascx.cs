@@ -84,16 +84,19 @@ namespace DotNetNuke.Modules.Reports
                     this.Report = new ReportInfo();
                 }
 
+                var reportsModuleSettingsRepository = new ReportsModuleSettingsRepository();
+                var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(this.ModuleConfiguration);
+
                 // If the user has permission to see the Data Source Settings
                 if (this.CheckPermissions())
                 {
                     // Load the fields
-                    this.txtTitle.Text = this.Report.Title;
-                    this.txtDescription.Text = this.Report.Description;
-                    this.txtParameters.Text = this.Report.Parameters;
+                    this.txtTitle.Text = reportsModuleSettings.Title;
+                    this.txtDescription.Text = reportsModuleSettings.Description;
+                    this.txtParameters.Text = reportsModuleSettings.Parameters;
 
                     // Load the Data Source Settings
-                    var temp_extensionName = this.Report.DataSource;
+                    var temp_extensionName = reportsModuleSettings.DataSource;
                     this.LoadExtensionSettings("DataSource", ref temp_extensionName, "DataSourceName.Text",
                                                "DataSource.Text", ReportsConstants.DEFAULT_DataSource, this.DataSourceDropDown,
                                                this.DataSourceSettings, this.DataSourceNotConfiguredView,
@@ -131,14 +134,14 @@ namespace DotNetNuke.Modules.Reports
                     this.txtHtmlDecode.Text = decodeBuilder.ToString();
                 }
 
-                this.txtCacheDuration.Text = this.Report.CacheDuration.ToString();
-                this.chkShowInfoPane.Checked = this.Report.ShowInfoPane;
-                this.chkShowControls.Checked = this.Report.ShowControls;
-                this.chkAutoRunReport.Checked = this.Report.AutoRunReport;
-                this.chkTokenReplace.Checked = this.Report.TokenReplace;
+                this.txtCacheDuration.Text = reportsModuleSettings.CacheDuration.ToString();
+                this.chkShowInfoPane.Checked = reportsModuleSettings.ShowInfoPane;
+                this.chkShowControls.Checked = reportsModuleSettings.ShowControls;
+                this.chkAutoRunReport.Checked = reportsModuleSettings.AutoRunReport;
+                this.chkTokenReplace.Checked = reportsModuleSettings.TokenReplace;
 
                 // Set the caching checkbox
-                if (this.Report.CacheDuration <= 0)
+                if (reportsModuleSettings.CacheDuration <= 0)
                 {
                     this.chkCaching.Checked = false;
                     this.Report.CacheDuration = 0;
@@ -152,7 +155,7 @@ namespace DotNetNuke.Modules.Reports
                 this.UpdateCachingSpan();
 
                 // Load Visualizer Settings
-                var temp_extensionName2 = this.Report.Visualizer;
+                var temp_extensionName2 = reportsModuleSettings.Visualizer;
                 this.LoadExtensionSettings("Visualizer", ref temp_extensionName2, "VisualizerName.Text",
                                            "Visualizer.Text", ReportsConstants.DEFAULT_Visualizer, this.VisualizerDropDown,
                                            this.VisualizerSettings, null, this.Report.VisualizerSettings,
@@ -179,7 +182,7 @@ namespace DotNetNuke.Modules.Reports
                 this.UpdateDataSourceSettings();
 
                 // Save the report definition
-                UpdateModuleSettings(this.ModuleId, this.ModuleConfiguration, this.Report);
+                ReportsController.UpdateReportDefinition(this.ModuleId, this.Report);
             }
 
             // Non-SuperUsers can change TabModuleSettings (display settings)
@@ -190,6 +193,7 @@ namespace DotNetNuke.Modules.Reports
             {
                 duration = this.txtCacheDuration.Text;
             }
+
             this.Report.CacheDuration = int.Parse(duration);
             this.Report.ShowInfoPane = this.chkShowInfoPane.Checked;
             this.Report.ShowControls = this.chkShowControls.Checked;
@@ -359,58 +363,6 @@ namespace DotNetNuke.Modules.Reports
         #endregion
 
         #region  Private Methods
-
-        // Internal version of SaveReportDefinition to allow SaveReport to use
-        // the same ModuleController instance for both method calls
-        private static void UpdateModuleSettings(int ModuleId, ModuleInfo configuration, ReportInfo objReport)
-        {
-            var reportsModuleSettingsRepository = new ReportsModuleSettingsRepository();
-            var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(configuration);
-
-            // Update the module settings with the data from the report
-            reportsModuleSettings.Title = objReport.Title;
-            reportsModuleSettings.Description = objReport.Description;
-            reportsModuleSettings.Parameters = objReport.Parameters;
-            reportsModuleSettings.DataSource = objReport.DataSource;
-            reportsModuleSettings.DataSourceClass = objReport.DataSourceClass;
-            reportsModuleSettings.CreatedOn = objReport.CreatedOn;
-            reportsModuleSettings.CreatedBy = objReport.CreatedBy;
-
-            reportsModuleSettingsRepository.SaveSettings(configuration, reportsModuleSettings);
-
-            // Update data source settings
-            // Can't do this in a common way because we must call a different method to
-            // update Visualizer Settings and Data Source Settings
-            var ctrl = new ModuleController();
-
-            if (!string.IsNullOrEmpty(objReport.DataSource))
-            {
-                var prefix = string.Format("{0}{1}_", ReportsConstants.PREFIX_DataSource, objReport.DataSource);
-                foreach (var pair in objReport.DataSourceSettings)
-                {
-                    ctrl.UpdateModuleSetting(ModuleId, string.Concat(prefix, pair.Key), Convert.ToString(pair.Value));
-                }
-            }
-
-            // Update Converter settigns
-            var ConverterBuilder = new StringBuilder();
-            foreach (var list in objReport.Converters.Values)
-            {
-                foreach (var Converter in list)
-                {
-                    ConverterBuilder.Append(Converter.FieldName);
-                    ConverterBuilder.Append("|");
-                    ConverterBuilder.Append(Converter.ConverterName);
-                    if (Converter.Arguments != null && Converter.Arguments.Length > 0)
-                    {
-                        ConverterBuilder.Append("|");
-                        ConverterBuilder.Append(string.Join(",", Converter.Arguments));
-                    }
-                    ConverterBuilder.Append(";");
-                }
-            }
-            ctrl.UpdateModuleSetting(ModuleId, ReportsConstants.SETTING_Converters, ConverterBuilder.ToString());
-        }
 
         private void UpdateDataSourceSettings()
         {

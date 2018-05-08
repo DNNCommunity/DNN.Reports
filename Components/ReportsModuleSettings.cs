@@ -28,6 +28,9 @@ namespace Components
     using DotNetNuke.Entities.Modules.Settings;
     using DotNetNuke.Modules.Reports.Converters;
 
+    /// <summary>
+    ///     The settings to be saved to the database. The datasource and visualzier settings are handled by the ReportInfo class.
+    /// </summary>
     [Serializable]
     public class ReportsModuleSettings
     {
@@ -57,6 +60,9 @@ namespace Components
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
         public int CacheDuration { get; set; }
+
+        [TabModuleSetting(Prefix = "dnn_Reports_")]
+        public string Visualizer { get; set; }
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
         public bool ShowInfoPane { get; set; }
