@@ -61,19 +61,24 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetNuke.Web.Client, Version=7.3.2.109, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetNuke, Version=8.0.0.809, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.references\DotNetNuke.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Client, Version=8.0.0.809, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.references\DotNetNuke.Web.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="DotNetNuke, Version=7.0.0.1586, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.references\DotNetNuke.dll</HintPath>
+      <HintPath>.references\nunit.framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.references\DotNetNuke.WebUtility.dll</HintPath>
@@ -102,6 +107,7 @@
     <Content Include=".references\DotNetNuke.Web.Client.dll" />
     <Content Include=".references\DotNetNuke.WebUtility.dll" />
     <Content Include=".references\Microsoft.ApplicationBlocks.Data.dll" />
+    <Content Include=".references\nunit.framework.dll" />
     <Content Include="App_LocalResources\Packages.ascx.resx">
       <SubType>Designer</SubType>
     </Content>
@@ -144,6 +150,7 @@
     <Compile Include="Components\Extensions\ExtensionType.cs" />
     <Compile Include="Components\ReportsConstants.cs" />
     <Compile Include="Components\ReportsModuleSettings.cs" />
+    <Compile Include="Components\Tests\ReportsControllerTests.cs" />
     <Compile Include="Installation\Attributes.cs" />
     <Compile Include="Packages.ascx.designer.cs">
       <DependentUpon>Packages.ascx</DependentUpon>
