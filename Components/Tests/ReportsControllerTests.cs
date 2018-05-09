@@ -61,17 +61,12 @@ namespace Components.Tests
         public void TestFormatRemoveSQL()
         {
             // Arrange
-            var strSQL =
-                //"SELECT T.Title AS Title, T.Description AS Description, T.KeyWords AS Keyword FROM {oQ}Tabs AS T WHERE T.Title <>";
-            "; -- create drop insert delete update sp_ xp_";
+            var strSQL = "; -- create drop insert delete update sp_ xp_";
 
             // Act
             var actual = this._sut.FormatRemoveSQL(strSQL);
 
             // Assert
-            //this.Expect(actual, Is.Not.Empty);
-            string[] check = { ";", "--", "create ", "drop ", "insert ", "delete ", "update ", "sp_", "xp_" };
-            //this.Expect(actual, this.Contains(";"));
             this.Expect(actual, !this.Contains(";"));
         }
 
