@@ -23,7 +23,6 @@
 
 namespace Components.Tests
 {
-    using DotNetNuke.Entities.Modules;
     using DotNetNuke.Modules.Reports;
     using NUnit.Framework;
 
