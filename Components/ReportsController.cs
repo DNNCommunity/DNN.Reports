@@ -450,7 +450,7 @@ namespace DotNetNuke.Modules.Reports
         ///     [anurse]        6/20/2006   Created
         /// </history>
         /// -----------------------------------------------------------------------------
-        public static string FormatRemoveSQL(string strSQL)
+        public string FormatRemoveSQL(string strSQL)
         {
             var strCleanSQL = strSQL;
 
@@ -810,6 +810,16 @@ namespace DotNetNuke.Modules.Reports
         public string ExportModule(int ModuleID)
         {
             var objReport = GetReport(ModuleID);
+            return this.ExportModule(objReport);
+        }
+
+        /// <summary>
+        /// Exports the module.
+        /// </summary>
+        /// <param name="objReport">The object report.</param>
+        /// <returns></returns>
+        public string ExportModule(ReportInfo objReport)
+        {
             if (ReferenceEquals(objReport, null))
             {
                 return string.Empty;
