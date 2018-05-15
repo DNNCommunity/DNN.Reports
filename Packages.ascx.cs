@@ -88,6 +88,8 @@ namespace DotNetNuke.Modules.Reports
                                                         ReportsConstants.PACKAGETYPE_Visualizer, "HTML"));
             allExtensions.Add(this.CreateBuiltInPackage("XSLT", BuiltInVersion,
                                                         ReportsConstants.PACKAGETYPE_Visualizer, "XSLT"));
+            allExtensions.Add(this.CreateBuiltInPackage("Razor", BuiltInVersion,
+                                                        ReportsConstants.PACKAGETYPE_Visualizer, "Razor"));
             allExtensions.Add(this.CreateBuiltInPackage("Generic ADO.Net Provider", BuiltInVersion,
                                                         ReportsConstants.PACKAGETYPE_DataSource, "ADO"));
             allExtensions.Add(this.CreateBuiltInPackage("DotNetNuke", BuiltInVersion,
