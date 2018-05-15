@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -28,6 +30,7 @@ namespace DotNetNuke.Modules.Reports
     using System.Linq;
     using System.Reflection;
     using Components;
+    using DNNtc;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Installer;
@@ -43,7 +46,7 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [DNNtc.ModuleControlProperties("ManagePackages", "Add/Remove Extensions", DNNtc.ControlType.Edit, "", false, false)]
+    [ModuleControlProperties("ManagePackages", "Add/Remove Extensions", ControlType.Edit, "", false, false)]
     public partial class Packages : PortalModuleBase
     {
         private static readonly Version BuiltInVersion = Assembly.GetExecutingAssembly().GetName().Version;

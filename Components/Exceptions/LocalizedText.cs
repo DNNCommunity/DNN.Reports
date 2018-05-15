@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -54,7 +56,8 @@ namespace DotNetNuke.Modules.Reports.Exceptions
             this.FormatArguments = new string[count + 1];
             for (var i = 0; i <= count; i++)
             {
-                this.FormatArguments[i] = info.GetString(string.Concat(ReportsConstants.SER_KEY_FormatArgs, i.ToString()));
+                this.FormatArguments[i] =
+                    info.GetString(string.Concat(ReportsConstants.SER_KEY_FormatArgs, i.ToString()));
             }
         }
 
@@ -71,7 +74,8 @@ namespace DotNetNuke.Modules.Reports.Exceptions
             info.AddValue(ReportsConstants.SER_KEY_FormatArgsCount, this.FormatArguments.Length);
             for (var i = 0; i <= this.FormatArguments.Length; i++)
             {
-                info.AddValue(string.Concat(ReportsConstants.SER_KEY_FormatArgs, i.ToString()), this.FormatArguments[i]);
+                info.AddValue(string.Concat(ReportsConstants.SER_KEY_FormatArgs, i.ToString()),
+                              this.FormatArguments[i]);
             }
         }
 

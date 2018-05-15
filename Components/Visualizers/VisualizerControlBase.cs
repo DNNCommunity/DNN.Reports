@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -52,6 +54,8 @@ namespace DotNetNuke.Modules.Reports.Visualizers
         private bool _fromCache;
 
         #endregion
+
+        //        Private Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
 
         #region  Properties
 
@@ -219,7 +223,6 @@ namespace DotNetNuke.Modules.Reports.Visualizers
 
         #endregion
 
-        //        Private Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         //            Me.IsFirstRun = False
         //        End Sub
 

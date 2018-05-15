@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Components
+﻿namespace Components
 {
     public class ReportsConstants
     {
@@ -11,6 +6,7 @@ namespace Components
 
         // Localized Text
         public const string SER_KEY_ResourceKey = "ResourceKey";
+
         public const string SER_KEY_ResourceFile = "ResourceFile";
         public const string SER_KEY_FormatArgs = "FormatArg";
         public const string SER_KEY_FormatArgsCount = "FormatArgsCount";
@@ -33,6 +29,7 @@ namespace Components
 
         // Settings
         public const string DEFAULT_Visualizer = "Grid";
+
         public const string DEFAULT_DataSource = "DotNetNuke";
         public const string FILENAME_RESX_DataSource = "DataSource.ascx.resx";
         public const string FILENAME_RESX_Visualizer = "Visualizer.ascx.resx";
