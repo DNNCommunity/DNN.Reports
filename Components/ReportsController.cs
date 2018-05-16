@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -69,14 +71,16 @@ namespace DotNetNuke.Modules.Reports
             // Load Data Source Settings
             if (!string.IsNullOrEmpty(Report.DataSource))
             {
-                LoadPrefixedSettings(ModuleSettings, string.Format("{0}{1}_", ReportsConstants.PREFIX_DataSource, Report.DataSource),
+                LoadPrefixedSettings(ModuleSettings,
+                                     string.Format("{0}{1}_", ReportsConstants.PREFIX_DataSource, Report.DataSource),
                                      Report.DataSourceSettings);
             }
 
             if (TabModuleSettings != null)
             {
                 // Load Visualizer Settings
-                LoadPrefixedSettings(TabModuleSettings, string.Format("{0}{1}_", ReportsConstants.PREFIX_Visualizer, Report.Visualizer),
+                LoadPrefixedSettings(TabModuleSettings,
+                                     string.Format("{0}{1}_", ReportsConstants.PREFIX_Visualizer, Report.Visualizer),
                                      Report.VisualizerSettings);
             }
         }
@@ -115,7 +119,7 @@ namespace DotNetNuke.Modules.Reports
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <param name=" ModuleInfo">The module info</param> 
+        /// <param name=" ModuleInfo">The module info</param>
         /// <history>
         ///     [anurse]	01/15/2007	Created from GetReport(Integer)
         /// </history>
@@ -159,7 +163,9 @@ namespace DotNetNuke.Modules.Reports
 
             // Load Filter Settings
             var converterString =
-                Convert.ToString(SettingsUtil.GetHashtableSetting(objSettings, ReportsConstants.SETTING_Converters, Null.NullString));
+                Convert.ToString(
+                    SettingsUtil.GetHashtableSetting(objSettings, ReportsConstants.SETTING_Converters,
+                                                     Null.NullString));
             if (!string.IsNullOrEmpty(converterString.Trim()))
             {
                 foreach (var converterItem in converterString.Split(';'))
@@ -198,7 +204,8 @@ namespace DotNetNuke.Modules.Reports
                 // Read the visualizer name
                 objReport.Visualizer =
                     Convert.ToString(
-                        SettingsUtil.GetHashtableSetting(objTabModuleSettings, ReportsConstants.SETTING_Visualizer, "Grid"));
+                        SettingsUtil.GetHashtableSetting(objTabModuleSettings, ReportsConstants.SETTING_Visualizer,
+                                                         "Grid"));
             }
 
             LoadExtensionSettings(objSettings, objTabModuleSettings, objReport);
@@ -350,8 +357,9 @@ namespace DotNetNuke.Modules.Reports
                 if (objReport.CacheDuration != 0)
                 {
                     // Check the app setting
-                    if (!"True".Equals(WebConfigurationManager.AppSettings[ReportsConstants.APPSETTING_AllowCachingWithParameters],
-                                       StringComparison.InvariantCulture))
+                    if (!"True".Equals(
+                            WebConfigurationManager.AppSettings[ReportsConstants.APPSETTING_AllowCachingWithParameters],
+                            StringComparison.InvariantCulture))
                     {
                         parameters.Clear();
                     }
@@ -457,7 +465,7 @@ namespace DotNetNuke.Modules.Reports
             if (strSQL != null)
             {
                 // each string in this array is one that must be removed from the SQL
-                string[] BadSQL = { ";", "--", "create ", "drop ", "insert ", "delete ", "update ", "sp_", "xp_" };
+                string[] BadSQL = {";", "--", "create ", "drop ", "insert ", "delete ", "update ", "sp_", "xp_"};
 
                 // strip any dangerous SQL commands
                 var intCommand = 0;
@@ -615,7 +623,7 @@ namespace DotNetNuke.Modules.Reports
                                                   "Data Source could not be loaded", ex);
                 }
             }
-            return (IDataSource)HttpContext.Current.Items[sKey];
+            return (IDataSource) HttpContext.Current.Items[sKey];
         }
 
         private static void LoadPrefixedSettings(IDictionary settingsTable, string prefix,
@@ -626,7 +634,7 @@ namespace DotNetNuke.Modules.Reports
             // Load the module data source settings
             foreach (var key in settingsTable.Keys)
             {
-                var sKey = (string)key;
+                var sKey = (string) key;
 
                 // If the setting starts with the current visualizer's prefix
                 if (sKey.StartsWith(prefix))
@@ -710,7 +718,8 @@ namespace DotNetNuke.Modules.Reports
             // Update the cache duration if it is specified
             if (!objReport.CacheDuration.Equals(Null.NullInteger))
             {
-                ctrl.UpdateTabModuleSetting(TabModuleId, ReportsConstants.SETTING_CacheDuration, objReport.CacheDuration.ToString());
+                ctrl.UpdateTabModuleSetting(TabModuleId, ReportsConstants.SETTING_CacheDuration,
+                                            objReport.CacheDuration.ToString());
             }
 
             reportsModuleSettings.ShowInfoPane = objReport.ShowInfoPane;
@@ -759,7 +768,7 @@ namespace DotNetNuke.Modules.Reports
                 {
                     continue;
                 }
-                var settingElem = (XmlElement)settingNode;
+                var settingElem = (XmlElement) settingNode;
                 dict.Add(settingElem.GetAttribute("key"), settingElem.InnerText);
             }
             return dict;
@@ -814,7 +823,7 @@ namespace DotNetNuke.Modules.Reports
         }
 
         /// <summary>
-        /// Exports the module.
+        ///     Exports the module.
         /// </summary>
         /// <param name="objReport">The object report.</param>
         /// <returns></returns>
@@ -916,7 +925,7 @@ namespace DotNetNuke.Modules.Reports
                     ConverterUtils.AddConverter(objNewReport.Converters, newConverter);
                 }
 
-                var dsElement = (XmlElement)xmlRoot.SelectSingleNode("datasource");
+                var dsElement = (XmlElement) xmlRoot.SelectSingleNode("datasource");
                 objNewReport.DataSource = dsElement.GetAttribute("type");
                 objNewReport.DataSourceClass = dsElement.GetAttribute("class");
                 objNewReport.DataSourceSettings = ReadSettingsDictionary(dsElement);
