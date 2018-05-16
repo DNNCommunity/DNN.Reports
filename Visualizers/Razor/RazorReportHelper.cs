@@ -26,16 +26,16 @@
 namespace DotNetNuke.Modules.Reports.Visualizers.Razor
 {
     using System.Data;
+    using System.Threading;
     using System.Web;
-    using DotNetNuke.Entities.Modules;
     using DotNetNuke.Web.Razor.Helpers;
 
     public static class RazorReportHelper
     {
         public static DataTable ReportResults(this DnnHelper Helper)
         {
-            return (DataTable) HttpContext.Current.Items[
-                ModuleController.CacheKey(Helper.Module.TabModuleID) + "_razor"];
+            var strCacheKey = "TabModule:" + Helper.Module.TabModuleID + ":" + Thread.CurrentThread.CurrentUICulture;
+            return (DataTable) HttpContext.Current.Items[strCacheKey + "_razor"];
         }
     }
 }

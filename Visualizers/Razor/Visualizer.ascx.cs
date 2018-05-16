@@ -26,8 +26,8 @@
 namespace DotNetNuke.Modules.Reports.Visualizers.Razor
 {
     using System;
+    using System.Threading;
     using System.Web;
-    using DotNetNuke.Entities.Modules;
     using DotNetNuke.Security;
     using DotNetNuke.Services.Localization;
     using DotNetNuke.Web.Razor;
@@ -53,7 +53,8 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Razor
         {
             if (this.ValidateDataSource() && this.ValidateResults())
             {
-                HttpContext.Current.Items[ModuleController.CacheKey(this.TabModuleId) + "_razor"] = this.ReportResults;
+                var strCacheKey = "TabModule:" + this.TabModuleId + ":" + Thread.CurrentThread.CurrentUICulture;
+                HttpContext.Current.Items[strCacheKey + "_razor"] = this.ReportResults;
             }
         }
 
