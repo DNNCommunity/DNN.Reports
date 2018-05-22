@@ -22,7 +22,6 @@
 
 #endregion
 
-
 namespace DotNetNuke.Modules.Reports.Visualizers.Razor
 {
     using System;
@@ -30,6 +29,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Razor
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Modules.Reports.Extensions;
     using DotNetNuke.Security;
+    using DotNetNuke.Web.Razor;
 
     public class Settings : ReportsSettingsBase
     {
