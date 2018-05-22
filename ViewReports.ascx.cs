@@ -50,7 +50,7 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [ModuleDependencies(ModuleDependency.CoreVersion, "7.3.2")]
+    [ModuleDependencies(ModuleDependency.CoreVersion, "8.0.1")]
     [ModuleControlProperties("", "", ControlType.View, "", false, false)]
     public partial class ViewReports : PortalModuleBase, IActionable
     {
