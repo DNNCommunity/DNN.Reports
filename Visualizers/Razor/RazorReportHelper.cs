@@ -1,7 +1,7 @@
 #region Copyright
 
 // 
-// DotNetNukeÂ® - http://www.dotnetnuke.com
+// DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
 // 
@@ -23,23 +23,19 @@
 #endregion
 
 
-namespace DotNetNuke.Modules.Reports.DataSources
+namespace DotNetNuke.Modules.Reports.Visualizers.Razor
 {
-    using global::DotNetNuke.Modules.Reports.Extensions;
+    using System.Data;
+    using System.Threading;
+    using System.Web;
+    using DotNetNuke.Web.Razor.Helpers;
 
-    /// -----------------------------------------------------------------------------
-    /// <summary>
-    ///     The IDataSourceSettingsControl class provides an interface to a Data Source Settings Control
-    /// </summary>
-    /// <history>
-    ///     [anurse]     08/02/2007    Created
-    /// </history>
-    /// -----------------------------------------------------------------------------
-    public interface IDataSourceSettingsControl : IReportsSettingsControl
+    public static class RazorReportHelper
     {
-        /// <summary>
-        ///     Gets the fully-qualified type name of the class for this data source
-        /// </summary>
-        string DataSourceClass { get; }
+        public static DataTable ReportResults(this DnnHelper Helper)
+        {
+            var strCacheKey = "TabModule:" + Helper.Module.TabModuleID + ":" + Thread.CurrentThread.CurrentUICulture;
+            return (DataTable) HttpContext.Current.Items[strCacheKey + "_razor"];
+        }
     }
 }

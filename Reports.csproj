@@ -66,6 +66,11 @@
       <Private>True</Private>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DotNetNuke.Modules.RazorHost, Version=7.3.2.109, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.references\DotNetNuke.Modules.RazorHost.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DotNetNuke.Web, Version=8.0.0.809, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Dnn.Platform.8.0.0\lib\net40\DotNetNuke.Web.dll</HintPath>
       <Private>False</Private>
@@ -144,6 +149,8 @@
     <EmbeddedResource Include="js\dnn.reports.js" />
     <Content Include="Settings.ascx" />
     <Content Include="ViewReports.ascx" />
+    <Content Include="Visualizers\Razor\App_LocalResources\Settings.ascx.resx" />
+    <Content Include="Visualizers\Razor\App_LocalResources\Visualizer.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\DataSources\ADODataSourceBase.cs" />
@@ -270,6 +277,15 @@
       <DependentUpon>Visualizer.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Visualizers\Razor\RazorReportHelper.cs" />
+    <Compile Include="Visualizers\Razor\Settings.ascx.cs">
+      <DependentUpon>Settings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Visualizers\Razor\Visualizer.ascx.cs">
+      <DependentUpon>Visualizer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Visualizers\XSLT\Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
     </Compile>
@@ -290,6 +306,8 @@
     <Content Include="Visualizers\Grid\Visualizer.ascx" />
     <Content Include="Visualizers\HTML\Settings.ascx" />
     <Content Include="Visualizers\HTML\Visualizer.ascx" />
+    <Content Include="Visualizers\Razor\Settings.ascx" />
+    <Content Include="Visualizers\Razor\Visualizer.ascx" />
     <Content Include="Visualizers\XSLT\Settings.ascx" />
     <Content Include="Visualizers\XSLT\Visualizer.ascx" />
   </ItemGroup>

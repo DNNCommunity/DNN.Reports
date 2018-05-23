@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -32,6 +34,7 @@ namespace DotNetNuke.Modules.Reports
     using System.Web.UI;
     using System.Web.UI.WebControls;
     using Components;
+    using DNNtc;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Modules.Reports.Converters;
@@ -52,7 +55,7 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [DNNtc.ModuleControlProperties("Settings", "Reports Settings", DNNtc.ControlType.Edit, "", false, false)]
+    [ModuleControlProperties("Settings", "Reports Settings", ControlType.Edit, "", false, false)]
     public partial class Settings : ModuleSettingsBase
     {
         #region  Properties
@@ -98,9 +101,11 @@ namespace DotNetNuke.Modules.Reports
                     // Load the Data Source Settings
                     var temp_extensionName = reportsModuleSettings.DataSource;
                     this.LoadExtensionSettings("DataSource", ref temp_extensionName, "DataSourceName.Text",
-                                               "DataSource.Text", ReportsConstants.DEFAULT_DataSource, this.DataSourceDropDown,
+                                               "DataSource.Text", ReportsConstants.DEFAULT_DataSource,
+                                               this.DataSourceDropDown,
                                                this.DataSourceSettings, this.DataSourceNotConfiguredView,
-                                               this.Report.DataSourceSettings, ReportsConstants.FILENAME_RESX_DataSource, true);
+                                               this.Report.DataSourceSettings,
+                                               ReportsConstants.FILENAME_RESX_DataSource, true);
                     this.Report.DataSource = temp_extensionName;
 
                     // Load the filtering settings
@@ -157,7 +162,8 @@ namespace DotNetNuke.Modules.Reports
                 // Load Visualizer Settings
                 var temp_extensionName2 = reportsModuleSettings.Visualizer;
                 this.LoadExtensionSettings("Visualizer", ref temp_extensionName2, "VisualizerName.Text",
-                                           "Visualizer.Text", ReportsConstants.DEFAULT_Visualizer, this.VisualizerDropDown,
+                                           "Visualizer.Text", ReportsConstants.DEFAULT_Visualizer,
+                                           this.VisualizerDropDown,
                                            this.VisualizerSettings, null, this.Report.VisualizerSettings,
                                            ReportsConstants.FILENAME_RESX_Visualizer, false);
                 this.Report.Visualizer = temp_extensionName2;
@@ -471,7 +477,7 @@ namespace DotNetNuke.Modules.Reports
             else
             {
                 // Otherwise, find the view with the new active view name
-                newActiveView = (View)multiView.FindControl(newActiveViewName);
+                newActiveView = (View) multiView.FindControl(newActiveViewName);
             }
 
             // Set that view as the active view

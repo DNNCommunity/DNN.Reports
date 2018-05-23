@@ -1,4 +1,5 @@
 ﻿#region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,18 +19,18 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
 namespace Components
 {
     using System;
-    using System.Collections.Generic;
     using DotNetNuke.Entities.Modules.Settings;
-    using DotNetNuke.Modules.Reports.Converters;
 
     /// <summary>
-    ///     The settings to be saved to the database. The datasource and visualzier settings are handled by the ReportInfo class.
+    ///     The settings to be saved to the database. The datasource and visualzier settings are handled by the ReportInfo
+    ///     class.
     /// </summary>
     [Serializable]
     public class ReportsModuleSettings
@@ -78,9 +79,8 @@ namespace Components
     }
 
     /// <summary>
-    /// The <see cref="SettingsRepository{T}"/> used for storing and retrieving <see cref="ReportsModuleSettings"/>
+    ///     The <see cref="SettingsRepository{T}" /> used for storing and retrieving <see cref="ReportsModuleSettings" />
     /// </summary>
     public class ReportsModuleSettingsRepository : SettingsRepository<ReportsModuleSettings>
-    {
-    }
+    { }
 }
