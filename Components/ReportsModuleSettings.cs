@@ -26,6 +26,7 @@
 namespace Components
 {
     using System;
+    using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules.Settings;
 
     /// <summary>
@@ -72,7 +73,7 @@ namespace Components
         public bool ShowControls { get; set; }
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
-        public bool AutoRunReport { get; set; }
+        public bool AutoRunReport { get; set; } = true;
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
         public bool TokenReplace { get; set; }

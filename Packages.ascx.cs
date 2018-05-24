@@ -30,7 +30,6 @@ namespace DotNetNuke.Modules.Reports
     using System.Linq;
     using System.Reflection;
     using Components;
-    using DNNtc;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Installer;
@@ -46,7 +45,7 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [ModuleControlProperties("ManagePackages", "Add/Remove Extensions", ControlType.Edit, "", false, false)]
+    [DNNtc.ModuleControlProperties("ManagePackages", "Add/Remove Extensions", DNNtc.ControlType.Edit, "", false, false)]
     public partial class Packages : PortalModuleBase
     {
         private static readonly Version BuiltInVersion = Assembly.GetExecutingAssembly().GetName().Version;

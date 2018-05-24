@@ -34,7 +34,6 @@ namespace DotNetNuke.Modules.Reports
     using System.Web.UI;
     using System.Web.UI.WebControls;
     using Components;
-    using DNNtc;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Modules.Reports.Converters;
@@ -55,7 +54,7 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [ModuleControlProperties("Settings", "Reports Settings", ControlType.Edit, "", false, false)]
+    [DNNtc.ModuleControlProperties("Settings", "Reports Settings", DNNtc.ControlType.Edit, "", false, false)]
     public partial class Settings : ModuleSettingsBase
     {
         #region  Properties
