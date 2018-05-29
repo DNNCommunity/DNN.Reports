@@ -116,6 +116,7 @@
     <Content Include=".build\DNNtc.MSBuild.Tasks.dll" />
     <Content Include=".build\EcmaScript.NET.modified.dll" />
     <Content Include=".build\Yahoo.Yui.Compressor.dll" />
+    <Content Include=".references\DotNetNuke.Modules.RazorHost.dll" />
     <Content Include=".references\DotNetNuke.WebUtility.dll" />
     <Content Include=".references\Microsoft.ApplicationBlocks.Data.dll" />
     <Content Include="App_LocalResources\Packages.ascx.resx">

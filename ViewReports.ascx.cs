@@ -30,7 +30,6 @@ namespace DotNetNuke.Modules.Reports
     using System.IO;
     using System.Web;
     using Components;
-    using DNNtc;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Entities.Modules.Actions;
     using DotNetNuke.Modules.Reports.Exceptions;
@@ -50,8 +49,8 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [ModuleDependencies(ModuleDependency.CoreVersion, "8.0.1")]
-    [ModuleControlProperties("", "", ControlType.View, "", false, false)]
+    [DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "8.0.1")]
+    [DNNtc.ModuleControlProperties("", "", DNNtc.ControlType.View, "", false, false)]
     public partial class ViewReports : PortalModuleBase, IActionable
     {
         private ReportInfo Report;
