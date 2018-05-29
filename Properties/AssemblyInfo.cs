@@ -7,15 +7,15 @@ using System.Web.UI;
 // associated with an assembly.
 
 // Review the values of the assembly attributes
-[assembly: AssemblyTitle("DotNetNuke Reports Module")]
+[assembly: AssemblyTitle("DNN Reports Module")]
 [assembly:
     AssemblyDescription(
         "The ReportsModule allows users to quickly display data retrieved from many data sources. An extensible architecture allows the use of custom Data Sources and Visualization systems to display data from any tabular data source, in many ways.")]
-[assembly: AssemblyCompany("DotNetNuke Corporation")]
-[assembly: AssemblyProduct("http://www.dotnetnuke.com")]
+[assembly: AssemblyCompany("DNN Corp.")]
+[assembly: AssemblyProduct("http://www.dnnsoftware.com")]
 [assembly:
     AssemblyCopyright(
-        "DotNetNuke Reports Module is copyright 2002-2016 by DotNetNuke Corporation. All Rights Reserved")]
+"DNN Reports Module is copyright 2002-2018 by DNN Corp. All Rights Reserved")]
 [assembly: AssemblyTrademark("DotNetNuke")]
 
 [assembly: ComVisible(false)]

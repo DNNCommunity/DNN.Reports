@@ -355,6 +355,8 @@
 						$(MSBuildProjectDirectory)\My Project\*.*;
 						$(MSBuildProjectDirectory)\Properties\*.*;
 						$(MSBuildProjectDirectory)\Dependencies\*.*; 
+						$(MSBuildProjectDirectory)\packages\**; 
+						$(MSBuildProjectDirectory)\wiki.images\*.*; 
 						$(MSBuildProjectDirectory)\*ReSharper*\**;
             $(MSBuildProjectDirectory)\Installation\*.png;
             $(MSBuildProjectDirectory)\tmpCompressScript\**;
