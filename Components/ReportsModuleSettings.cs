@@ -37,13 +37,13 @@ namespace Components
     public class ReportsModuleSettings
     {
         [ModuleSetting(Prefix = "dnn_Reports_")]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         [ModuleSetting(Prefix = "dnn_Reports_")]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [ModuleSetting(Prefix = "dnn_Reports_")]
-        public string Parameters { get; set; }
+        public string Parameters { get; set; } = string.Empty;
 
         [ModuleSetting(Prefix = "dnn_Reports_")]
         public int CreatedBy { get; set; }
@@ -52,19 +52,19 @@ namespace Components
         public DateTime CreatedOn { get; set; }
 
         [ModuleSetting(Prefix = "dnn_Reports_")]
-        public string DataSource { get; set; }
+        public string DataSource { get; set; } = string.Empty;
 
         [ModuleSetting(Prefix = "dnn_Reports_")]
-        public string DataSourceClass { get; set; }
+        public string DataSourceClass { get; set; } = string.Empty;
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
-        public string Visualizers { get; set; }
+        public string Visualizers { get; set; } = string.Empty;
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
         public int CacheDuration { get; set; }
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
-        public string Visualizer { get; set; }
+        public string Visualizer { get; set; } = string.Empty;
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
         public bool ShowInfoPane { get; set; }
