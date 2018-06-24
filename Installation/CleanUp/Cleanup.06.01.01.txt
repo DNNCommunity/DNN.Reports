@@ -1,0 +1,4 @@
+'Remove old versions of the extension
+Install\Module\DNN_Reports_06.01.00_Install.zip
+'Tidy up debug files if any
+Bin\DotNetNuke.Modules.Reports.pdb
