@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -31,6 +33,7 @@ namespace DotNetNuke.Modules.Reports
     using System.Web.Configuration;
     using System.Web.UI;
     using System.Web.UI.WebControls;
+    using Components;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Modules.Reports.Converters;
@@ -83,20 +86,25 @@ namespace DotNetNuke.Modules.Reports
                     this.Report = new ReportInfo();
                 }
 
+                var reportsModuleSettingsRepository = new ReportsModuleSettingsRepository();
+                var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(this.ModuleConfiguration);
+
                 // If the user has permission to see the Data Source Settings
                 if (this.CheckPermissions())
                 {
                     // Load the fields
-                    this.txtTitle.Text = this.Report.Title;
-                    this.txtDescription.Text = this.Report.Description;
-                    this.txtParameters.Text = this.Report.Parameters;
+                    this.txtTitle.Text = reportsModuleSettings.Title;
+                    this.txtDescription.Text = reportsModuleSettings.Description;
+                    this.txtParameters.Text = reportsModuleSettings.Parameters;
 
                     // Load the Data Source Settings
-                    var temp_extensionName = this.Report.DataSource;
+                    var temp_extensionName = reportsModuleSettings.DataSource;
                     this.LoadExtensionSettings("DataSource", ref temp_extensionName, "DataSourceName.Text",
-                                               "DataSource.Text", DEFAULT_DataSource, this.DataSourceDropDown,
+                                               "DataSource.Text", ReportsConstants.DEFAULT_DataSource,
+                                               this.DataSourceDropDown,
                                                this.DataSourceSettings, this.DataSourceNotConfiguredView,
-                                               this.Report.DataSourceSettings, FILENAME_RESX_DataSource, true);
+                                               this.Report.DataSourceSettings,
+                                               ReportsConstants.FILENAME_RESX_DataSource, true);
                     this.Report.DataSource = temp_extensionName;
 
                     // Load the filtering settings
@@ -130,14 +138,14 @@ namespace DotNetNuke.Modules.Reports
                     this.txtHtmlDecode.Text = decodeBuilder.ToString();
                 }
 
-                this.txtCacheDuration.Text = this.Report.CacheDuration.ToString();
-                this.chkShowInfoPane.Checked = this.Report.ShowInfoPane;
-                this.chkShowControls.Checked = this.Report.ShowControls;
-                this.chkAutoRunReport.Checked = this.Report.AutoRunReport;
-                this.chkTokenReplace.Checked = this.Report.TokenReplace;
+                this.txtCacheDuration.Text = reportsModuleSettings.CacheDuration.ToString();
+                this.chkShowInfoPane.Checked = reportsModuleSettings.ShowInfoPane;
+                this.chkShowControls.Checked = reportsModuleSettings.ShowControls;
+                this.chkAutoRunReport.Checked = reportsModuleSettings.AutoRunReport;
+                this.chkTokenReplace.Checked = reportsModuleSettings.TokenReplace;
 
                 // Set the caching checkbox
-                if (this.Report.CacheDuration <= 0)
+                if (reportsModuleSettings.CacheDuration <= 0)
                 {
                     this.chkCaching.Checked = false;
                     this.Report.CacheDuration = 0;
@@ -151,11 +159,12 @@ namespace DotNetNuke.Modules.Reports
                 this.UpdateCachingSpan();
 
                 // Load Visualizer Settings
-                var temp_extensionName2 = this.Report.Visualizer;
+                var temp_extensionName2 = reportsModuleSettings.Visualizer;
                 this.LoadExtensionSettings("Visualizer", ref temp_extensionName2, "VisualizerName.Text",
-                                           "Visualizer.Text", DEFAULT_Visualizer, this.VisualizerDropDown,
+                                           "Visualizer.Text", ReportsConstants.DEFAULT_Visualizer,
+                                           this.VisualizerDropDown,
                                            this.VisualizerSettings, null, this.Report.VisualizerSettings,
-                                           FILENAME_RESX_Visualizer, false);
+                                           ReportsConstants.FILENAME_RESX_Visualizer, false);
                 this.Report.Visualizer = temp_extensionName2;
             }
         }
@@ -189,6 +198,7 @@ namespace DotNetNuke.Modules.Reports
             {
                 duration = this.txtCacheDuration.Text;
             }
+
             this.Report.CacheDuration = int.Parse(duration);
             this.Report.ShowInfoPane = this.chkShowInfoPane.Checked;
             this.Report.ShowControls = this.chkShowControls.Checked;
@@ -212,26 +222,16 @@ namespace DotNetNuke.Modules.Reports
             ReportsController.ClearCachedResults(this.ModuleId);
         }
 
-        #region  Constants
-
-        private const string DEFAULT_Visualizer = "Grid";
-        private const string DEFAULT_DataSource = "DotNetNuke";
-        private const string FILENAME_RESX_DataSource = "DataSource.ascx.resx";
-        private const string FILENAME_RESX_Visualizer = "Visualizer.ascx.resx";
-        private const string FILENAME_RESX_Settings = "Settings.ascx.resx";
-
-        #endregion
-
         #region  Event Handlers
 
         protected void Page_Init(object sender, EventArgs e)
         {
             // Setup the extension lists
             this.VisualizerDropDown.Items.Clear();
-            this.BuildExtensionList("Visualizer", FILENAME_RESX_Visualizer, "VisualizerName.Text",
+            this.BuildExtensionList("Visualizer", ReportsConstants.FILENAME_RESX_Visualizer, "VisualizerName.Text",
                                     "Visualizer.Text", this.VisualizerDropDown, this.VisualizerSettings, true, false);
 
-            this.BuildExtensionList("DataSource", FILENAME_RESX_DataSource, "DataSourceName.Text",
+            this.BuildExtensionList("DataSource", ReportsConstants.FILENAME_RESX_DataSource, "DataSourceName.Text",
                                     "DataSource.Text", this.DataSourceDropDown, this.DataSourceSettings, true, true);
 
             // Register Confirm Messages
@@ -260,7 +260,7 @@ namespace DotNetNuke.Modules.Reports
                 this.btnShowXml.Visible = haveDataSource;
 
                 if ("True".Equals(
-                    WebConfigurationManager.AppSettings[ReportsController.APPSETTING_AllowCachingWithParameters]))
+                    WebConfigurationManager.AppSettings[ReportsConstants.APPSETTING_AllowCachingWithParameters]))
                 {
                     this.CacheWarningLabel.Attributes["ResourceKey"] = "CacheWithParametersEnabled.Text";
                 }

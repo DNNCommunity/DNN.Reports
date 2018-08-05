@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 namespace DotNetNuke.Modules.Reports.Visualizers.Xslt
@@ -30,6 +32,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Xslt
     using System.Xml;
     using System.Xml.XPath;
     using System.Xml.Xsl;
+    using Components;
     using DotNetNuke.Security;
     using DotNetNuke.Services.Exceptions;
 
@@ -93,7 +96,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Xslt
 
                 // Get the Xslt Url
                 var sXsl = SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
-                                                             ReportsController.SETTING_Xslt_TransformFile,
+                                                             ReportsConstants.SETTING_Xslt_TransformFile,
                                                              string.Empty);
                 if (string.IsNullOrEmpty(sXsl))
                 {
@@ -103,7 +106,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Xslt
                 {
                     sXsl = Utilities.MapFileIdPath(this.ParentModule.PortalSettings, sXsl);
                 }
-                else
+                else if (!sXsl.ToLower().StartsWith("http"))
                 {
                     sXsl = Path.Combine(this.ParentModule.PortalSettings.HomeDirectoryMapPath, sXsl.Replace("/", "\\"));
                 }

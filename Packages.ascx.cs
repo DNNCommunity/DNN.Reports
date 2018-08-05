@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -27,6 +29,7 @@ namespace DotNetNuke.Modules.Reports
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using Components;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Installer;
@@ -50,9 +53,9 @@ namespace DotNetNuke.Modules.Reports
         public void Page_Load(object sender, EventArgs args)
         {
             this.InstallVisualizerLink.NavigateUrl =
-                Util.InstallURL(this.TabId, ReportsController.PACKAGETYPE_Visualizer);
+                Util.InstallURL(this.TabId, ReportsConstants.PACKAGETYPE_Visualizer);
             this.InstallDataSourceLink.NavigateUrl =
-                Util.InstallURL(this.TabId, ReportsController.PACKAGETYPE_DataSource);
+                Util.InstallURL(this.TabId, ReportsConstants.PACKAGETYPE_DataSource);
 
             Localization.LocalizeGridView(ref this.PackagesGrid, this.LocalResourceFile);
 
@@ -70,11 +73,11 @@ namespace DotNetNuke.Modules.Reports
 
             var visualizers = PackageController
                 .Instance.GetExtensionPackages(Null.NullInteger,
-                                               arg => arg.PackageType == ReportsController.PACKAGETYPE_Visualizer)
+                                               arg => arg.PackageType == ReportsConstants.PACKAGETYPE_Visualizer)
                 .ToList();
             var dataSources = PackageController
                 .Instance.GetExtensionPackages(Null.NullInteger,
-                                               arg => arg.PackageType == ReportsController.PACKAGETYPE_DataSource)
+                                               arg => arg.PackageType == ReportsConstants.PACKAGETYPE_DataSource)
                 .ToList();
 
             var allExtensions = new List<PackageInfo>(visualizers);
@@ -82,17 +85,19 @@ namespace DotNetNuke.Modules.Reports
 
             // Add Built-in packages
             allExtensions.Add(this.CreateBuiltInPackage("Grid", BuiltInVersion,
-                                                        ReportsController.PACKAGETYPE_Visualizer, "Grid"));
+                                                        ReportsConstants.PACKAGETYPE_Visualizer, "Grid"));
             allExtensions.Add(this.CreateBuiltInPackage("HTML", BuiltInVersion,
-                                                        ReportsController.PACKAGETYPE_Visualizer, "HTML"));
+                                                        ReportsConstants.PACKAGETYPE_Visualizer, "HTML"));
             allExtensions.Add(this.CreateBuiltInPackage("XSLT", BuiltInVersion,
-                                                        ReportsController.PACKAGETYPE_Visualizer, "XSLT"));
+                                                        ReportsConstants.PACKAGETYPE_Visualizer, "XSLT"));
+            allExtensions.Add(this.CreateBuiltInPackage("Razor", BuiltInVersion,
+                                                        ReportsConstants.PACKAGETYPE_Visualizer, "Razor"));
             allExtensions.Add(this.CreateBuiltInPackage("Generic ADO.Net Provider", BuiltInVersion,
-                                                        ReportsController.PACKAGETYPE_DataSource, "ADO"));
+                                                        ReportsConstants.PACKAGETYPE_DataSource, "ADO"));
             allExtensions.Add(this.CreateBuiltInPackage("DotNetNuke", BuiltInVersion,
-                                                        ReportsController.PACKAGETYPE_DataSource, "DNN"));
+                                                        ReportsConstants.PACKAGETYPE_DataSource, "DNN"));
             allExtensions.Add(this.CreateBuiltInPackage("Microsoft SQL Server", BuiltInVersion,
-                                                        ReportsController.PACKAGETYPE_DataSource, "SqlServer"));
+                                                        ReportsConstants.PACKAGETYPE_DataSource, "SqlServer"));
 
             this.PackagesGrid.DataSource = allExtensions;
             this.PackagesGrid.DataBind();
@@ -126,7 +131,7 @@ namespace DotNetNuke.Modules.Reports
 
         protected string StripPrefix(string value)
         {
-            return value.Substring(ReportsController.PACKAGETYPE_Prefix.Length);
+            return value.Substring(ReportsConstants.PACKAGETYPE_Prefix.Length);
         }
 
         protected string InstallUrl(int id)

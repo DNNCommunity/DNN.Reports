@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 namespace DotNetNuke.Modules.Reports.Visualizers.Html
@@ -26,6 +28,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Html
     using System.Data;
     using System.IO;
     using System.Web.UI.HtmlControls;
+    using Components;
     using DotNetNuke.Security;
 
     /// -----------------------------------------------------------------------------
@@ -74,7 +77,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Html
                 this.pnlContent.Visible = true;
                 var sFileID =
                     Convert.ToString(SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
-                                                                       ReportsController.SETTING_Html_TemplateFile,
+                                                                       ReportsConstants.SETTING_Html_TemplateFile,
                                                                        string.Empty));
                 if (!string.IsNullOrEmpty(sFileID))
                 {

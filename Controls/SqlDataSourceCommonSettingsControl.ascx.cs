@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -26,6 +28,7 @@ namespace DotNetNuke.Modules.Reports.Controls
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using Components;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Framework;
@@ -83,12 +86,12 @@ namespace DotNetNuke.Modules.Reports.Controls
         {
             this.QueryTextBox.Text =
                 Convert.ToString(
-                    SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_Query, Null.NullString));
+                    SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_Query, Null.NullString));
         }
 
         public override void SaveSettings(Dictionary<string, string> Settings)
         {
-            Settings[ReportsController.SETTING_Query] = this.QueryTextBox.Text;
+            Settings[ReportsConstants.SETTING_Query] = this.QueryTextBox.Text;
         }
     }
 }

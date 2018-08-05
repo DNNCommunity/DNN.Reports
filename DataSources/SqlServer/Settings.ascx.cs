@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -25,6 +27,7 @@ namespace DotNetNuke.Modules.Reports.DataSources.SqlServer
 {
     using System;
     using System.Collections.Generic;
+    using Components;
     using global::DotNetNuke.Modules.Reports.Extensions;
 
     /// -----------------------------------------------------------------------------
@@ -42,31 +45,31 @@ namespace DotNetNuke.Modules.Reports.DataSources.SqlServer
         {
             var useConnectionString =
                 Convert.ToBoolean(
-                    SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_UseConnectionString, false));
+                    SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_UseConnectionString, false));
             this.AutomaticConnStrRadio.Checked = !useConnectionString;
             this.ManualConnStrRadio.Checked = useConnectionString;
             this.ConnStrTextBox.Text =
                 Convert.ToString(
-                    SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_ConnectionString,
+                    SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_ConnectionString,
                                                       string.Empty));
             this.ServerTextBox.Text =
                 Convert.ToString(
-                    SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_Server, string.Empty));
+                    SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_Server, string.Empty));
             this.DatabaseTextBox.Text =
                 Convert.ToString(
-                    SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_Database, string.Empty));
+                    SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_Database, string.Empty));
             this.IntegratedSecurityCheckBox.Checked =
                 Convert.ToBoolean(
-                    SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_Sql_UseIntegratedSecurity,
+                    SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_Sql_UseIntegratedSecurity,
                                                       false));
             if (!this.IntegratedSecurityCheckBox.Checked)
             {
                 this.UserNameTextBox.Text =
                     Convert.ToString(
-                        SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_UserName, string.Empty));
+                        SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_UserName, string.Empty));
                 this.PasswordTextBox.Text =
                     Convert.ToString(
-                        SettingsUtil.GetDictionarySetting(Settings, ReportsController.SETTING_Password, string.Empty));
+                        SettingsUtil.GetDictionarySetting(Settings, ReportsConstants.SETTING_Password, string.Empty));
             }
             this.SqlDataSourceCommonSettingsControl.LoadSettings(Settings);
 
@@ -78,21 +81,21 @@ namespace DotNetNuke.Modules.Reports.DataSources.SqlServer
             Settings.Clear();
             if (this.AutomaticConnStrRadio.Checked)
             {
-                Settings.Add(ReportsController.SETTING_UseConnectionString, "False");
-                Settings.Add(ReportsController.SETTING_Server, this.ServerTextBox.Text);
-                Settings.Add(ReportsController.SETTING_Database, this.DatabaseTextBox.Text);
-                Settings.Add(ReportsController.SETTING_Sql_UseIntegratedSecurity,
+                Settings.Add(ReportsConstants.SETTING_UseConnectionString, "False");
+                Settings.Add(ReportsConstants.SETTING_Server, this.ServerTextBox.Text);
+                Settings.Add(ReportsConstants.SETTING_Database, this.DatabaseTextBox.Text);
+                Settings.Add(ReportsConstants.SETTING_Sql_UseIntegratedSecurity,
                              this.IntegratedSecurityCheckBox.Checked.ToString());
                 if (!this.IntegratedSecurityCheckBox.Checked)
                 {
-                    Settings.Add(ReportsController.SETTING_UserName, this.UserNameTextBox.Text);
-                    Settings.Add(ReportsController.SETTING_Password, this.PasswordTextBox.Text);
+                    Settings.Add(ReportsConstants.SETTING_UserName, this.UserNameTextBox.Text);
+                    Settings.Add(ReportsConstants.SETTING_Password, this.PasswordTextBox.Text);
                 }
             }
             else if (this.ManualConnStrRadio.Checked)
             {
-                Settings.Add(ReportsController.SETTING_UseConnectionString, "True");
-                Settings.Add(ReportsController.SETTING_ConnectionString, this.ConnStrTextBox.Text);
+                Settings.Add(ReportsConstants.SETTING_UseConnectionString, "True");
+                Settings.Add(ReportsConstants.SETTING_ConnectionString, this.ConnStrTextBox.Text);
             }
             this.SqlDataSourceCommonSettingsControl.SaveSettings(Settings);
         }

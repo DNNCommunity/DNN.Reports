@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,12 +19,14 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
 namespace DotNetNuke.Modules.Reports.Extensions
 {
     using System.Collections.Generic;
+    using Components;
 
     /// -----------------------------------------------------------------------------
     /// <summary>
@@ -37,9 +40,7 @@ namespace DotNetNuke.Modules.Reports.Extensions
     /// -----------------------------------------------------------------------------
     public class ReportsSettingsBase : ReportsControlBase, IReportsSettingsControl
     {
-        public const string FILENAME_SettingsASCX = "Settings.ascx";
-
-        protected override string ASCXFileName => FILENAME_SettingsASCX;
+        protected override string ASCXFileName => ReportsConstants.FILENAME_SettingsASCX;
 
         /// -----------------------------------------------------------------------------
         /// <summary>

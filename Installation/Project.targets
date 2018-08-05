@@ -349,34 +349,37 @@
 		<!-- Get files -->
 		<CreateItem
           Exclude="**\.svn\**;
-            $(MSBuildProjectDirectory)\_*\**;
-						$(MSBuildProjectDirectory)\obj\**;
-						$(MSBuildProjectDirectory)\bin\**;
-						$(MSBuildProjectDirectory)\My Project\*.*;
-						$(MSBuildProjectDirectory)\Properties\*.*;
-						$(MSBuildProjectDirectory)\Dependencies\*.*; 
-						$(MSBuildProjectDirectory)\*ReSharper*\**;
-            $(MSBuildProjectDirectory)\Installation\*.png;
-            $(MSBuildProjectDirectory)\tmpCompressScript\**;
-			$(MSBuildProjectDirectory)\tmpCompressCSS\**"
+            	$(MSBuildProjectDirectory)\_*\**;
+            	$(MSBuildProjectDirectory)\.git\**;
+		$(MSBuildProjectDirectory)\obj\**;
+		$(MSBuildProjectDirectory)\bin\**;
+		$(MSBuildProjectDirectory)\My Project\*.*;
+		$(MSBuildProjectDirectory)\Properties\*.*;
+		$(MSBuildProjectDirectory)\Dependencies\*.*; 
+		$(MSBuildProjectDirectory)\packages\**; 
+		$(MSBuildProjectDirectory)\wiki.images\*.*; 
+		$(MSBuildProjectDirectory)\*ReSharper*\**;
+            	$(MSBuildProjectDirectory)\Installation\*.png;
+            	$(MSBuildProjectDirectory)\tmpCompressScript\**;
+		MSBuildProjectDirectory)\tmpCompressCSS\**"
           Include="$(MSBuildProjectDirectory)\**\*.ascx;
-						$(MSBuildProjectDirectory)\**\*.aspx;
-						$(MSBuildProjectDirectory)\**\*.css;
-						$(MSBuildProjectDirectory)\**\*.htm;
-						$(MSBuildProjectDirectory)\**\*.html;
-						$(MSBuildProjectDirectory)\**\*.xml;
-						$(MSBuildProjectDirectory)\**\*.xslt;
-						$(MSBuildProjectDirectory)\**\*.resx;
-						$(MSBuildProjectDirectory)\**\*.rpt;
-						$(MSBuildProjectDirectory)\**\*.gif;
-						$(MSBuildProjectDirectory)\**\*.jpg;
-						$(MSBuildProjectDirectory)\**\*.png;
-						$(MSBuildProjectDirectory)\**\*.svg;
-						$(MSBuildProjectDirectory)\**\*.eot;
-						$(MSBuildProjectDirectory)\**\*.ttf;
-						$(MSBuildProjectDirectory)\**\*.woff;
-						$(MSBuildProjectDirectory)\**\*.js;">
-			<Output TaskParameter="Include" ItemName="resources" />
+		$(MSBuildProjectDirectory)\**\*.aspx;
+		$(MSBuildProjectDirectory)\**\*.css;
+		$(MSBuildProjectDirectory)\**\*.htm;
+		$(MSBuildProjectDirectory)\**\*.html;
+		$(MSBuildProjectDirectory)\**\*.xml;
+		$(MSBuildProjectDirectory)\**\*.xslt;
+		$(MSBuildProjectDirectory)\**\*.resx;
+		$(MSBuildProjectDirectory)\**\*.rpt;
+		$(MSBuildProjectDirectory)\**\*.gif;
+		$(MSBuildProjectDirectory)\**\*.jpg;
+		$(MSBuildProjectDirectory)\**\*.png;
+		$(MSBuildProjectDirectory)\**\*.svg;
+		$(MSBuildProjectDirectory)\**\*.eot;
+		$(MSBuildProjectDirectory)\**\*.ttf;
+		$(MSBuildProjectDirectory)\**\*.woff;
+		$(MSBuildProjectDirectory)\**\*.js;">
+	<Output TaskParameter="Include" ItemName="resources" />
 		</CreateItem>
 		<!-- Include module png as IconFile in resources zip -->
 		<!-- First copy it to the root of the module because else the Installation folder will be in the Resources zip -->

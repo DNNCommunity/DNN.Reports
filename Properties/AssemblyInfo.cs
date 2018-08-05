@@ -7,15 +7,15 @@ using System.Web.UI;
 // associated with an assembly.
 
 // Review the values of the assembly attributes
-[assembly: AssemblyTitle("DotNetNuke Reports Module")]
+[assembly: AssemblyTitle("DNN Reports Module")]
 [assembly:
     AssemblyDescription(
         "The ReportsModule allows users to quickly display data retrieved from many data sources. An extensible architecture allows the use of custom Data Sources and Visualization systems to display data from any tabular data source, in many ways.")]
-[assembly: AssemblyCompany("DotNetNuke Corporation")]
-[assembly: AssemblyProduct("http://www.dotnetnuke.com")]
+[assembly: AssemblyCompany("DNN Corp.")]
+[assembly: AssemblyProduct("http://www.dnnsoftware.com")]
 [assembly:
     AssemblyCopyright(
-        "DotNetNuke Reports Module is copyright 2002-2016 by DotNetNuke Corporation. All Rights Reserved")]
+"DNN Reports Module is copyright 2002-2018 by DNN Corp. All Rights Reserved")]
 [assembly: AssemblyTrademark("DotNetNuke")]
 
 [assembly: ComVisible(false)]
@@ -34,8 +34,8 @@ using System.Web.UI;
 // by using the '*' as shown below:
 // <Assembly: AssemblyVersion("1.0.*")>
 
-[assembly: AssemblyVersion("6.0.0.0")]
-[assembly: AssemblyFileVersion("6.0.0.0")]
+[assembly: AssemblyVersion("6.1.0.0")]
+[assembly: AssemblyFileVersion("6.1.0.0")]
 [assembly: WebResource("dnn.reports.js", "text/javascript")]
 [assembly: WebResource("CssForm.css", "test/css")]
 [assembly: WebResource("CssForm.debug.css", "text/css")]

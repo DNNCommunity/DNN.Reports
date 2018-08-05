@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -25,6 +27,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers
 {
     using System;
     using System.Data;
+    using Components;
     using DotNetNuke.Modules.Reports.Exceptions;
     using DotNetNuke.Modules.Reports.Extensions;
     using DotNetNuke.Services.Localization;
@@ -44,12 +47,6 @@ namespace DotNetNuke.Modules.Reports.Visualizers
     /// -----------------------------------------------------------------------------
     public class VisualizerControlBase : ReportsControlBase, IVisualizerControl
     {
-        #region  Public Constants
-
-        public const string FILENAME_VisualizerASCX = "Visualizer.ascx";
-
-        #endregion
-
         //#Region " Event Handlers "
 
         #region  Private Fields
@@ -57,6 +54,8 @@ namespace DotNetNuke.Modules.Reports.Visualizers
         private bool _fromCache;
 
         #endregion
+
+        //        Private Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
 
         #region  Properties
 
@@ -82,7 +81,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers
         /// </summary>
         public virtual bool AutoExecuteReport => true;
 
-        protected override string ASCXFileName => FILENAME_VisualizerASCX;
+        protected override string ASCXFileName => ReportsConstants.FILENAME_VisualizerASCX;
 
         /// <summary>
         ///     Gets a boolean indicating if the current request is the first one
@@ -126,7 +125,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers
             {
                 this.ReportResults =
                     ReportsController.ExecuteReport(this.Report,
-                                                    string.Concat(ReportsController.CACHEKEY_Reports,
+                                                    string.Concat(ReportsConstants.CACHEKEY_Reports,
                                                                   Convert.ToString(this.ModuleId)), false,
                                                     this.ParentModule, ref this._fromCache);
             }
@@ -224,7 +223,6 @@ namespace DotNetNuke.Modules.Reports.Visualizers
 
         #endregion
 
-        //        Private Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         //            Me.IsFirstRun = False
         //        End Sub
 

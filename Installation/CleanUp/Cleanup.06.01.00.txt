@@ -1,0 +1,6 @@
+Install\Module\DNN_Reports_06.00.00_Install.zip
+DesktopModules\Reports\license.txt
+DesktopModules\Reports\releaseNotes.txt
+DesktopModules\Reports\Install\
+DesktopModules\Reports\wiki.images\*.*
+DesktopModules\Reports\wiki.images\

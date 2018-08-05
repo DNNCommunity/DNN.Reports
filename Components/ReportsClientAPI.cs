@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -41,8 +43,6 @@ namespace DotNetNuke.Modules.Reports
     /// -----------------------------------------------------------------------------
     public class ReportsClientAPI
     {
-        public const string ReportsScript = "~/DesktopModules/Reports/js/dnn.reports.js";
-
         public static bool IsSupported => ClientAPI.BrowserSupportsFunctionality(ClientAPI.ClientFunctionality.DHTML);
 
         public static void Import(Page page)

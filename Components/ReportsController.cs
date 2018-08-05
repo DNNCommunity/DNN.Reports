@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -35,6 +37,7 @@ namespace DotNetNuke.Modules.Reports
     using System.Web.Compilation;
     using System.Web.Configuration;
     using System.Xml;
+    using Components;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Entities.Users;
@@ -68,132 +71,19 @@ namespace DotNetNuke.Modules.Reports
             // Load Data Source Settings
             if (!string.IsNullOrEmpty(Report.DataSource))
             {
-                LoadPrefixedSettings(ModuleSettings, string.Format("{0}{1}_", PREFIX_DataSource, Report.DataSource),
+                LoadPrefixedSettings(ModuleSettings,
+                                     string.Format("{0}{1}_", ReportsConstants.PREFIX_DataSource, Report.DataSource),
                                      Report.DataSourceSettings);
             }
 
             if (TabModuleSettings != null)
             {
                 // Load Visualizer Settings
-                LoadPrefixedSettings(TabModuleSettings, string.Format("{0}{1}_", PREFIX_Visualizer, Report.Visualizer),
+                LoadPrefixedSettings(TabModuleSettings,
+                                     string.Format("{0}{1}_", ReportsConstants.PREFIX_Visualizer, Report.Visualizer),
                                      Report.VisualizerSettings);
             }
         }
-
-        #endregion
-
-
-        #region  Public Constants
-
-        // App Settings
-        public const string APPSETTING_AllowCachingWithParameters = "Reports_AllowCachingAndParameters";
-
-        // Prefixes
-        public const string PREFIX_Reports = "dnn_Reports_";
-
-        public const string PREFIX_Visualizer = "dnn_ReportsVis_";
-        public const string PREFIX_DataSource = "dnn_ReportsDS_";
-
-        // Package Types
-        public const string PACKAGETYPE_Prefix = "DNN_Reports_";
-
-        public const string PACKAGETYPE_Visualizer = PACKAGETYPE_Prefix + "Visualizer";
-        public const string PACKAGETYPE_DataSource = PACKAGETYPE_Prefix + "DataSource";
-
-        // Reports Module Settings
-        public const string SETTING_ReportTitle = PREFIX_Reports + "Title";
-
-        public const string SETTING_ReportDescription = PREFIX_Reports + "Description";
-        public const string SETTING_ReportParameters = PREFIX_Reports + "Parameters";
-        public const string SETTING_ReportCreatedBy = PREFIX_Reports + "CreatedBy";
-        public const string SETTING_ReportCreatedOn = PREFIX_Reports + "CreatedOn";
-        public const string SETTING_CacheDuration = PREFIX_Reports + "CacheDuration";
-        public const string SETTING_DataSource = PREFIX_Reports + "DataSource";
-        public const string SETTING_DataSourceClass = PREFIX_Reports + "DataSourceClass";
-        public const string SETTING_Visualizer = PREFIX_Reports + "Visualizer";
-        public const string SETTING_Converters = PREFIX_Reports + "Converters";
-        public const string SETTING_ShowInfoPane = PREFIX_Reports + "ShowInfoPane";
-        public const string SETTING_ShowControls = PREFIX_Reports + "ShowControls";
-        public const string SETTING_AutoRunReport = PREFIX_Reports + "AutoRunReport";
-        public const string SETTING_TokenReplace = PREFIX_Reports + "TokenReplace";
-
-        // Data Source Settings
-
-        // Common
-        public const string SETTING_Query = "Query";
-
-        public const string SETTING_ConnectionString = "ConnectionString";
-        public const string SETTING_Server = "Server";
-        public const string SETTING_Database = "Database";
-        public const string SETTING_UserName = "UserName";
-        public const string SETTING_Password = "Password";
-        public const string SETTING_UseConnectionString = "UseConnectionString";
-
-        // Sql
-        public const string SETTING_Sql_UseIntegratedSecurity = "UseIntegratedSecurity";
-
-        // ADO
-        public const string SETTING_ADO_ProviderName = "ProviderName";
-
-        public const string SETTING_ADO_ParamPrefix = "ParamPrefix";
-
-        // Visualizer Settings
-
-        // Common
-        public const string SETTING_Height = "Height";
-
-        public const string SETTING_Width = "Width";
-
-        // Chart Visualizer
-        public const string SETTING_Chart_Type = "Type";
-
-        public const string SETTING_Chart_BarNameColumn = "BarNameColumn";
-        public const string SETTING_Chart_BarValueColumn = "BarValueColumn";
-        public const string SETTING_Chart_ColorMode = "ColorMode";
-        public const string SETTING_Chart_BarColorColumn = "BarColorColumn";
-        public const string SETTING_Chart_BarColor = "BarColor";
-        public const string SETTING_Chart_XAxisTitle = "XAxisTitle";
-        public const string SETTING_Chart_YAxisTitle = "YAxisTitle";
-
-        // Grid Visualizer
-        public const string SETTING_Grid_EnablePaging = "EnablePaging";
-
-        public const string SETTING_Grid_EnableSorting = "EnableSorting";
-        public const string SETTING_Grid_PageSize = "PageSize";
-        public const string SETTING_Grid_ShowHeader = "ShowHeader";
-        public const string SETTING_Grid_GridLines = "GridLines";
-        public const string SETTING_Grid_AdditionalCSS = "AdditionalCSS";
-        public const string SETTING_Grid_CSSClass = "CSSClass";
-        public const string DEFAULT_Grid_GridLines = "None";
-
-        // Reporting Services Visualizer
-        public const string SETTING_RS_Mode = "Mode";
-
-        public const string SETTING_RS_LocalReportFile = "LocalFile";
-        public const string SETTING_RS_ServerReportUrl = "ServerUrl";
-        public const string SETTING_RS_ServerReportPath = "ServerPath";
-        public const string SETTING_RS_DataSourceName = "DataSourceName";
-        public const string SETTING_RS_VisibleUIElements = "VisibleUI";
-        public const string SETTING_RS_EnableExternalImages = "EnExImg";
-        public const string SETTING_RS_EnableHyperlinks = "EnHyper";
-        public const string SETTING_RS_Domain = "Domain";
-
-        public const string DEFAULT_RS_VisibleUIElements =
-                "DocumentMapButton,ExportControls,FindControls,NavigationControls,PrintButton,PromptAreaButton,RefreshButton,ToolBar,ZoomControl"
-            ;
-
-        // HTML Visualizer
-        public const string SETTING_Html_TemplateFile = "TemplateFile";
-
-        public const string SETTING_Html_Repeat = "Repeat";
-        public const string SETTING_Html_Separator = "Separator";
-
-        // XSLT Visualizer
-        public const string SETTING_Xslt_TransformFile = "TransformFile";
-
-        public const string SETTING_Xslt_ExtensionObject = "Ext";
-
-        public const string CACHEKEY_Reports = "dnn_ReportCache";
 
         #endregion
 
@@ -214,7 +104,7 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public static ReportInfo GetReport(int ModuleId)
         {
-           var info = new ModuleInfo
+            var info = new ModuleInfo
                            {
                                ModuleID = ModuleId,
                                TabModuleID = Null.NullInteger
@@ -229,7 +119,7 @@ namespace DotNetNuke.Modules.Reports
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <param name=" ModuleInfo">The module info</param> 
+        /// <param name=" ModuleInfo">The module info</param>
         /// <history>
         ///     [anurse]	01/15/2007	Created from GetReport(Integer)
         /// </history>
@@ -247,7 +137,7 @@ namespace DotNetNuke.Modules.Reports
 
             // Extract the Title, Description and Query from the settings
             var objModuleController = new ModuleController();
-            
+
             var objSettings = ModuleInfo.ModuleSettings;
             // Check that the settings hashtable was retrieved
             if (ReferenceEquals(objSettings, null))
@@ -259,30 +149,23 @@ namespace DotNetNuke.Modules.Reports
             var objReport = new ReportInfo();
 
             // Build the Report from the Module Settings
-            objReport.Title =
-                Convert.ToString(SettingsUtil.GetHashtableSetting(objSettings, SETTING_ReportTitle, Null.NullString));
-            objReport.Description =
-                Convert.ToString(
-                    SettingsUtil.GetHashtableSetting(objSettings, SETTING_ReportDescription, Null.NullString));
-            objReport.Parameters =
-                Convert.ToString(
-                    SettingsUtil.GetHashtableSetting(objSettings, SETTING_ReportParameters, Null.NullString));
-            objReport.CreatedOn =
-                Convert.ToDateTime(
-                    SettingsUtil.GetHashtableSetting(objSettings, SETTING_ReportCreatedOn, Null.NullDate));
-            objReport.CreatedBy =
-                Convert.ToInt32(
-                    SettingsUtil.GetHashtableSetting(objSettings, SETTING_ReportCreatedBy, Null.NullInteger));
-            objReport.DataSource =
-                Convert.ToString(SettingsUtil.GetHashtableSetting(objSettings, SETTING_DataSource, Null.NullString));
-            objReport.DataSourceClass =
-                Convert.ToString(
-                    SettingsUtil.GetHashtableSetting(objSettings, SETTING_DataSourceClass, Null.NullString));
+            var reportsModuleSettingsRepository = new ReportsModuleSettingsRepository();
+            var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(ModuleInfo);
+
+            objReport.Title = reportsModuleSettings.Title;
+            objReport.Description = reportsModuleSettings.Description;
+            objReport.Parameters = reportsModuleSettings.Parameters;
+            objReport.CreatedOn = reportsModuleSettings.CreatedOn;
+            objReport.CreatedBy = reportsModuleSettings.CreatedBy;
+            objReport.DataSource = reportsModuleSettings.DataSource;
+            objReport.DataSourceClass = reportsModuleSettings.DataSourceClass;
             objReport.ModuleID = ModuleId;
 
             // Load Filter Settings
             var converterString =
-                Convert.ToString(SettingsUtil.GetHashtableSetting(objSettings, SETTING_Converters, Null.NullString));
+                Convert.ToString(
+                    SettingsUtil.GetHashtableSetting(objSettings, ReportsConstants.SETTING_Converters,
+                                                     Null.NullString));
             if (!string.IsNullOrEmpty(converterString.Trim()))
             {
                 foreach (var converterItem in converterString.Split(';'))
@@ -312,27 +195,17 @@ namespace DotNetNuke.Modules.Reports
             {
                 objTabModuleSettings = ModuleInfo.TabModuleSettings;
 
-                objReport.ShowControls =
-                    Convert.ToBoolean(
-                        SettingsUtil.GetHashtableSetting(objTabModuleSettings, SETTING_ShowControls, false));
-                objReport.ShowInfoPane =
-                    Convert.ToBoolean(
-                        SettingsUtil.GetHashtableSetting(objTabModuleSettings, SETTING_ShowInfoPane, false));
-                objReport.AutoRunReport =
-                    Convert.ToBoolean(
-                        SettingsUtil.GetHashtableSetting(objTabModuleSettings, SETTING_AutoRunReport, true));
-                objReport.TokenReplace =
-                    Convert.ToBoolean(
-                        SettingsUtil.GetHashtableSetting(objTabModuleSettings, SETTING_TokenReplace, false));
+                objReport.ShowControls = reportsModuleSettings.ShowControls;
+                objReport.ShowInfoPane = reportsModuleSettings.ShowInfoPane;
+                objReport.AutoRunReport = reportsModuleSettings.AutoRunReport;
+                objReport.TokenReplace = reportsModuleSettings.TokenReplace;
+                objReport.CacheDuration = reportsModuleSettings.CacheDuration;
 
-                // Read the visualizer name and cache duration
+                // Read the visualizer name
                 objReport.Visualizer =
                     Convert.ToString(
-                        SettingsUtil.GetHashtableSetting(objTabModuleSettings, SETTING_Visualizer, "Grid"));
-                objReport.CacheDuration =
-                    Convert.ToInt32(
-                        SettingsUtil.GetHashtableSetting(objTabModuleSettings, SETTING_CacheDuration,
-                                                         Null.NullInteger));
+                        SettingsUtil.GetHashtableSetting(objTabModuleSettings, ReportsConstants.SETTING_Visualizer,
+                                                         "Grid"));
             }
 
             LoadExtensionSettings(objSettings, objTabModuleSettings, objReport);
@@ -484,8 +357,9 @@ namespace DotNetNuke.Modules.Reports
                 if (objReport.CacheDuration != 0)
                 {
                     // Check the app setting
-                    if (!"True".Equals(WebConfigurationManager.AppSettings[APPSETTING_AllowCachingWithParameters],
-                                       StringComparison.InvariantCulture))
+                    if (!"True".Equals(
+                            WebConfigurationManager.AppSettings[ReportsConstants.APPSETTING_AllowCachingWithParameters],
+                            StringComparison.InvariantCulture))
                     {
                         parameters.Clear();
                     }
@@ -584,7 +458,7 @@ namespace DotNetNuke.Modules.Reports
         ///     [anurse]        6/20/2006   Created
         /// </history>
         /// -----------------------------------------------------------------------------
-        public static string FormatRemoveSQL(string strSQL)
+        public string FormatRemoveSQL(string strSQL)
         {
             var strCleanSQL = strSQL;
 
@@ -619,7 +493,7 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public static void ClearCachedResults(int ModuleID)
         {
-            DataCache.RemoveCache(string.Concat(CACHEKEY_Reports, Convert.ToString(ModuleID)));
+            DataCache.RemoveCache(string.Concat(ReportsConstants.CACHEKEY_Reports, Convert.ToString(ModuleID)));
         }
 
         /// -----------------------------------------------------------------------------
@@ -786,21 +660,27 @@ namespace DotNetNuke.Modules.Reports
         // the same ModuleController instance for both method calls
         private static void UpdateReportDefinition(ModuleController ctrl, int ModuleId, ReportInfo objReport)
         {
+            var reportsModuleSettingsRepository = new ReportsModuleSettingsRepository();
+            var moduleInfo = ctrl.GetModule(ModuleId);
+            var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(moduleInfo);
+
             // Update the module settings with the data from the report
-            ctrl.UpdateModuleSetting(ModuleId, SETTING_ReportTitle, objReport.Title);
-            ctrl.UpdateModuleSetting(ModuleId, SETTING_ReportDescription, objReport.Description);
-            ctrl.UpdateModuleSetting(ModuleId, SETTING_ReportParameters, objReport.Parameters);
-            ctrl.UpdateModuleSetting(ModuleId, SETTING_DataSource, objReport.DataSource);
-            ctrl.UpdateModuleSetting(ModuleId, SETTING_DataSourceClass, objReport.DataSourceClass);
-            ctrl.UpdateModuleSetting(ModuleId, SETTING_ReportCreatedOn, objReport.CreatedOn.ToString());
-            ctrl.UpdateModuleSetting(ModuleId, SETTING_ReportCreatedBy, objReport.CreatedBy.ToString());
+            reportsModuleSettings.Title = objReport.Title;
+            reportsModuleSettings.Description = objReport.Description;
+            reportsModuleSettings.Parameters = objReport.Parameters;
+            reportsModuleSettings.DataSource = objReport.DataSource;
+            reportsModuleSettings.DataSourceClass = objReport.DataSourceClass;
+            reportsModuleSettings.CreatedOn = objReport.CreatedOn;
+            reportsModuleSettings.CreatedBy = objReport.CreatedBy;
+
+            reportsModuleSettingsRepository.SaveSettings(moduleInfo, reportsModuleSettings);
 
             // Update data source settings
             // Can't do this in a common way because we must call a different method to
             // update Visualizer Settings and Data Source Settings
             if (!string.IsNullOrEmpty(objReport.DataSource))
             {
-                var prefix = string.Format("{0}{1}_", PREFIX_DataSource, objReport.DataSource);
+                var prefix = string.Format("{0}{1}_", ReportsConstants.PREFIX_DataSource, objReport.DataSource);
                 foreach (var pair in objReport.DataSourceSettings)
                 {
                     ctrl.UpdateModuleSetting(ModuleId, string.Concat(prefix, pair.Key), Convert.ToString(pair.Value));
@@ -824,26 +704,33 @@ namespace DotNetNuke.Modules.Reports
                     ConverterBuilder.Append(";");
                 }
             }
-            ctrl.UpdateModuleSetting(ModuleId, SETTING_Converters, ConverterBuilder.ToString());
+            ctrl.UpdateModuleSetting(ModuleId, ReportsConstants.SETTING_Converters, ConverterBuilder.ToString());
         }
 
         // Internal version of SaveReportViewSettings to allow SaveReport to use
         // the same ModuleController instance for both method calls
         private static void UpdateReportView(ModuleController ctrl, int TabModuleId, ReportInfo objReport)
         {
+            var reportsModuleSettingsRepository = new ReportsModuleSettingsRepository();
+            var moduleInfo = ctrl.GetTabModule(TabModuleId);
+            var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(moduleInfo);
+
             // Update the cache duration if it is specified
             if (!objReport.CacheDuration.Equals(Null.NullInteger))
             {
-                ctrl.UpdateTabModuleSetting(TabModuleId, SETTING_CacheDuration, objReport.CacheDuration.ToString());
+                ctrl.UpdateTabModuleSetting(TabModuleId, ReportsConstants.SETTING_CacheDuration,
+                                            objReport.CacheDuration.ToString());
             }
 
-            ctrl.UpdateTabModuleSetting(TabModuleId, SETTING_ShowInfoPane, objReport.ShowInfoPane.ToString());
-            ctrl.UpdateTabModuleSetting(TabModuleId, SETTING_ShowControls, objReport.ShowControls.ToString());
-            ctrl.UpdateTabModuleSetting(TabModuleId, SETTING_AutoRunReport, objReport.AutoRunReport.ToString());
-            ctrl.UpdateTabModuleSetting(TabModuleId, SETTING_TokenReplace, objReport.TokenReplace.ToString());
+            reportsModuleSettings.ShowInfoPane = objReport.ShowInfoPane;
+            reportsModuleSettings.ShowControls = objReport.ShowControls;
+            reportsModuleSettings.AutoRunReport = objReport.AutoRunReport;
+            reportsModuleSettings.TokenReplace = objReport.TokenReplace;
 
-            // Update the visualizer setting
-            ctrl.UpdateTabModuleSetting(TabModuleId, SETTING_Visualizer, objReport.Visualizer);
+            //Update the visualizer setting
+            reportsModuleSettings.Visualizer = objReport.Visualizer;
+
+            reportsModuleSettingsRepository.SaveSettings(moduleInfo, reportsModuleSettings);
 
             // Update the Visualizer Settings
             // Can't do this in a common way because we must call a different method to
@@ -851,7 +738,7 @@ namespace DotNetNuke.Modules.Reports
             if (!string.IsNullOrEmpty(objReport.Visualizer))
             {
                 // Build the visualizer setting prefix (see GetReport)
-                var strVisPrefix = string.Format("{0}{1}_", PREFIX_Visualizer, objReport.Visualizer);
+                var strVisPrefix = string.Format("{0}{1}_", ReportsConstants.PREFIX_Visualizer, objReport.Visualizer);
 
                 // For each visualizer setting
                 foreach (var pair in objReport.VisualizerSettings)
@@ -932,6 +819,16 @@ namespace DotNetNuke.Modules.Reports
         public string ExportModule(int ModuleID)
         {
             var objReport = GetReport(ModuleID);
+            return this.ExportModule(objReport);
+        }
+
+        /// <summary>
+        ///     Exports the module.
+        /// </summary>
+        /// <param name="objReport">The object report.</param>
+        /// <returns></returns>
+        public string ExportModule(ReportInfo objReport)
+        {
             if (ReferenceEquals(objReport, null))
             {
                 return string.Empty;

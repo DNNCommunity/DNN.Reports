@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -32,6 +34,7 @@ namespace DotNetNuke.Modules.Reports
     using System.Text.RegularExpressions;
     using System.Web.UI;
     using System.Web.UI.WebControls;
+    using Components;
     using DotNetNuke.Common;
     using DotNetNuke.Entities.Portals;
     using DotNetNuke.Modules.Reports.Converters;
@@ -295,8 +298,8 @@ namespace DotNetNuke.Modules.Reports
         {
             var gridLines =
                 Convert.ToString(SettingsUtil.GetDictionarySetting(VisualizerSettings,
-                                                                   ReportsController.SETTING_Grid_GridLines,
-                                                                   ReportsController.DEFAULT_Grid_GridLines));
+                                                                   ReportsConstants.SETTING_Grid_GridLines,
+                                                                   ReportsConstants.DEFAULT_Grid_GridLines));
             if (bool.TrueString.Equals(gridLines, StringComparison.InvariantCultureIgnoreCase))
             {
                 return GridLines.Both;

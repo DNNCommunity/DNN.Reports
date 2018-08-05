@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -25,6 +27,7 @@ namespace DotNetNuke.Modules.Reports.DataSources.ADO
 {
     using System;
     using System.Data.Common;
+    using Components;
     using global::DotNetNuke.Modules.Reports.Exceptions;
 
     /// <summary>
@@ -35,12 +38,12 @@ namespace DotNetNuke.Modules.Reports.DataSources.ADO
         private DbProviderFactory GetProviderFactory()
         {
             return DbProviderFactories.GetFactory(
-                Convert.ToString(this.CurrentReport.DataSourceSettings[ReportsController.SETTING_ADO_ProviderName]));
+                Convert.ToString(this.CurrentReport.DataSourceSettings[ReportsConstants.SETTING_ADO_ProviderName]));
         }
 
         protected override DbConnection CreateConnection()
         {
-            this.ValidateRequiredReportSetting(ReportsController.SETTING_ADO_ProviderName);
+            this.ValidateRequiredReportSetting(ReportsConstants.SETTING_ADO_ProviderName);
 
             // Get the provider factory
             var factory = this.GetProviderFactory();
@@ -67,7 +70,7 @@ namespace DotNetNuke.Modules.Reports.DataSources.ADO
             var factory = this.GetProviderFactory();
             var paramPrefix =
                 Convert.ToString(SettingsUtil.GetDictionarySetting(this.CurrentReport.DataSourceSettings,
-                                                                   ReportsController.SETTING_ADO_ParamPrefix,
+                                                                   ReportsConstants.SETTING_ADO_ParamPrefix,
                                                                    string.Empty));
             var param = factory.CreateParameter();
             param.ParameterName = string.Concat(paramPrefix, name);

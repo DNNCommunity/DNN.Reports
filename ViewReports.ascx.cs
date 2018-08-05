@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -27,6 +29,7 @@ namespace DotNetNuke.Modules.Reports
     using System.Data;
     using System.IO;
     using System.Web;
+    using Components;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Entities.Modules.Actions;
     using DotNetNuke.Modules.Reports.Exceptions;
@@ -46,7 +49,7 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "7.3.2")]
+    [DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "8.0.1")]
     [DNNtc.ModuleControlProperties("", "", DNNtc.ControlType.View, "", false, false)]
     public partial class ViewReports : PortalModuleBase, IActionable
     {
@@ -131,7 +134,7 @@ namespace DotNetNuke.Modules.Reports
 
         private string GetVisualizerFolder()
         {
-            var sVisualizerFolder = Convert.ToString(this.Settings[ReportsController.SETTING_Visualizer]);
+            var sVisualizerFolder = Convert.ToString(this.Settings[ReportsConstants.SETTING_Visualizer]);
             if (string.IsNullOrEmpty(sVisualizerFolder) || !this.VisualizerFolderExists(sVisualizerFolder))
             {
                 if (this.VisualizerFolderExists("Grid"))
@@ -182,7 +185,7 @@ namespace DotNetNuke.Modules.Reports
             try
             {
                 results = ReportsController.ExecuteReport(
-                    report, string.Concat(ReportsController.CACHEKEY_Reports, Convert.ToString(this.ModuleId)),
+                    report, string.Concat(ReportsConstants.CACHEKEY_Reports, Convert.ToString(this.ModuleId)),
                     report.CacheDuration <= 0, this, ref fromCache);
             }
             catch (DataSourceException ex)
@@ -221,7 +224,7 @@ namespace DotNetNuke.Modules.Reports
                 // Find the visualizer control
                 var sVisualizerControl =
                     this.ResolveUrl(string.Format("Visualizers/{0}/{1}", sVisualizerFolder,
-                                                  VisualizerControlBase.FILENAME_VisualizerASCX));
+                                                  ReportsConstants.FILENAME_VisualizerASCX));
                 if (!File.Exists(this.Server.MapPath(sVisualizerControl)))
                 {
                     this.HandleMissingVisualizerError();

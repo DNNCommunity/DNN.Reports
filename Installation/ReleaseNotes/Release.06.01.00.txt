@@ -1,0 +1,16 @@
+<h2>Release notes DNN Reports 06.01.00</h2>
+<p>DNN Reports 06.01.00 will work for any DNN version <strong>8.0.1</strong> and up. 
+Full details on the changes can be found in great detail at <a href="https://github.com/DNNCommunity/DNN.Reports/releases">https://github.com/DNNCommunity/DNN.Reports/releases</a>. </p>
+<h3>ENHANCEMENTS</h3>
+<ul>
+	<li>Implemented a new Visualizer: the Razor Visualizer. It currently opens existing .cshtml files in the scripts folder of the RazorHost module. More to come later!</li>
+</ul>
+<h3>CHANGES</h3>
+<ul>
+	<li>Upgraded to DNN 8.0.1</li>	
+	<li>Implemented DNN 8.0.0 style module settings</li>
+</ul>
+<h3>BUG FIXES</h3>
+<ul>
+	<li>Fixed xslt visualizer recognition of external urls</li>
+</ul>

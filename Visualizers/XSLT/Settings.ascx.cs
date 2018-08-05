@@ -1,4 +1,5 @@
 #region Copyright
+
 // 
 // DotNetNuke® - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
@@ -18,6 +19,7 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
 
 
@@ -26,6 +28,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Xslt
     using System;
     using System.Collections.Generic;
     using System.Web.UI.WebControls;
+    using Components;
     using DotNetNuke.Modules.Reports.Extensions;
     using DotNetNuke.Services.Localization;
 
@@ -85,7 +88,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Xslt
         {
             this.ctlTransform.Url =
                 Convert.ToString(SettingsUtil.GetDictionarySetting(VisualizerSettings,
-                                                                   ReportsController.SETTING_Xslt_TransformFile,
+                                                                   ReportsConstants.SETTING_Xslt_TransformFile,
                                                                    string.Empty));
             this.ctlTransform.DataBind();
 
@@ -97,7 +100,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Xslt
 
         public override void SaveSettings(Dictionary<string, string> VisualizerSettings)
         {
-            VisualizerSettings[ReportsController.SETTING_Xslt_TransformFile] = this.ctlTransform.Url;
+            VisualizerSettings[ReportsConstants.SETTING_Xslt_TransformFile] = this.ctlTransform.Url;
 
             if (this.StoredExtensionObjects != null && this.ParentModule.UserInfo.IsSuperUser)
             {
