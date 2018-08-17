@@ -53,7 +53,6 @@ a ticket number.
 
 ## Submitting Changes
 
-* Sign the [Contributor License Agreement](http://www.dnnsoftware.com).
 * Push your changes to a topic branch in your fork of the repository.
 * Submit a pull request to the DNN.Platform repository in the DNNSoftware organization.
 * The committers will handle updating the associated issue in the DNN Tracker to ensure it gets the necessary code review and QA.
@@ -70,6 +69,5 @@ a ticket number.
 
 # Additional Resources
 
-* [Contributor License Agreement](http://www.dnnsoftware.com)
 * [General GitHub documentation](http://help.github.com/)
 * [GitHub pull request documentation](http://help.github.com/send-pull-requests/)
