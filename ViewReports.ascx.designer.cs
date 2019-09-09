@@ -67,6 +67,15 @@ namespace DotNetNuke.Modules.Reports {
         protected global::System.Web.UI.WebControls.LinkButton ClearReportButton;
         
         /// <summary>
+        /// ExportExcelButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ExportExcelButton;
+        
+        /// <summary>
         /// VisualizerSection control.
         /// </summary>
         /// <remarks>

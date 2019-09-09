@@ -66,11 +66,12 @@
         public const string SETTING_ShowControls = PREFIX_Reports + "ShowControls";
         public const string SETTING_AutoRunReport = PREFIX_Reports + "AutoRunReport";
         public const string SETTING_TokenReplace = PREFIX_Reports + "TokenReplace";
+		public const string SETTING_ExportExcel = PREFIX_Reports + "ExportExcel";
 
-        // Data Source Settings
+		// Data Source Settings
 
-        // Common
-        public const string SETTING_Query = "Query";
+		// Common
+		public const string SETTING_Query = "Query";
 
         public const string SETTING_ConnectionString = "ConnectionString";
         public const string SETTING_Server = "Server";

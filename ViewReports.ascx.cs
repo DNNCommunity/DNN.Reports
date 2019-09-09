@@ -287,8 +287,10 @@ namespace DotNetNuke.Modules.Reports
             this.Report = ReportsController.GetReport(this.ModuleConfiguration);
             this.InfoPane.Visible = this.Report.ShowInfoPane;
             this.ControlsPane.Visible = this.Report.ShowControls;
+			this.ExportExcelButton.Visible = Report.ExportExcel;
 
-            if (this.Report.ShowInfoPane)
+
+			if (this.Report.ShowInfoPane)
             {
                 this.TitleLiteral.Text = this.Report.Title;
                 this.DescriptionLiteral.Text = this.Report.Description;
@@ -312,6 +314,14 @@ namespace DotNetNuke.Modules.Reports
             this.ClearReportButton.Visible = false;
         }
 
-        #endregion
-    }
+		protected void ExportExcelButton_Click(object sender, EventArgs e)
+		{
+			DataTable results = null;
+			results = ReportsController.ExecuteReport(Report, String.Concat(ReportsConstants.CACHEKEY_Reports, ModuleId), true, this);
+			Session["report_export"] = results;
+			Response.Redirect("~/desktopmodules/reports/excel.aspx");
+		}
+
+		#endregion
+	}
 }

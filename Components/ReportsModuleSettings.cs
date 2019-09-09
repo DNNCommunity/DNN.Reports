@@ -77,11 +77,14 @@ namespace Components
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
         public bool TokenReplace { get; set; }
-    }
 
-    /// <summary>
-    ///     The <see cref="SettingsRepository{T}" /> used for storing and retrieving <see cref="ReportsModuleSettings" />
-    /// </summary>
-    public class ReportsModuleSettingsRepository : SettingsRepository<ReportsModuleSettings>
+		[TabModuleSetting(Prefix = "dnn_Reports_")]
+		public bool ExportExcel { get; set; } = true;
+	}
+
+	/// <summary>
+	///     The <see cref="SettingsRepository{T}" /> used for storing and retrieving <see cref="ReportsModuleSettings" />
+	/// </summary>
+	public class ReportsModuleSettingsRepository : SettingsRepository<ReportsModuleSettings>
     { }
 }

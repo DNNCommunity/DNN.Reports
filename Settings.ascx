@@ -203,6 +203,17 @@ TagPrefix="dnn" %>
                 <asp:CheckBox ID="chkAutoRunReport" runat="server"/>
             </td>
         </tr>
+		<tr>
+            <td class="dnn_rpt_form_label">
+                <dnn:label id="lblExportExcel" runat="server" cssclass="SubHead" controlname="chkExportExcel"
+                    suffix=":">
+                </dnn:label>
+            </td>
+            <td class="dnn_rpt_form_field">
+                <asp:CheckBox ID="chkExportExcel" runat="server" />
+            </td>
+        </tr>
+
         <tr>
             <td class="dnn_rpt_form_label">
                 <dnn:label id="lblTokenReplace" runat="server" cssclass="SubHead" controlname="chkTokenReplace"
