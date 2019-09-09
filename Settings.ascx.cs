@@ -142,7 +142,8 @@ namespace DotNetNuke.Modules.Reports
                 this.chkShowInfoPane.Checked = reportsModuleSettings.ShowInfoPane;
                 this.chkShowControls.Checked = reportsModuleSettings.ShowControls;
                 this.chkAutoRunReport.Checked = reportsModuleSettings.AutoRunReport;
-                this.chkTokenReplace.Checked = reportsModuleSettings.TokenReplace;
+				this.chkExportExcel.Checked = reportsModuleSettings.ExportExcel;
+				this.chkTokenReplace.Checked = reportsModuleSettings.TokenReplace;
 
                 // Set the caching checkbox
                 if (reportsModuleSettings.CacheDuration <= 0)
@@ -203,7 +204,8 @@ namespace DotNetNuke.Modules.Reports
             this.Report.ShowInfoPane = this.chkShowInfoPane.Checked;
             this.Report.ShowControls = this.chkShowControls.Checked;
             this.Report.AutoRunReport = this.chkAutoRunReport.Checked;
-            this.Report.TokenReplace = this.chkTokenReplace.Checked;
+			this.Report.ExportExcel = this.chkExportExcel.Checked;
+			this.Report.TokenReplace = this.chkTokenReplace.Checked;
 
             // and Visualizer Settings
             this.Report.Visualizer = this.VisualizerDropDown.SelectedValue;

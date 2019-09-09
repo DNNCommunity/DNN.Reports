@@ -68,7 +68,8 @@ namespace DotNetNuke.Modules.Reports
         private bool _ShowInfoPane;
         private bool _ShowControls;
         private bool _AutoRunReport;
-        private bool _TokenReplace;
+		private bool _ExportExcel;
+		private bool _TokenReplace;
 
         #endregion
 
@@ -306,13 +307,29 @@ namespace DotNetNuke.Modules.Reports
         {
             get { return this._AutoRunReport; }
             set { this._AutoRunReport = value; }
-        }
+		}
 
+        /// -----------------------------------------------------------------------------
         /// <summary>
-        ///     Gets or sets a value indicating whether token replace should take place.
+        ///     Gets or sets a boolean indicating if this report should allow export 
+		///     to excel
         /// </summary>
-        /// <value><c>true</c> if [token replace]; otherwise, <c>false</c>.</value>
-        public bool TokenReplace
+        /// <history>
+        ///     [anurse]	10/17/2007	Created
+        /// </history>
+        /// -----------------------------------------------------------------------------
+		public bool ExportExcel
+		{
+			get { return this._ExportExcel; }
+			set { this._ExportExcel = value; }
+		}
+
+
+		/// <summary>
+		///     Gets or sets a value indicating whether token replace should take place.
+		/// </summary>
+		/// <value><c>true</c> if [token replace]; otherwise, <c>false</c>.</value>
+		public bool TokenReplace
         {
             get { return this._TokenReplace; }
             set { this._TokenReplace = value; }

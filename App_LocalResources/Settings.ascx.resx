@@ -353,4 +353,10 @@ ask any questions you have regarding the usage of this visualizer.&lt;/p&gt;</va
   <data name="lblParameters.Text" xml:space="preserve">
     <value>Allowed Url Parameters</value>
   </data>
+  <data name="lblExportExcel.Help" xml:space="preserve">
+    <value>Select to display a button to export the report to excel</value>
+  </data>
+  <data name="lblExportExcel.Text" xml:space="preserve">
+    <value>Export to Excel?</value>
+  </data>
 </root>

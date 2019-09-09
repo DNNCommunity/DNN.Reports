@@ -200,9 +200,10 @@ namespace DotNetNuke.Modules.Reports
                 objReport.AutoRunReport = reportsModuleSettings.AutoRunReport;
                 objReport.TokenReplace = reportsModuleSettings.TokenReplace;
                 objReport.CacheDuration = reportsModuleSettings.CacheDuration;
+				objReport.ExportExcel = reportsModuleSettings.ExportExcel;
 
-                // Read the visualizer name
-                objReport.Visualizer =
+				// Read the visualizer name
+				objReport.Visualizer =
                     Convert.ToString(
                         SettingsUtil.GetHashtableSetting(objTabModuleSettings, ReportsConstants.SETTING_Visualizer,
                                                          "Grid"));
@@ -725,7 +726,8 @@ namespace DotNetNuke.Modules.Reports
             reportsModuleSettings.ShowInfoPane = objReport.ShowInfoPane;
             reportsModuleSettings.ShowControls = objReport.ShowControls;
             reportsModuleSettings.AutoRunReport = objReport.AutoRunReport;
-            reportsModuleSettings.TokenReplace = objReport.TokenReplace;
+			reportsModuleSettings.ExportExcel = objReport.ExportExcel;
+			reportsModuleSettings.TokenReplace = objReport.TokenReplace;
 
             //Update the visualizer setting
             reportsModuleSettings.Visualizer = objReport.Visualizer;

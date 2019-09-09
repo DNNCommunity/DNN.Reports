@@ -180,4 +180,7 @@
   <data name="CleanUpOldAppCode.Text" xml:space="preserve">
     <value>It looks like you upgraded from a previous version of the Reports Module. Due to a minor limitation, there are a few manual steps that must be performed to properly clean up old files. Please read the DesktopModules/Reports/AppCodeCleanup.txt file for instructions. This message will disappear when the cleanup is complete.</value>
   </data>
+  <data name="ExportExcelButton.Text" xml:space="preserve">
+    <value>Export to Excel</value>
+  </data>  
 </root>

@@ -130,6 +130,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Excel.aspx" />
     <Content Include="images\LegacyPackage.gif" />
     <Content Include="images\ManagePackages.gif" />
     <Content Include="DataSources\SqlServer\App_LocalResources\Settings.ascx.resx">
@@ -164,6 +165,13 @@
     <Compile Include="Components\ReportsConstants.cs" />
     <Compile Include="Components\ReportsModuleSettings.cs" />
     <Compile Include="Components\Tests\ReportsControllerTests.cs" />
+    <Compile Include="Excel.aspx.cs">
+      <DependentUpon>Excel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Excel.aspx.designer.cs">
+      <DependentUpon>Excel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Installation\Attributes.cs" />
     <Compile Include="Packages.ascx.designer.cs">
       <DependentUpon>Packages.ascx</DependentUpon>
