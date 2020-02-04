@@ -78,8 +78,10 @@ namespace DotNetNuke.Modules.Reports.Controls
                                       ModuleMessage.ModuleMessageType.RedError);
                 return;
             }
-            var reader = new StreamReader(this.QueryUploadControl.PostedFile.InputStream);
-            this.QueryTextBox.Text = reader.ReadToEnd();
+            using (var reader = new StreamReader(this.QueryUploadControl.PostedFile.InputStream))
+            {
+                this.QueryTextBox.Text = reader.ReadToEnd();
+            }
         }
 
         public override void LoadSettings(Dictionary<string, string> Settings)
