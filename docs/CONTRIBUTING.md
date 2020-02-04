@@ -32,6 +32,10 @@ We asume that you have some basic Git(Hub) knowledge and know how to work with f
 
 ### Fork the repository on GitHub
 If this is your first time working with the repository, you will need to fork the repository to get your system configured for local development.
+
+If you are new to Dnn Development, you can start by watching this video playlist which explains how to setup the required tools, your development environment and submit pull requests for modules, the Platform and the Persona Bar.
+[How to make a pull requests playlist](https://www.youtube.com/playlist?list=PLIx1M8IdVvqZ0bnODGqJyxvONNPj5BzMP)
+
 * Click fork on the project. You will get a fork of the repository in your own GitHub account
 * Clone your fork locally with `git clone
 * Add the *upstream connection* to the original repository, so you can rebase and update your fork with `git remote add upstream` to the base (the original) repository
