@@ -1,0 +1,8 @@
+image: Visual Studio 2017
+
+build:
+  parallel: true
+  project: Reports.sln
+
+artifacts:
+  path: 'Packages\**\*.zip'
