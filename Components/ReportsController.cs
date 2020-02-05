@@ -23,34 +23,34 @@
 #endregion
 
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.Compilation;
+using System.Web.Configuration;
+using System.Xml;
+using Components;
+using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Users;
+using DotNetNuke.Framework;
+using DotNetNuke.Modules.Reports.Converters;
+using DotNetNuke.Modules.Reports.Data;
+using DotNetNuke.Modules.Reports.DataSources;
+using DotNetNuke.Modules.Reports.Exceptions;
+using DotNetNuke.Modules.Reports.Extensions;
+using DotNetNuke.Modules.Reports.Visualizers.Xslt;
+using DotNetNuke.Services.Search.Entities;
+using DotNetNuke.Services.Tokens;
+
 namespace DotNetNuke.Modules.Reports
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Data.Common;
-    using System.IO;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Web;
-    using System.Web.Compilation;
-    using System.Web.Configuration;
-    using System.Xml;
-    using Components;
-    using DotNetNuke.Common.Utilities;
-    using DotNetNuke.Entities.Modules;
-    using DotNetNuke.Entities.Users;
-    using DotNetNuke.Framework;
-    using DotNetNuke.Modules.Reports.Converters;
-    using DotNetNuke.Modules.Reports.Data;
-    using DotNetNuke.Modules.Reports.DataSources;
-    using DotNetNuke.Modules.Reports.Exceptions;
-    using DotNetNuke.Modules.Reports.Extensions;
-    using DotNetNuke.Modules.Reports.Visualizers.Xslt;
-    using DotNetNuke.Services.Search.Entities;
-    using DotNetNuke.Services.Tokens;
-
     /// -----------------------------------------------------------------------------
     /// <summary>
     ///     The Controller class for Reports
@@ -317,136 +317,123 @@ namespace DotNetNuke.Modules.Reports
         public static DataTable ExecuteReport(ReportInfo objReport, string cacheKey, bool bypassCache,
                                               PortalModuleBase hostModule, ref bool fromCache)
         {
-            try
+            fromCache = false;
+            if (ReferenceEquals(objReport, null))
             {
-                fromCache = false;
-                if (ReferenceEquals(objReport, null))
+                throw new ArgumentNullException("objReport");
+            }
+
+            if (string.IsNullOrEmpty(objReport.DataSource))
+            {
+                return null; // If there's no data source, there's no report
+            }
+            // Check the cache
+            DataTable results = null;
+            if (!bypassCache)
+            {
+                results = DataCache.GetCache(cacheKey) as DataTable;
+                if (results != null)
                 {
-                    throw new ArgumentNullException("objReport");
+                    fromCache = true;
+                    return results;
                 }
+            }
 
-                if (string.IsNullOrEmpty(objReport.DataSource))
+            // Get an instance of the data source
+            //DotNetNuke.Modules.Reports.DataSources.IDataSource dataSource = GetDataSource(objReport.DataSourceClass) as DataSources.IDataSource;
+            var dataSource = GetDataSource(objReport.DataSourceClass);
+
+            // Create an extension context
+            var moduleFolder = string.Empty;
+            if (hostModule != null)
+            {
+                moduleFolder = hostModule.TemplateSourceDirectory;
+            }
+            var ctxt = new ExtensionContext(moduleFolder, "DataSource", objReport.DataSource);
+
+            // Load Parameters
+            IDictionary<string, object> parameters = BuildParameters(hostModule, objReport);
+            if (objReport.CacheDuration != 0)
+            {
+                // Check the app setting
+                if (!"True".Equals(
+                    WebConfigurationManager.AppSettings[ReportsConstants.APPSETTING_AllowCachingWithParameters],
+                    StringComparison.InvariantCulture))
                 {
-                    return null; // If there's no data source, there's no report
+                    parameters.Clear();
                 }
-                // Check the cache
-                DataTable results = null;
-                if (!bypassCache)
+            }
+
+            // Execute the report
+            dataSource.Initialize(ctxt);
+            results = dataSource.ExecuteReport(objReport, hostModule, parameters).ToTable();
+            results.TableName = "QueryResults";
+
+            // Check if the converters were run
+            if (!dataSource.CanProcessConverters)
+            {
+                // If not, run them the slow way :(
+                foreach (DataRow row in results.Rows)
                 {
-                    results = DataCache.GetCache(cacheKey) as DataTable;
-                    if (results != null)
-                    {
-                        fromCache = true;
-                        return results;
-                    }
-                }
-
-                // Get an instance of the data source
-                //DotNetNuke.Modules.Reports.DataSources.IDataSource dataSource = GetDataSource(objReport.DataSourceClass) as DataSources.IDataSource;
-                var dataSource = GetDataSource(objReport.DataSourceClass);
-
-                // Create an extension context
-                var moduleFolder = string.Empty;
-                if (hostModule != null)
-                {
-                    moduleFolder = hostModule.TemplateSourceDirectory;
-                }
-                var ctxt = new ExtensionContext(moduleFolder, "DataSource", objReport.DataSource);
-
-                // Load Parameters
-                IDictionary<string, object> parameters = BuildParameters(hostModule, objReport);
-                if (objReport.CacheDuration != 0)
-                {
-                    // Check the app setting
-                    if (!"True".Equals(
-                            WebConfigurationManager.AppSettings[ReportsConstants.APPSETTING_AllowCachingWithParameters],
-                            StringComparison.InvariantCulture))
-                    {
-                        parameters.Clear();
-                    }
-                }
-
-                // Execute the report
-                dataSource.Initialize(ctxt);
-                results = dataSource.ExecuteReport(objReport, hostModule, parameters).ToTable();
-                results.TableName = "QueryResults";
-
-                // Check if the converters were run
-                if (!dataSource.CanProcessConverters)
-                {
-                    // If not, run them the slow way :(
-                    foreach (DataRow row in results.Rows)
-                    {
-                        foreach (DataColumn col in results.Columns)
-                        {
-                            if (!objReport.Converters.ContainsKey(col.ColumnName))
-                            {
-                                continue;
-                            }
-                            var list = objReport.Converters[col.ColumnName];
-                            foreach (var converter in list)
-                            {
-                                row[col] = ApplyConverter(row[col], converter.ConverterName, converter.Arguments);
-                            }
-                        }
-                    }
-                }
-
-                // Do the token replace if specified
-                if (objReport.TokenReplace)
-                {
-                    var localTokenReplacer = new TokenReplace();
                     foreach (DataColumn col in results.Columns)
                     {
-                        // Process each column of the resultset
-                        if (col.DataType == typeof(string))
+                        if (!objReport.Converters.ContainsKey(col.ColumnName))
                         {
-                            // We want to replace the data, we don't mind that it is marked as readonly
-                            if (col.ReadOnly)
-                            {
-                                col.ReadOnly = false;
-                            }
-
-                            var maxLength = col.MaxLength;
-                            var resultText = "";
-
-                            foreach (DataRow row in results.Rows)
-                            {
-                                resultText =
-                                    localTokenReplacer.ReplaceEnvironmentTokens(Convert.ToString(row[col].ToString()));
-
-                                // Don't make it too long
-                                if (resultText.Length > maxLength)
-                                {
-                                    resultText = resultText.Substring(0, maxLength);
-                                }
-
-                                row[col] = resultText;
-                            }
+                            continue;
+                        }
+                        var list = objReport.Converters[col.ColumnName];
+                        foreach (var converter in list)
+                        {
+                            row[col] = ApplyConverter(row[col], converter.ConverterName, converter.Arguments);
                         }
                     }
                 }
-
-
-                // Cache it, if not asked to bypass the cache
-                if (!bypassCache && results != null)
-                {
-                    DataCache.SetCache(cacheKey, results);
-                }
-
-                // Return the results
-                return results;
             }
-            catch (DataSourceException)
+
+            // Do the token replace if specified
+            if (objReport.TokenReplace)
             {
-                throw;
-                //Catch ex As Exception
-                //    If hostModule IsNot Nothing Then
-                //        Throw New DataSourceException("UnknownError.Text", hostModule.LocalResourceFile, ex, ex.Message)
-                //    Else
-                //        Throw
-                //    End If
+                var localTokenReplacer = new TokenReplace();
+                foreach (DataColumn col in results.Columns)
+                {
+                    // Process each column of the resultset
+                    if (col.DataType == typeof(string))
+                    {
+                        // We want to replace the data, we don't mind that it is marked as readonly
+                        if (col.ReadOnly)
+                        {
+                            col.ReadOnly = false;
+                        }
+
+                        var maxLength = col.MaxLength;
+                        var resultText = "";
+
+                        foreach (DataRow row in results.Rows)
+                        {
+                            resultText =
+                                localTokenReplacer.ReplaceEnvironmentTokens(Convert.ToString(row[col].ToString()));
+
+                            // Don't make it too long
+                            if (resultText.Length > maxLength)
+                            {
+                                resultText = resultText.Substring(0, maxLength);
+                            }
+
+                            row[col] = resultText;
+                        }
+                    }
+                }
             }
+
+
+            // Cache it, if not asked to bypass the cache
+            if (!bypassCache && results != null)
+            {
+                DataCache.SetCache(cacheKey, results);
+            }
+
+            // Return the results
+            return results;
         }
 
         /// -----------------------------------------------------------------------------
@@ -821,7 +808,7 @@ namespace DotNetNuke.Modules.Reports
         public string ExportModule(int ModuleID)
         {
             var objReport = GetReport(ModuleID);
-            return this.ExportModule(objReport);
+            return ExportModule(objReport);
         }
 
         /// <summary>
