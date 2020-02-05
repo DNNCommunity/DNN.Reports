@@ -101,7 +101,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Html
                                 var divContent = new HtmlGenericControl("div");
                                 divContent.Attributes["class"] = "DNN_Reports_HTML_Item";
                                 divContent.InnerHtml =
-                                    objSec.InputFilter(rowHtml, PortalSecurity.FilterFlag.NoScripting);
+                                    objSec.InputFilter(rowHtml, PortalSecurity.FilterFlag.MultiLine|PortalSecurity.FilterFlag.NoSQL);
                                 this.pnlContent.Controls.Add(divContent);
                             }
                         }

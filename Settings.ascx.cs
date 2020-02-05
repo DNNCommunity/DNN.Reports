@@ -23,28 +23,29 @@
 #endregion
 
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Components;
+using DNNtc;
+using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Modules.Reports.Converters;
+using DotNetNuke.Modules.Reports.DataSources;
+using DotNetNuke.Modules.Reports.Exceptions;
+using DotNetNuke.Modules.Reports.Extensions;
+using DotNetNuke.Security;
+using DotNetNuke.Services.Localization;
+using DotNetNuke.UI.Utilities;
+using DotNetNuke.Web.Client.ClientResourceManagement;
+
 namespace DotNetNuke.Modules.Reports
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Text;
-    using System.Web;
-    using System.Web.Configuration;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
-    using Components;
-    using DotNetNuke.Common.Utilities;
-    using DotNetNuke.Entities.Modules;
-    using DotNetNuke.Modules.Reports.Converters;
-    using DotNetNuke.Modules.Reports.DataSources;
-    using DotNetNuke.Modules.Reports.Exceptions;
-    using DotNetNuke.Modules.Reports.Extensions;
-    using DotNetNuke.Security;
-    using DotNetNuke.Services.Localization;
-    using DotNetNuke.UI.Utilities;
-    using DotNetNuke.Web.Client.ClientResourceManagement;
-
     /// -----------------------------------------------------------------------------
     /// <summary>
     ///     The Settings class manages Module Settings
@@ -54,15 +55,15 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [DNNtc.ModuleControlProperties("Settings", "Reports Settings", DNNtc.ControlType.Edit, "", false, false)]
+    [ModuleControlProperties("Settings", "Reports Settings", ControlType.Edit, "")]
     public partial class Settings : ModuleSettingsBase
     {
         #region  Properties
 
         private ReportInfo Report
         {
-            get { return this.ViewState["Report"] as ReportInfo; }
-            set { this.ViewState["Report"] = value; }
+            get { return ViewState["Report"] as ReportInfo; }
+            set { ViewState["Report"] = value; }
         }
 
         #endregion
@@ -78,39 +79,39 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public override void LoadSettings()
         {
-            if (!this.Page.IsPostBack)
+            if (!Page.IsPostBack)
             {
-                this.Report = ReportsController.GetReport(this.ModuleConfiguration);
-                if (ReferenceEquals(this.Report, null))
+                Report = ReportsController.GetReport(ModuleConfiguration);
+                if (ReferenceEquals(Report, null))
                 {
-                    this.Report = new ReportInfo();
+                    Report = new ReportInfo();
                 }
 
                 var reportsModuleSettingsRepository = new ReportsModuleSettingsRepository();
-                var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(this.ModuleConfiguration);
+                var reportsModuleSettings = reportsModuleSettingsRepository.GetSettings(ModuleConfiguration);
 
                 // If the user has permission to see the Data Source Settings
-                if (this.CheckPermissions())
+                if (CheckPermissions())
                 {
                     // Load the fields
-                    this.txtTitle.Text = reportsModuleSettings.Title;
-                    this.txtDescription.Text = reportsModuleSettings.Description;
-                    this.txtParameters.Text = reportsModuleSettings.Parameters;
+                    txtTitle.Text = reportsModuleSettings.Title;
+                    txtDescription.Text = reportsModuleSettings.Description;
+                    txtParameters.Text = reportsModuleSettings.Parameters;
 
                     // Load the Data Source Settings
                     var temp_extensionName = reportsModuleSettings.DataSource;
-                    this.LoadExtensionSettings("DataSource", ref temp_extensionName, "DataSourceName.Text",
+                    LoadExtensionSettings("DataSource", ref temp_extensionName, "DataSourceName.Text",
                                                "DataSource.Text", ReportsConstants.DEFAULT_DataSource,
-                                               this.DataSourceDropDown,
-                                               this.DataSourceSettings, this.DataSourceNotConfiguredView,
-                                               this.Report.DataSourceSettings,
+                                               DataSourceDropDown,
+                                               DataSourceSettings, DataSourceNotConfiguredView,
+                                               Report.DataSourceSettings,
                                                ReportsConstants.FILENAME_RESX_DataSource, true);
-                    this.Report.DataSource = temp_extensionName;
+                    Report.DataSource = temp_extensionName;
 
                     // Load the filtering settings
                     var encodeBuilder = new StringBuilder();
                     var decodeBuilder = new StringBuilder();
-                    foreach (List<ConverterInstanceInfo> list in this.Report.Converters.Values)
+                    foreach (List<ConverterInstanceInfo> list in Report.Converters.Values)
                     {
                         foreach (var Converter in list)
                         {
@@ -134,39 +135,39 @@ namespace DotNetNuke.Modules.Reports
                             }
                         }
                     }
-                    this.txtHtmlEncode.Text = encodeBuilder.ToString();
-                    this.txtHtmlDecode.Text = decodeBuilder.ToString();
+                    txtHtmlEncode.Text = encodeBuilder.ToString();
+                    txtHtmlDecode.Text = decodeBuilder.ToString();
                 }
 
-                this.txtCacheDuration.Text = reportsModuleSettings.CacheDuration.ToString();
-                this.chkShowInfoPane.Checked = reportsModuleSettings.ShowInfoPane;
-                this.chkShowControls.Checked = reportsModuleSettings.ShowControls;
-                this.chkAutoRunReport.Checked = reportsModuleSettings.AutoRunReport;
-				this.chkExportExcel.Checked = reportsModuleSettings.ExportExcel;
-				this.chkTokenReplace.Checked = reportsModuleSettings.TokenReplace;
+                txtCacheDuration.Text = reportsModuleSettings.CacheDuration.ToString();
+                chkShowInfoPane.Checked = reportsModuleSettings.ShowInfoPane;
+                chkShowControls.Checked = reportsModuleSettings.ShowControls;
+                chkAutoRunReport.Checked = reportsModuleSettings.AutoRunReport;
+				chkExportExcel.Checked = reportsModuleSettings.ExportExcel;
+				chkTokenReplace.Checked = reportsModuleSettings.TokenReplace;
 
                 // Set the caching checkbox
                 if (reportsModuleSettings.CacheDuration <= 0)
                 {
-                    this.chkCaching.Checked = false;
-                    this.Report.CacheDuration = 0;
+                    chkCaching.Checked = false;
+                    Report.CacheDuration = 0;
                 }
                 else
                 {
-                    this.chkCaching.Checked = true;
+                    chkCaching.Checked = true;
                 }
 
                 // Update the cache duration text box visibility
-                this.UpdateCachingSpan();
+                UpdateCachingSpan();
 
                 // Load Visualizer Settings
                 var temp_extensionName2 = reportsModuleSettings.Visualizer;
-                this.LoadExtensionSettings("Visualizer", ref temp_extensionName2, "VisualizerName.Text",
+                LoadExtensionSettings("Visualizer", ref temp_extensionName2, "VisualizerName.Text",
                                            "Visualizer.Text", ReportsConstants.DEFAULT_Visualizer,
-                                           this.VisualizerDropDown,
-                                           this.VisualizerSettings, null, this.Report.VisualizerSettings,
+                                           VisualizerDropDown,
+                                           VisualizerSettings, null, Report.VisualizerSettings,
                                            ReportsConstants.FILENAME_RESX_Visualizer, false);
-                this.Report.Visualizer = temp_extensionName2;
+                Report.Visualizer = temp_extensionName2;
             }
         }
 
@@ -182,46 +183,46 @@ namespace DotNetNuke.Modules.Reports
         public override void UpdateSettings()
         {
             // Do not update report definition if the user is not a SuperUser
-            if (this.UserInfo.IsSuperUser)
+            if (UserInfo.IsSuperUser)
             {
                 // Update the settings
-                this.UpdateDataSourceSettings();
+                UpdateDataSourceSettings();
 
                 // Save the report definition
-                ReportsController.UpdateReportDefinition(this.ModuleId, this.Report);
+                ReportsController.UpdateReportDefinition(ModuleId, Report);
             }
 
             // Non-SuperUsers can change TabModuleSettings (display settings)
 
             // Update cache duration (0 => no caching)
             var duration = "0";
-            if (this.chkCaching.Checked)
+            if (chkCaching.Checked)
             {
-                duration = this.txtCacheDuration.Text;
+                duration = txtCacheDuration.Text;
             }
 
-            this.Report.CacheDuration = int.Parse(duration);
-            this.Report.ShowInfoPane = this.chkShowInfoPane.Checked;
-            this.Report.ShowControls = this.chkShowControls.Checked;
-            this.Report.AutoRunReport = this.chkAutoRunReport.Checked;
-			this.Report.ExportExcel = this.chkExportExcel.Checked;
-			this.Report.TokenReplace = this.chkTokenReplace.Checked;
+            Report.CacheDuration = int.Parse(duration);
+            Report.ShowInfoPane = chkShowInfoPane.Checked;
+            Report.ShowControls = chkShowControls.Checked;
+            Report.AutoRunReport = chkAutoRunReport.Checked;
+			Report.ExportExcel = chkExportExcel.Checked;
+			Report.TokenReplace = chkTokenReplace.Checked;
 
             // and Visualizer Settings
-            this.Report.Visualizer = this.VisualizerDropDown.SelectedValue;
-            this.Report.VisualizerSettings.Clear();
-            var settings = this.GetSettingsControlFromView(this.VisualizerSettings.GetActiveView());
+            Report.Visualizer = VisualizerDropDown.SelectedValue;
+            Report.VisualizerSettings.Clear();
+            var settings = GetSettingsControlFromView(VisualizerSettings.GetActiveView());
             if (settings != null)
             {
-                settings.SaveSettings(this.Report.VisualizerSettings);
+                settings.SaveSettings(Report.VisualizerSettings);
             }
 
             // Save the report view and clear the cache
-            ReportsController.UpdateReportView(this.TabModuleId, this.Report);
+            ReportsController.UpdateReportView(TabModuleId, Report);
 
             // refresh cache
-            ModuleController.SynchronizeModule(this.ModuleId);
-            ReportsController.ClearCachedResults(this.ModuleId);
+            ModuleController.SynchronizeModule(ModuleId);
+            ReportsController.ClearCachedResults(ModuleId);
         }
 
         #region  Event Handlers
@@ -229,142 +230,142 @@ namespace DotNetNuke.Modules.Reports
         protected void Page_Init(object sender, EventArgs e)
         {
             // Setup the extension lists
-            this.VisualizerDropDown.Items.Clear();
-            this.BuildExtensionList("Visualizer", ReportsConstants.FILENAME_RESX_Visualizer, "VisualizerName.Text",
-                                    "Visualizer.Text", this.VisualizerDropDown, this.VisualizerSettings, true, false);
+            VisualizerDropDown.Items.Clear();
+            BuildExtensionList("Visualizer", ReportsConstants.FILENAME_RESX_Visualizer, "VisualizerName.Text",
+                                    "Visualizer.Text", VisualizerDropDown, VisualizerSettings, true, false);
 
-            this.BuildExtensionList("DataSource", ReportsConstants.FILENAME_RESX_DataSource, "DataSourceName.Text",
-                                    "DataSource.Text", this.DataSourceDropDown, this.DataSourceSettings, true, true);
+            BuildExtensionList("DataSource", ReportsConstants.FILENAME_RESX_DataSource, "DataSourceName.Text",
+                                    "DataSource.Text", DataSourceDropDown, DataSourceSettings, true, true);
 
             // Register Confirm Messages
-            ClientAPI.AddButtonConfirm(this.btnTestDataSource,
-                                       Localization.GetString("btnTestDataSource.Confirm", this.LocalResourceFile));
-            ClientAPI.AddButtonConfirm(this.btnShowXml,
-                                       Localization.GetString("btnTestDataSource.Confirm", this.LocalResourceFile));
+            ClientAPI.AddButtonConfirm(btnTestDataSource,
+                                       Localization.GetString("btnTestDataSource.Confirm", LocalResourceFile));
+            ClientAPI.AddButtonConfirm(btnShowXml,
+                                       Localization.GetString("btnTestDataSource.Confirm", LocalResourceFile));
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             // Add module.css because it isn't loaded by default here (since the current module
             // is "Admin/Modules"
-            ClientResourceManager.RegisterStyleSheet(this.Page, this.ResolveUrl("module.css"));
+            ClientResourceManager.RegisterStyleSheet(Page, ResolveUrl("module.css"));
 
             // Update the selected extension on postback
-            if (this.IsPostBack)
+            if (IsPostBack)
             {
-                this.DisplaySelectedExtension("Visualizer", this.VisualizerDropDown,
-                                              this.VisualizerSettings, null, this.Report.VisualizerSettings);
-                this.DisplaySelectedExtension("DataSource", this.DataSourceDropDown,
-                                              this.DataSourceSettings, this.DataSourceNotConfiguredView,
-                                              this.Report.DataSourceSettings);
-                var haveDataSource = !string.IsNullOrEmpty(this.DataSourceDropDown.SelectedValue);
-                this.btnTestDataSource.Visible = haveDataSource;
-                this.btnShowXml.Visible = haveDataSource;
+                DisplaySelectedExtension("Visualizer", VisualizerDropDown,
+                                              VisualizerSettings, null, Report.VisualizerSettings);
+                DisplaySelectedExtension("DataSource", DataSourceDropDown,
+                                              DataSourceSettings, DataSourceNotConfiguredView,
+                                              Report.DataSourceSettings);
+                var haveDataSource = !string.IsNullOrEmpty(DataSourceDropDown.SelectedValue);
+                btnTestDataSource.Visible = haveDataSource;
+                btnShowXml.Visible = haveDataSource;
 
                 if ("True".Equals(
                     WebConfigurationManager.AppSettings[ReportsConstants.APPSETTING_AllowCachingWithParameters]))
                 {
-                    this.CacheWarningLabel.Attributes["ResourceKey"] = "CacheWithParametersEnabled.Text";
+                    CacheWarningLabel.Attributes["ResourceKey"] = "CacheWithParametersEnabled.Text";
                 }
             }
 
             // Register ClientAPI Functionality
             if (!ReportsClientAPI.IsSupported)
             {
-                this.chkCaching.AutoPostBack = true;
-                this.chkCaching.CheckedChanged += this.chkCaching_CheckedChanged;
+                chkCaching.AutoPostBack = true;
+                chkCaching.CheckedChanged += chkCaching_CheckedChanged;
             }
             else
             {
-                ReportsClientAPI.Import(this.Page);
-                ReportsClientAPI.ShowHideByCheckBox(this.Page, this.chkCaching, this.spanCacheDuration);
+                ReportsClientAPI.Import(Page);
+                ReportsClientAPI.ShowHideByCheckBox(Page, chkCaching, spanCacheDuration);
             }
 
             // Perform a server-side update of the caching text box span
-            this.UpdateCachingSpan();
+            UpdateCachingSpan();
         }
 
         private void chkCaching_CheckedChanged(object sender, EventArgs args)
         {
-            this.UpdateCachingSpan();
+            UpdateCachingSpan();
         }
 
         protected void btnShowXml_Click(object sender, EventArgs e)
         {
-            this.rowXmlSource.Visible = false;
-            this.rowResults.Visible = false;
+            rowXmlSource.Visible = false;
+            rowResults.Visible = false;
 
             try
             {
                 // Update data source settings
-                this.UpdateDataSourceSettings();
+                UpdateDataSourceSettings();
 
                 // Execute the DataSource
-                var results = ReportsController.ExecuteReport(this.Report, null,
+                var results = ReportsController.ExecuteReport(Report, null,
                                                               true, this);
 
                 // Serialize the results to Xml
                 var writer = new StringWriter();
                 results.WriteXml(writer);
-                this.txtXmlSource.Text = writer.ToString();
-                this.rowXmlSource.Visible = true;
+                txtXmlSource.Text = writer.ToString();
+                rowXmlSource.Visible = true;
             }
             catch (DataSourceException ex)
             {
                 // Format an error message
-                this.lblQueryResults.Text =
-                    string.Format(Localization.GetString("TestDSFail.Message", this.LocalResourceFile),
+                lblQueryResults.Text =
+                    string.Format(Localization.GetString("TestDSFail.Message", LocalResourceFile),
                                   ex.LocalizedMessage);
-                this.lblQueryResults.CssClass = "NormalRed";
-                this.imgQueryResults.ImageUrl = "~/images/red-error.gif";
-                this.rowResults.Visible = true;
-                this.rowXmlSource.Visible = false;
+                lblQueryResults.CssClass = "NormalRed";
+                imgQueryResults.ImageUrl = "~/images/red-error.gif";
+                rowResults.Visible = true;
+                rowXmlSource.Visible = false;
             }
         }
 
         protected void btnHideXmlSource_Click(object sender, EventArgs e)
         {
-            this.rowXmlSource.Visible = false;
+            rowXmlSource.Visible = false;
         }
 
         protected void btnTestQuery_Click(object sender, EventArgs e)
         {
-            this.rowXmlSource.Visible = false;
-            this.rowResults.Visible = false;
+            rowXmlSource.Visible = false;
+            rowResults.Visible = false;
 
             try
             {
                 // Update data source settings
-                this.UpdateDataSourceSettings();
+                UpdateDataSourceSettings();
 
                 // Execute the DataSource
-                var results = ReportsController.ExecuteReport(this.Report, null,
+                var results = ReportsController.ExecuteReport(Report, null,
                                                               true, this);
 
                 // Format a success message
-                this.lblQueryResults.Text = string.Format(Localization.GetString("TestDSSuccess.Message",
-                                                                                 this.LocalResourceFile),
+                lblQueryResults.Text = string.Format(Localization.GetString("TestDSSuccess.Message",
+                                                                                 LocalResourceFile),
                                                           results.Rows.Count);
-                this.lblQueryResults.CssClass = "NormalBold";
-                this.imgQueryResults.ImageUrl = "~/images/green-ok.gif";
+                lblQueryResults.CssClass = "NormalBold";
+                imgQueryResults.ImageUrl = "~/images/green-ok.gif";
             }
             catch (DataSourceException ex)
             {
                 // Format an error message
-                this.lblQueryResults.Text =
-                    string.Format(Localization.GetString("TestDSFail.Message", this.LocalResourceFile),
+                lblQueryResults.Text =
+                    string.Format(Localization.GetString("TestDSFail.Message", LocalResourceFile),
                                   ex.LocalizedMessage);
-                this.lblQueryResults.CssClass = "NormalRed";
-                this.imgQueryResults.ImageUrl = "~/images/red-error.gif";
+                lblQueryResults.CssClass = "NormalRed";
+                imgQueryResults.ImageUrl = "~/images/red-error.gif";
             }
 
             // Display the results/error message
-            this.rowResults.Visible = true;
+            rowResults.Visible = true;
         }
 
         protected void btnHideTestResults_Click(object sender, EventArgs e)
         {
-            this.rowResults.Visible = false;
+            rowResults.Visible = false;
         }
 
         #endregion
@@ -375,48 +376,48 @@ namespace DotNetNuke.Modules.Reports
         {
             // Load the data source settings into the report
             var security = new PortalSecurity();
-            this.Report.Title = this.txtTitle.Text;
-            this.Report.Description =
-                security.InputFilter(this.txtDescription.Text, PortalSecurity.FilterFlag.NoScripting);
-            this.Report.Parameters = this.txtParameters.Text;
-            this.Report.CreatedBy = this.UserId;
-            this.Report.CreatedOn = DateTime.Now;
-            this.Report.DataSource = this.DataSourceDropDown.SelectedValue;
+            Report.Title = txtTitle.Text;
+            Report.Description =
+                security.InputFilter(txtDescription.Text, PortalSecurity.FilterFlag.NoScripting);
+            Report.Parameters = txtParameters.Text;
+            Report.CreatedBy = UserId;
+            Report.CreatedOn = DateTime.Now;
+            Report.DataSource = DataSourceDropDown.SelectedValue;
 
             // Get the active data source settings control
-            var activeDataSource = this.GetSettingsControlFromView(this.DataSourceSettings.GetActiveView()) as
+            var activeDataSource = GetSettingsControlFromView(DataSourceSettings.GetActiveView()) as
                                        IDataSourceSettingsControl;
 
             // If there is an active data source, save its settings
             if (activeDataSource != null)
             {
-                this.Report.DataSourceClass = activeDataSource.DataSourceClass;
-                activeDataSource.SaveSettings(this.Report.DataSourceSettings);
+                Report.DataSourceClass = activeDataSource.DataSourceClass;
+                activeDataSource.SaveSettings(Report.DataSourceSettings);
             }
 
             // Update Converter settings
-            this.Report.Converters.Clear();
-            if (!string.IsNullOrEmpty(this.txtHtmlDecode.Text.Trim()))
+            Report.Converters.Clear();
+            if (!string.IsNullOrEmpty(txtHtmlDecode.Text.Trim()))
             {
-                foreach (var field in this.txtHtmlDecode.Text.Split(','))
+                foreach (var field in txtHtmlDecode.Text.Split(','))
                 {
                     var newConverter = new ConverterInstanceInfo();
                     newConverter.FieldName = Convert.ToString(field);
                     newConverter.ConverterName = "HtmlDecode";
                     newConverter.Arguments = null;
-                    ConverterUtils.AddConverter(this.Report.Converters, newConverter);
+                    ConverterUtils.AddConverter(Report.Converters, newConverter);
                 }
             }
 
-            if (!string.IsNullOrEmpty(this.txtHtmlEncode.Text.Trim()))
+            if (!string.IsNullOrEmpty(txtHtmlEncode.Text.Trim()))
             {
-                foreach (var field in this.txtHtmlEncode.Text.Split(','))
+                foreach (var field in txtHtmlEncode.Text.Split(','))
                 {
                     var newConverter = new ConverterInstanceInfo();
                     newConverter.FieldName = Convert.ToString(field);
                     newConverter.ConverterName = "HtmlEncode";
                     newConverter.Arguments = null;
-                    ConverterUtils.AddConverter(this.Report.Converters, newConverter);
+                    ConverterUtils.AddConverter(Report.Converters, newConverter);
                 }
             }
         }
@@ -428,7 +429,7 @@ namespace DotNetNuke.Modules.Reports
                                            bool buildNotSpecifiedItem)
         {
             // Build the list of Data Sources
-            this.BuildExtensionList(extensionType, resxFileName, nameResourceKey,
+            BuildExtensionList(extensionType, resxFileName, nameResourceKey,
                                     typeResourceKey, dropDown, multiView, true, buildNotSpecifiedItem);
 
             // Check that the Report has a Data Source, if not, use the default
@@ -442,7 +443,7 @@ namespace DotNetNuke.Modules.Reports
             if (extensionItem != null)
             {
                 extensionItem.Selected = true;
-                this.DisplaySelectedExtension(extensionType, dropDown, multiView, notConfiguredView, extensionSettings);
+                DisplaySelectedExtension(extensionType, dropDown, multiView, notConfiguredView, extensionSettings);
             }
         }
 
@@ -453,7 +454,7 @@ namespace DotNetNuke.Modules.Reports
             var newActiveViewName = Null.NullString;
             if (!string.IsNullOrEmpty(dropDown.SelectedValue))
             {
-                newActiveViewName = this.GetExtensionViewName(dropDown.SelectedValue, extensionType);
+                newActiveViewName = GetExtensionViewName(dropDown.SelectedValue, extensionType);
             }
 
             // Get the current active view
@@ -485,7 +486,7 @@ namespace DotNetNuke.Modules.Reports
             multiView.SetActiveView(newActiveView);
 
             // Get the settings control in the new active view
-            var settingsControl = this.GetSettingsControlFromView(newActiveView);
+            var settingsControl = GetSettingsControlFromView(newActiveView);
 
             // If we successfully got it, load its settings
             if (settingsControl != null)
@@ -499,7 +500,7 @@ namespace DotNetNuke.Modules.Reports
                                         bool buildView, bool buildNotSpecifiedItem)
         {
             // Map the root physical path by using this control's location
-            var rootPhysicalPath = this.Server.MapPath(this.TemplateSourceDirectory);
+            var rootPhysicalPath = Server.MapPath(TemplateSourceDirectory);
 
             // Load all the Settings.ascx files for the Extension
             var extTypeFolder = string.Concat(extensionType, "s");
@@ -512,7 +513,7 @@ namespace DotNetNuke.Modules.Reports
             {
                 dropDown.Items.Add(new ListItem(
                                        Localization.GetString(string.Format("No{0}.Text", extensionType),
-                                                              this.LocalResourceFile),
+                                                              LocalResourceFile),
                                        string.Empty));
             }
             buildView = buildView && multiView.Views.Count <= 1;
@@ -526,15 +527,15 @@ namespace DotNetNuke.Modules.Reports
                                           extPath,
                                           Localization.LocalResourceDirectory,
                                           resxFileName);
-                var localResourceFile = this.ResolveUrl(lrWeb);
-                if (!File.Exists(this.Server.MapPath(localResourceFile)))
+                var localResourceFile = ResolveUrl(lrWeb);
+                if (!File.Exists(Server.MapPath(localResourceFile)))
                 {
                     continue;
                 }
 
                 // Locate the Settings control
-                var ctrlPath = this.ResolveUrl(string.Format("{0}/{1}/{2}", extTypeFolder, ext, "Settings.ascx"));
-                if (!File.Exists(this.Server.MapPath(ctrlPath)))
+                var ctrlPath = ResolveUrl(string.Format("{0}/{1}/{2}", extTypeFolder, ext, "Settings.ascx"));
+                if (!File.Exists(Server.MapPath(ctrlPath)))
                 {
                     continue;
                 }
@@ -546,7 +547,7 @@ namespace DotNetNuke.Modules.Reports
                 var ctrl = default(Control);
                 try
                 {
-                    ctrl = this.LoadControl(ctrlPath);
+                    ctrl = LoadControl(ctrlPath);
                 }
                 catch (HttpException)
                 {
@@ -570,11 +571,11 @@ namespace DotNetNuke.Modules.Reports
                 }
 
                 // Construct an extension context
-                var ctxt = new ExtensionContext(this.TemplateSourceDirectory, extensionType, ext);
+                var ctxt = new ExtensionContext(TemplateSourceDirectory, extensionType, ext);
 
                 // Set properties and initialize extension
                 rptExt.Initialize(ctxt);
-                ctrl.ID = this.GetExtensionControlName(ext, extensionType);
+                ctrl.ID = GetExtensionControlName(ext, extensionType);
                 rptCtrl.ParentModule = this;
 
                 // Don't build the view unless we're asked to AND
@@ -583,7 +584,7 @@ namespace DotNetNuke.Modules.Reports
                 {
                     // Create a View to hold the control
                     var view = new View();
-                    view.ID = this.GetExtensionViewName(ext, extensionType);
+                    view.ID = GetExtensionViewName(ext, extensionType);
                     view.Controls.Add(ctrl);
 
                     // Add the view to the multi view
@@ -591,7 +592,7 @@ namespace DotNetNuke.Modules.Reports
                 }
 
                 // Get the full text for the drop down list item
-                var itemText = string.Format(Localization.GetString(typeResourceKey, this.LocalResourceFile), extName);
+                var itemText = string.Format(Localization.GetString(typeResourceKey, LocalResourceFile), extName);
 
                 // Create the dropdown list items
                 dropDown.Items.Add(new ListItem(itemText, ext));
@@ -617,40 +618,40 @@ namespace DotNetNuke.Modules.Reports
 
         private bool CheckPermissions()
         {
-            if (!this.UserInfo.IsSuperUser)
+            if (!UserInfo.IsSuperUser)
             {
-                this.ReportsSettingsMultiView.SetActiveView(this.AccessDeniedView);
+                ReportsSettingsMultiView.SetActiveView(AccessDeniedView);
                 return false;
             }
-            this.ReportsSettingsMultiView.SetActiveView(this.SuperUserView);
+            ReportsSettingsMultiView.SetActiveView(SuperUserView);
             return true;
         }
 
         protected void VisualizerDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Report.Visualizer = this.VisualizerDropDown.SelectedValue;
-            ReportsController.LoadExtensionSettings(this.ModuleSettings, this.TabModuleSettings, this.Report);
-            this.DisplaySelectedExtension("Visualizer", this.VisualizerDropDown, this.VisualizerSettings, null,
-                                          this.Report.VisualizerSettings);
+            Report.Visualizer = VisualizerDropDown.SelectedValue;
+            ReportsController.LoadExtensionSettings(ModuleSettings, TabModuleSettings, Report);
+            DisplaySelectedExtension("Visualizer", VisualizerDropDown, VisualizerSettings, null,
+                                          Report.VisualizerSettings);
         }
 
         protected void DataSourceDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Report.DataSource = this.DataSourceDropDown.SelectedValue;
-            ReportsController.LoadExtensionSettings(this.ModuleSettings, this.TabModuleSettings, this.Report);
-            this.DisplaySelectedExtension("DataSource", this.DataSourceDropDown, this.DataSourceSettings,
-                                          this.DataSourceNotConfiguredView, this.Report.DataSourceSettings);
+            Report.DataSource = DataSourceDropDown.SelectedValue;
+            ReportsController.LoadExtensionSettings(ModuleSettings, TabModuleSettings, Report);
+            DisplaySelectedExtension("DataSource", DataSourceDropDown, DataSourceSettings,
+                                          DataSourceNotConfiguredView, Report.DataSourceSettings);
         }
 
         private void UpdateCachingSpan()
         {
-            if (this.chkCaching.Checked)
+            if (chkCaching.Checked)
             {
-                this.spanCacheDuration.Style[HtmlTextWriterStyle.Display] = string.Empty;
+                spanCacheDuration.Style[HtmlTextWriterStyle.Display] = string.Empty;
             }
             else
             {
-                this.spanCacheDuration.Style[HtmlTextWriterStyle.Display] = "none";
+                spanCacheDuration.Style[HtmlTextWriterStyle.Display] = "none";
             }
         }
 

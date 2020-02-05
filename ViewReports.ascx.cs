@@ -23,23 +23,24 @@
 #endregion
 
 
+using System;
+using System.Data;
+using System.IO;
+using System.Web;
+using Components;
+using DNNtc;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Modules.Actions;
+using DotNetNuke.Modules.Reports.Exceptions;
+using DotNetNuke.Modules.Reports.Extensions;
+using DotNetNuke.Modules.Reports.Visualizers;
+using DotNetNuke.Security;
+using DotNetNuke.Services.Localization;
+using DotNetNuke.UI.Skins;
+using DotNetNuke.UI.Skins.Controls;
+
 namespace DotNetNuke.Modules.Reports
 {
-    using System;
-    using System.Data;
-    using System.IO;
-    using System.Web;
-    using Components;
-    using DotNetNuke.Entities.Modules;
-    using DotNetNuke.Entities.Modules.Actions;
-    using DotNetNuke.Modules.Reports.Exceptions;
-    using DotNetNuke.Modules.Reports.Extensions;
-    using DotNetNuke.Modules.Reports.Visualizers;
-    using DotNetNuke.Security;
-    using DotNetNuke.Services.Localization;
-    using DotNetNuke.UI.Skins;
-    using DotNetNuke.UI.Skins.Controls;
-
     /// -----------------------------------------------------------------------------
     /// <summary>
     ///     The ViewReports class displays the content
@@ -49,8 +50,8 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "8.0.1")]
-    [DNNtc.ModuleControlProperties("", "", DNNtc.ControlType.View, "", false, false)]
+    [ModuleDependencies(ModuleDependency.CoreVersion, "8.0.1")]
+    [ModuleControlProperties("", "", ControlType.View, "")]
     public partial class ViewReports : PortalModuleBase, IActionable
     {
         private ReportInfo Report;
@@ -62,9 +63,9 @@ namespace DotNetNuke.Modules.Reports
             get
                 {
                     var actions = new ModuleActionCollection();
-                    actions.Add(this.GetNextActionID(),
-                                Localization.GetString("ManagePackages.Action", this.LocalResourceFile),
-                                "", "", this.ResolveUrl("images/ManagePackages.gif"), this.EditUrl("ManagePackages"),
+                    actions.Add(GetNextActionID(),
+                                Localization.GetString("ManagePackages.Action", LocalResourceFile),
+                                "", "", ResolveUrl("images/ManagePackages.gif"), EditUrl("ManagePackages"),
                                 false, SecurityAccessLevel.Host, true, false);
                     return actions;
                 }
@@ -76,11 +77,11 @@ namespace DotNetNuke.Modules.Reports
 
         private void HandleVisualizerException(VisualizerException vex)
         {
-            if (this.IsEditable)
+            if (IsEditable)
             {
                 Skin.AddModuleMessage(this,
                                       string.Format(Localization.GetString("VisualizerError.Message",
-                                                                           this.LocalResourceFile),
+                                                                           LocalResourceFile),
                                                     vex.LocalizedMessage),
                                       ModuleMessage.ModuleMessageType.RedError);
             }
@@ -88,28 +89,28 @@ namespace DotNetNuke.Modules.Reports
 
         private void HandleDataSourceException(DataSourceException ex)
         {
-            if (this.UserInfo.IsSuperUser)
+            if (UserInfo.IsSuperUser)
             {
                 Skin.AddModuleMessage(this,
                                       string.Format(
-                                          Localization.GetString("HostDSError.Message", this.LocalResourceFile),
+                                          Localization.GetString("HostDSError.Message", LocalResourceFile),
                                           ex.LocalizedMessage),
                                       ModuleMessage.ModuleMessageType.RedError);
             }
-            else if (this.IsEditable)
+            else if (IsEditable)
             {
-                Skin.AddModuleMessage(this, Localization.GetString("AdminDSError.Message", this.LocalResourceFile),
+                Skin.AddModuleMessage(this, Localization.GetString("AdminDSError.Message", LocalResourceFile),
                                       ModuleMessage.ModuleMessageType.YellowWarning);
             }
         }
 
         private void HandleMissingVisualizerError()
         {
-            if (this.IsEditable)
+            if (IsEditable)
             {
                 Skin.AddModuleMessage(this,
                                       Localization.GetString("VisualizerDoesNotExist.Text",
-                                                             this.LocalResourceFile),
+                                                             LocalResourceFile),
                                       ModuleMessage.ModuleMessageType.RedError);
             }
         }
@@ -118,7 +119,7 @@ namespace DotNetNuke.Modules.Reports
         {
             Skin.AddModuleMessage(this,
                                   Localization.GetString("VisualizerLoadError.Text",
-                                                         this.LocalResourceFile),
+                                                         LocalResourceFile),
                                   ModuleMessage.ModuleMessageType.RedError);
         }
 
@@ -129,15 +130,15 @@ namespace DotNetNuke.Modules.Reports
         private bool VisualizerFolderExists(string visualizerFolder)
         {
             return Directory.Exists(
-                this.Server.MapPath(this.ResolveUrl(string.Format("Visualizers/{0}", visualizerFolder))));
+                Server.MapPath(ResolveUrl(string.Format("Visualizers/{0}", visualizerFolder))));
         }
 
         private string GetVisualizerFolder()
         {
-            var sVisualizerFolder = Convert.ToString(this.Settings[ReportsConstants.SETTING_Visualizer]);
-            if (string.IsNullOrEmpty(sVisualizerFolder) || !this.VisualizerFolderExists(sVisualizerFolder))
+            var sVisualizerFolder = Convert.ToString(Settings[ReportsConstants.SETTING_Visualizer]);
+            if (string.IsNullOrEmpty(sVisualizerFolder) || !VisualizerFolderExists(sVisualizerFolder))
             {
-                if (this.VisualizerFolderExists("Grid"))
+                if (VisualizerFolderExists("Grid"))
                 {
                     // Default to grid if its installed, otherwise default to none selected
                     // This should cover most upgrades from pre-Visualizer versions as long as the
@@ -146,11 +147,11 @@ namespace DotNetNuke.Modules.Reports
 
                     sVisualizerFolder = "Grid";
                 }
-                else if (this.IsEditable)
+                else if (IsEditable)
                 {
                     Skin.AddModuleMessage(this,
                                           Localization.GetString("VisualizerNotConfigured.Text",
-                                                                 this.LocalResourceFile),
+                                                                 LocalResourceFile),
                                           ModuleMessage.ModuleMessageType.RedError);
                 }
             }
@@ -163,13 +164,13 @@ namespace DotNetNuke.Modules.Reports
             try
             {
                 // Load the visualizer control
-                ctrlVisualizer = this.LoadControl(sVisualizerControl) as VisualizerControlBase;
+                ctrlVisualizer = LoadControl(sVisualizerControl) as VisualizerControlBase;
                 ctrlVisualizer.Initialize(
-                    new ExtensionContext(this.TemplateSourceDirectory, "Visualizer", sVisualizerName));
+                    new ExtensionContext(TemplateSourceDirectory, "Visualizer", sVisualizerName));
             }
             catch (VisualizerException vex)
             {
-                this.HandleVisualizerException(vex);
+                HandleVisualizerException(vex);
                 Services.Exceptions.Exceptions.LogException(vex);
             }
             catch (HttpCompileException ex)
@@ -185,25 +186,25 @@ namespace DotNetNuke.Modules.Reports
             try
             {
                 results = ReportsController.ExecuteReport(
-                    report, string.Concat(ReportsConstants.CACHEKEY_Reports, Convert.ToString(this.ModuleId)),
+                    report, string.Concat(ReportsConstants.CACHEKEY_Reports, Convert.ToString(ModuleId)),
                     report.CacheDuration <= 0, this, ref fromCache);
             }
             catch (DataSourceException ex)
             {
                 // Display the error message to host users only
-                if (this.UserInfo.IsSuperUser)
+                if (UserInfo.IsSuperUser)
                 {
                     Skin.AddModuleMessage(this,
                                           string.Format(Localization.GetString("HostExecuteError.Message",
-                                                                               this.LocalResourceFile),
+                                                                               LocalResourceFile),
                                                         ex.LocalizedMessage),
                                           ModuleMessage.ModuleMessageType.RedError);
                 }
-                else if (this.IsEditable)
+                else if (IsEditable)
                 {
                     Skin.AddModuleMessage(this,
                                           Localization.GetString("AdminExecuteError.Message",
-                                                                 this.LocalResourceFile),
+                                                                 LocalResourceFile),
                                           ModuleMessage.ModuleMessageType.RedError);
                 }
                 Services.Exceptions.Exceptions.LogException(ex);
@@ -216,22 +217,22 @@ namespace DotNetNuke.Modules.Reports
         private void RunReport()
         {
             // Check for a visualizer
-            var sVisualizerFolder = this.GetVisualizerFolder();
+            var sVisualizerFolder = GetVisualizerFolder();
 
             // If the visualizer folder is now non-empty
             if (!string.IsNullOrEmpty(sVisualizerFolder))
             {
                 // Find the visualizer control
                 var sVisualizerControl =
-                    this.ResolveUrl(string.Format("Visualizers/{0}/{1}", sVisualizerFolder,
+                    ResolveUrl(string.Format("Visualizers/{0}/{1}", sVisualizerFolder,
                                                   ReportsConstants.FILENAME_VisualizerASCX));
-                if (!File.Exists(this.Server.MapPath(sVisualizerControl)))
+                if (!File.Exists(Server.MapPath(sVisualizerControl)))
                 {
-                    this.HandleMissingVisualizerError();
+                    HandleMissingVisualizerError();
                 }
                 else
                 {
-                    var ctlVisualizer = this.LoadVisualizerControl(sVisualizerControl, sVisualizerFolder);
+                    var ctlVisualizer = LoadVisualizerControl(sVisualizerControl, sVisualizerFolder);
                     if (ctlVisualizer != null)
                     {
                         ctlVisualizer.ID = "Visualizer";
@@ -239,17 +240,17 @@ namespace DotNetNuke.Modules.Reports
                         DataTable results = null;
                         var fromCache = false;
                         if (ctlVisualizer.AutoExecuteReport &&
-                            !this.AutoExecuteReport(ctlVisualizer, this.Report, ref results, fromCache))
+                            !AutoExecuteReport(ctlVisualizer, Report, ref results, fromCache))
                         {
                             return;
                         }
-                        ctlVisualizer.SetReport(this.Report, results, fromCache);
-                        this.VisualizerSection.Controls.Clear();
-                        this.VisualizerSection.Controls.Add(ctlVisualizer);
+                        ctlVisualizer.SetReport(Report, results, fromCache);
+                        VisualizerSection.Controls.Clear();
+                        VisualizerSection.Controls.Add(ctlVisualizer);
                     }
-                    else if (this.IsEditable)
+                    else if (IsEditable)
                     {
-                        this.HandleVisualizerLoadError();
+                        HandleVisualizerLoadError();
                     }
                 }
             }
@@ -261,57 +262,57 @@ namespace DotNetNuke.Modules.Reports
 
         protected void Page_Error(object sender, EventArgs e)
         {
-            var ex = this.Server.GetLastError();
+            var ex = Server.GetLastError();
             if (ex is DataSourceException)
             {
-                this.HandleDataSourceException((DataSourceException) ex);
+                HandleDataSourceException((DataSourceException) ex);
             }
             else if (ex is VisualizerException)
             {
-                this.HandleVisualizerException((VisualizerException) ex);
+                HandleVisualizerException((VisualizerException) ex);
             }
             else
             {
-                this.OnError(e);
+                OnError(e);
             }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (this.UserInfo.IsSuperUser && Directory.Exists(this.Server.MapPath("App_Code/Reports")))
+            if (UserInfo.IsSuperUser && Directory.Exists(Server.MapPath("App_Code/Reports")))
             {
-                Skin.AddModuleMessage(this, Localization.GetString("CleanUpOldAppCode.Text", this.LocalResourceFile),
+                Skin.AddModuleMessage(this, Localization.GetString("CleanUpOldAppCode.Text", LocalResourceFile),
                                       ModuleMessage.ModuleMessageType.YellowWarning);
             }
 
-            this.Report = ReportsController.GetReport(this.ModuleConfiguration);
-            this.InfoPane.Visible = this.Report.ShowInfoPane;
-            this.ControlsPane.Visible = this.Report.ShowControls;
-			this.ExportExcelButton.Visible = Report.ExportExcel;
+            Report = ReportsController.GetReport(ModuleConfiguration);
+            InfoPane.Visible = Report.ShowInfoPane;
+            ControlsPane.Visible = Report.ShowControls;
+			ExportExcelButton.Visible = Report.ExportExcel;
 
 
-			if (this.Report.ShowInfoPane)
+			if (Report.ShowInfoPane)
             {
-                this.TitleLiteral.Text = this.Report.Title;
-                this.DescriptionLiteral.Text = this.Report.Description;
+                TitleLiteral.Text = Report.Title;
+                DescriptionLiteral.Text = Report.Description;
             }
 
-            if (this.Report.AutoRunReport)
+            if (Report.AutoRunReport)
             {
-                this.RunReport();
+                RunReport();
             }
         }
 
         protected void RunReportButton_Click(object sender, EventArgs e)
         {
-            this.RunReport();
-            this.ClearReportButton.Visible = true;
+            RunReport();
+            ClearReportButton.Visible = true;
         }
 
         protected void ClearReportButton_Click(object sender, EventArgs e)
         {
-            this.VisualizerSection.Controls.Clear();
-            this.ClearReportButton.Visible = false;
+            VisualizerSection.Controls.Clear();
+            ClearReportButton.Visible = false;
         }
 
 		protected void ExportExcelButton_Click(object sender, EventArgs e)
