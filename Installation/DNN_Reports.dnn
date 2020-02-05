@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DNN_Reports" type="Module" version="6.1.0">
+    <package name="DNN_Reports" type="Module" version="6.2.0">
       <friendlyName>Reports</friendlyName>
       <description>The ReportsModule allows users to quickly display data retrieved from many data sources. An extensible architecture allows the use of custom Data Sources and Visualization systems to display data from any tabular data source, in many ways.</description>
       <iconFile>DesktopModules\Reports\DNN_Reports.png</iconFile>
@@ -11,11 +11,9 @@
         <email>support@dnnsoftware.com</email>
       </owner>
       <license src="License.txt"></license>
-      <releaseNotes src="Release.06.01.00.txt"></releaseNotes>
+      <releaseNotes src="Release.06.02.00.txt"></releaseNotes>
       <azureCompatible>true</azureCompatible>
-      <dependencies>
-        <dependency type="CoreVersion">8.0.1</dependency>
-      </dependencies>
+      <dependencies></dependencies>
       <components>
         <component type="Script">
           <scripts>
@@ -71,24 +69,6 @@
                     <controlType>Edit</controlType>
                     <helpUrl></helpUrl>
                   </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>DesktopModules/Reports/Settings.ascx</controlSrc>
-                    <supportsPartialRendering>false</supportsPartialRendering>
-                    <supportsPopUps>false</supportsPopUps>
-                    <controlTitle>Reports Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <helpUrl></helpUrl>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey></controlKey>
-                    <controlSrc>DesktopModules/Reports/ViewReports.ascx</controlSrc>
-                    <supportsPartialRendering>false</supportsPartialRendering>
-                    <supportsPopUps>false</supportsPopUps>
-                    <controlTitle></controlTitle>
-                    <controlType>View</controlType>
-                    <helpUrl></helpUrl>
-                  </moduleControl>
                 </moduleControls>
                 <permissions></permissions>
               </moduleDefinition>
@@ -117,6 +97,7 @@
         <component type="Cleanup" version="05.07.01" fileName="Installation\CleanUp\Cleanup.05.07.01.txt" />
         <component type="Cleanup" version="06.00.00" fileName="Installation\CleanUp\Cleanup.06.00.00.txt" />
         <component type="Cleanup" version="06.01.00" fileName="Installation\CleanUp\Cleanup.06.01.00.txt" />
+        <component type="Cleanup" version="06.01.01" fileName="Installation\CleanUp\Cleanup.06.01.01.txt" />
       </components>
     </package>
   </packages>
