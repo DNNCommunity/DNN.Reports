@@ -195,13 +195,13 @@ namespace DotNetNuke.Modules.Reports
             // Non-SuperUsers can change TabModuleSettings (display settings)
 
             // Update cache duration (0 => no caching)
-            var duration = "0";
+            var duration = 0;
             if (chkCaching.Checked)
             {
-                duration = txtCacheDuration.Text;
+                duration =  int.Parse(txtCacheDuration.Text);
             }
 
-            Report.CacheDuration = int.Parse(duration);
+            Report.CacheDuration = duration;
             Report.ShowInfoPane = chkShowInfoPane.Checked;
             Report.ShowControls = chkShowControls.Checked;
             Report.AutoRunReport = chkAutoRunReport.Checked;
@@ -651,7 +651,7 @@ namespace DotNetNuke.Modules.Reports
             }
             else
             {
-                spanCacheDuration.Style[HtmlTextWriterStyle.Display] = "none";
+                spanCacheDuration.Style[HtmlTextWriterStyle.Display] = string.Empty; //"none";
             }
         }
 

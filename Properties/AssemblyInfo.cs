@@ -34,8 +34,8 @@ using System.Web.UI;
 // by using the '*' as shown below:
 // <Assembly: AssemblyVersion("1.0.*")>
 
-[assembly: AssemblyVersion("6.2.0.0")]
-[assembly: AssemblyFileVersion("6.2.0.0")]
+[assembly: AssemblyVersion("6.2.1.0")]
+[assembly: AssemblyFileVersion("6.2.1.0")]
 [assembly: WebResource("dnn.reports.js", "text/javascript")]
 [assembly: WebResource("CssForm.css", "test/css")]
 [assembly: WebResource("CssForm.debug.css", "text/css")]

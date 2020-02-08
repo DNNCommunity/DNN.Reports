@@ -35,7 +35,7 @@ namespace Components.Tests
         [SetUp]
         public void Setup()
         {
-            this._sut = new ReportsController();
+            _sut = new ReportsController();
         }
 
         [Test]
@@ -53,10 +53,10 @@ namespace Components.Tests
                                  };
 
             // Act
-            var actual = this._sut.ExportModule(reportInfo);
+            var actual = _sut.ExportModule(reportInfo);
 
             // Assert
-            this.Expect(actual, Is.Not.Empty);
+            Expect(actual, Is.Not.Empty);
         }
 
         [Test]
@@ -66,10 +66,10 @@ namespace Components.Tests
             var strSQL = "; -- create drop insert delete update sp_ xp_";
 
             // Act
-            var actual = this._sut.FormatRemoveSQL(strSQL);
+            var actual = _sut.FormatRemoveSQL(strSQL);
 
             // Assert
-            this.Expect(actual, !this.Contains(";"));
+            Expect(actual, !Contains(";"));
         }
     }
 }

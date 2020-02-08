@@ -714,7 +714,8 @@ namespace DotNetNuke.Modules.Reports
             reportsModuleSettings.ShowControls = objReport.ShowControls;
             reportsModuleSettings.AutoRunReport = objReport.AutoRunReport;
 			reportsModuleSettings.ExportExcel = objReport.ExportExcel;
-			reportsModuleSettings.TokenReplace = objReport.TokenReplace;
+            reportsModuleSettings.TokenReplace = objReport.TokenReplace;
+            reportsModuleSettings.CacheDuration = objReport.CacheDuration;
 
             //Update the visualizer setting
             reportsModuleSettings.Visualizer = objReport.Visualizer;

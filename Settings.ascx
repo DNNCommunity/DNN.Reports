@@ -162,7 +162,7 @@ TagPrefix="dnn" %>
                 </dnn:label>
             </td>
             <td class="dnn_rpt_form_field">
-                <asp:CheckBox ID="chkCaching" CssClass="NormalTextBox" runat="server"/>
+                <asp:CheckBox ID="chkCaching" CssClass="NormalTextBox" AutoPostBack="true" OnCheckChanged="chkCaching_CheckedChanged" runat="server"/>
                 <span id="spanCacheDuration" runat="server" class="Normal">
                     <asp:Label ID="Label1" runat="server" resourcekey="CacheFor.Text"/>
                     <asp:TextBox ID="txtCacheDuration" CssClass="NormalTextBox" Columns="5" runat="server"/>

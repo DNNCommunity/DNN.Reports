@@ -61,7 +61,7 @@ namespace Components
         public string Visualizers { get; set; } = string.Empty;
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
-        public int CacheDuration { get; set; }
+        public int CacheDuration { get; set; } = 0;
 
         [TabModuleSetting(Prefix = "dnn_Reports_")]
         public string Visualizer { get; set; } = string.Empty;
