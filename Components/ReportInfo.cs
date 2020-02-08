@@ -27,7 +27,7 @@ namespace DotNetNuke.Modules.Reports
 {
     using System;
     using System.Collections.Generic;
-    using DotNetNuke.Modules.Reports.Converters;
+    using Converters;
 
     /// -----------------------------------------------------------------------------
     /// <summary>
@@ -86,8 +86,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public int ModuleID
         {
-            get { return this._ModuleID; }
-            set { this._ModuleID = value; }
+            get { return _ModuleID; }
+            set { _ModuleID = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -101,8 +101,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public string Title
         {
-            get { return this._Title; }
-            set { this._Title = value; }
+            get { return _Title; }
+            set { _Title = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -116,8 +116,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public string Description
         {
-            get { return this._Description; }
-            set { this._Description = value; }
+            get { return _Description; }
+            set { _Description = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -131,8 +131,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public string Parameters
         {
-            get { return this._Parameters; }
-            set { this._Parameters = value; }
+            get { return _Parameters; }
+            set { _Parameters = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -146,8 +146,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public int CacheDuration
         {
-            get { return this._CacheDuration; }
-            set { this._CacheDuration = value; }
+            get { return _CacheDuration; }
+            set { _CacheDuration = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -161,8 +161,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public int CreatedBy
         {
-            get { return this._CreatedBy; }
-            set { this._CreatedBy = value; }
+            get { return _CreatedBy; }
+            set { _CreatedBy = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -176,8 +176,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public DateTime CreatedOn
         {
-            get { return this._CreatedOn; }
-            set { this._CreatedOn = value; }
+            get { return _CreatedOn; }
+            set { _CreatedOn = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -189,7 +189,7 @@ namespace DotNetNuke.Modules.Reports
         ///     [anurse]	10/13/2007	Created
         /// </history>
         /// -----------------------------------------------------------------------------
-        public IDictionary<string, IList<ConverterInstanceInfo>> Converters => this._Converters;
+        public IDictionary<string, IList<ConverterInstanceInfo>> Converters => _Converters;
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -202,8 +202,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public string DataSource
         {
-            get { return this._DataSource; }
-            set { this._DataSource = value; }
+            get { return _DataSource; }
+            set { _DataSource = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -217,8 +217,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public string DataSourceClass
         {
-            get { return this._DataSourceClass; }
-            set { this._DataSourceClass = value; }
+            get { return _DataSourceClass; }
+            set { _DataSourceClass = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -232,8 +232,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public Dictionary<string, string> DataSourceSettings
         {
-            get { return this._DataSourceSettings; }
-            set { this._DataSourceSettings = value; }
+            get { return _DataSourceSettings; }
+            set { _DataSourceSettings = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -247,8 +247,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public string Visualizer
         {
-            get { return this._Visualizer; }
-            set { this._Visualizer = value; }
+            get { return _Visualizer; }
+            set { _Visualizer = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -262,8 +262,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public Dictionary<string, string> VisualizerSettings
         {
-            get { return this._VisualizerSettings; }
-            set { this._VisualizerSettings = value; }
+            get { return _VisualizerSettings; }
+            set { _VisualizerSettings = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -276,8 +276,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public bool ShowInfoPane
         {
-            get { return this._ShowInfoPane; }
-            set { this._ShowInfoPane = value; }
+            get { return _ShowInfoPane; }
+            set { _ShowInfoPane = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -290,8 +290,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public bool ShowControls
         {
-            get { return this._ShowControls; }
-            set { this._ShowControls = value; }
+            get { return _ShowControls; }
+            set { _ShowControls = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -305,8 +305,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
         public bool AutoRunReport
         {
-            get { return this._AutoRunReport; }
-            set { this._AutoRunReport = value; }
+            get { return _AutoRunReport; }
+            set { _AutoRunReport = value; }
 		}
 
         /// -----------------------------------------------------------------------------
@@ -320,8 +320,8 @@ namespace DotNetNuke.Modules.Reports
         /// -----------------------------------------------------------------------------
 		public bool ExportExcel
 		{
-			get { return this._ExportExcel; }
-			set { this._ExportExcel = value; }
+			get { return _ExportExcel; }
+			set { _ExportExcel = value; }
 		}
 
 
@@ -331,8 +331,8 @@ namespace DotNetNuke.Modules.Reports
 		/// <value><c>true</c> if [token replace]; otherwise, <c>false</c>.</value>
 		public bool TokenReplace
         {
-            get { return this._TokenReplace; }
-            set { this._TokenReplace = value; }
+            get { return _TokenReplace; }
+            set { _TokenReplace = value; }
         }
 
         #endregion

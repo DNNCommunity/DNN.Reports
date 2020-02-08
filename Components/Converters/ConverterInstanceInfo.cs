@@ -64,8 +64,8 @@ namespace DotNetNuke.Modules.Reports.Converters
         /// -----------------------------------------------------------------------------
         public string FieldName
         {
-            get { return this._FieldName; }
-            set { this._FieldName = value; }
+            get { return _FieldName; }
+            set { _FieldName = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -78,8 +78,8 @@ namespace DotNetNuke.Modules.Reports.Converters
         /// -----------------------------------------------------------------------------
         public string ConverterName
         {
-            get { return this._ConverterName; }
-            set { this._ConverterName = value; }
+            get { return _ConverterName; }
+            set { _ConverterName = value; }
         }
 
         /// -----------------------------------------------------------------------------
@@ -92,8 +92,8 @@ namespace DotNetNuke.Modules.Reports.Converters
         /// -----------------------------------------------------------------------------
         public string[] Arguments
         {
-            get { return this._Arguments; }
-            set { this._Arguments = value; }
+            get { return _Arguments; }
+            set { _Arguments = value; }
         }
 
         #endregion
