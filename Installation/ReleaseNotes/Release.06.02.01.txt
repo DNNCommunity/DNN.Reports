@@ -6,6 +6,7 @@ Full details on the changes can be found in great detail at <a href="https://git
 <h3>BUG FIXES</h3>
 <ul>
 	<li>Made the Caching option working</li>
+	<li>Removed SQL code stripping in HTML visualizer</li>
 </ul>
 
 <h2>DNN_Reports 06.02.00</h2>
