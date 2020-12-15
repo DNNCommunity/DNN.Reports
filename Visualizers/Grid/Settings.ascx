@@ -49,7 +49,6 @@
             </asp:DropDownList>
         </td>
     </tr>
-    </tr>
     <tr>
         <td class="dnn_rpt_form_label">
             <dnn:Label ID="lblAdditionalCSS" runat="server" ControlName="txtAdditionalCSS" Suffix=":" CssClass="SubHead"/>
@@ -57,7 +56,6 @@
         <td class="dnn_rpt_form_field">
             <asp:TextBox ID="txtAdditionalCSS" runat="server" Width="90%"/>
         </td>
-    </tr>
     </tr>
     <tr>
         <td class="dnn_rpt_form_label">

@@ -24,15 +24,16 @@
 
 
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
+using Microsoft.ApplicationBlocks.Data;
+using DotNetNuke.Framework.Providers;
+using DotNetNuke.Common.Utilities;
+using System.Data;
 using System.Data.SqlClient;
 using System.Transactions;
-using Components;
-using DotNetNuke.Common.Utilities;
-using DotNetNuke.Framework.Providers;
 using DotNetNuke.Modules.Reports.Visualizers.Xslt;
-using Microsoft.ApplicationBlocks.Data;
+using Components;
+
 
 namespace DotNetNuke.Modules.Reports.Data
 {
@@ -113,7 +114,8 @@ namespace DotNetNuke.Modules.Reports.Data
                 sqlParams[i] = (SqlParameter) parameters[i];
             }
 
-            return SqlHelper.ExecuteReader(_connectionString, CommandType.Text, strScript, sqlParams);
+            return DotNetNuke.Data.DataProvider.Instance()
+                .ExecuteReader(_connectionString, CommandType.Text, strScript, sqlParams);
         }
 
         public override IDataReader GetXsltExtensionObjects(int tabModuleId)
@@ -128,14 +130,11 @@ namespace DotNetNuke.Modules.Reports.Data
             using (var transaction = new TransactionScope())
             {
                 DotNetNuke.Data.DataProvider.Instance()
-                          .ExecuteNonQuery("reports_ClearXsltExtensionObjects", tabModuleId);
-
+                    .ExecuteNonQuery("reports_ClearXsltExtensionObjects", tabModuleId);
                 foreach (var extensionObject in extensionObjects)
                 {
                     DotNetNuke.Data.DataProvider.Instance().ExecuteNonQuery("reports_AddXsltExtensionObject",
-                                                                            tabModuleId,
-                                                                            extensionObject.XmlNamespace,
-                                                                            extensionObject.ClrType);
+                        tabModuleId, extensionObject.XmlNamespace, extensionObject.ClrType);
                 }
 
                 transaction.Complete();

@@ -22,6 +22,9 @@
 
 #endregion
 
+using global::DotNetNuke.Entities.Modules;
+using global::DotNetNuke.Modules.Reports.Converters;
+using global::DotNetNuke.Modules.Reports.Exceptions;
 
 namespace DotNetNuke.Modules.Reports.DataSources
 {
@@ -29,9 +32,7 @@ namespace DotNetNuke.Modules.Reports.DataSources
     using System.Collections.Generic;
     using System.Data;
     using Components;
-    using global::DotNetNuke.Entities.Modules;
-    using global::DotNetNuke.Modules.Reports.Converters;
-    using global::DotNetNuke.Modules.Reports.Exceptions;
+
 
     /// <summary>
     ///     Base class for SQL-based Data Sources
