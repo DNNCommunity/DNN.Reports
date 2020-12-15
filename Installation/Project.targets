@@ -38,9 +38,9 @@
 	<!--####################################################################### -->
 	<!--Company properties-->
 	<PropertyGroup>
-		<CompanyName>DNNCorp</CompanyName>
-		<CompanyUrl>http://www.dnnsoftware.com</CompanyUrl>
-		<CompanyEmail>support@dnnsoftware.com</CompanyEmail>
+		<CompanyName>DNNCommunity</CompanyName>
+		<CompanyUrl>https://www.dnncommunity.org</CompanyUrl>
+		<CompanyEmail>support@dnncommunity.org</CompanyEmail>
 	</PropertyGroup>
 	<!--You may change these properties when needed-->
 	<PropertyGroup>
@@ -203,7 +203,7 @@
 		<FileUpdate Files="@(ModulednnFile)" Regex="@SupportedFeatures@" ReplacementText="$(SupportedFeatures)" />
 		<FileUpdate Files="@(ModulednnFile)" Regex="@EventMessage@" ReplacementText="$(EventMessage)" />
 		<!--Replace the Permissions part-->
-		<CreateItem Include="$(MSBuildProjectDirectory)\**\*.vb;
+		<CreateItem Include="$(MSBuildProjectDirectory)\**\*.cs;
                 $(MSBuildProjectDirectory)\**\*.cs;">
 			<Output TaskParameter="Include" ItemName="permissions" />
 		</CreateItem>

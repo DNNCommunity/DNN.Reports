@@ -1,19 +1,21 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DNN_Reports" type="Module" version="6.2.1">
+    <package name="DNN_Reports" type="Module" version="6.3.0">
       <friendlyName>Reports</friendlyName>
       <description>The ReportsModule allows users to quickly display data retrieved from many data sources. An extensible architecture allows the use of custom Data Sources and Visualization systems to display data from any tabular data source, in many ways.</description>
       <iconFile>DesktopModules\Reports\DNN_Reports.png</iconFile>
       <owner>
-        <name>DNNCorp</name>
-        <organization>DNNCorp</organization>
-        <url>http://www.dnnsoftware.com</url>
-        <email>support@dnnsoftware.com</email>
+        <name>DNNCommunity</name>
+        <organization>DNNCommunity</organization>
+        <url>https://www.dnncommunity.org</url>
+        <email>support@dnncommunity.org</email>
       </owner>
       <license src="License.txt"></license>
-      <releaseNotes src="Release.06.02.01.txt"></releaseNotes>
+      <releaseNotes src="Release.06.03.00.txt"></releaseNotes>
       <azureCompatible>true</azureCompatible>
-      <dependencies></dependencies>
+      <dependencies>
+        <dependency type="CoreVersion">9.4.0</dependency>
+      </dependencies>
       <components>
         <component type="Script">
           <scripts>
@@ -53,8 +55,10 @@
           <desktopModule>
             <moduleName>DNN_Reports</moduleName>
             <foldername>Reports</foldername>
-            <businessControllerClass />
-            <supportedFeatures />
+            <businessControllerClass>DotNetNuke.Modules.Reports.ReportsController,DotNetNuke.Modules.Reports</businessControllerClass>
+            <supportedFeatures>
+              <supportedFeature type="Portable" />
+            </supportedFeatures>
             <moduleDefinitions>
               <moduleDefinition>
                 <friendlyName>Reports</friendlyName>
@@ -98,6 +102,7 @@
         <component type="Cleanup" version="06.00.00" fileName="Installation\CleanUp\Cleanup.06.00.00.txt" />
         <component type="Cleanup" version="06.01.00" fileName="Installation\CleanUp\Cleanup.06.01.00.txt" />
         <component type="Cleanup" version="06.01.01" fileName="Installation\CleanUp\Cleanup.06.01.01.txt" />
+        <component type="Cleanup" version="06.03.00" fileName="Installation\CleanUp\Cleanup.06.03.00.txt" />
       </components>
     </package>
   </packages>

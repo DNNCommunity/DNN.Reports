@@ -1,0 +1,36 @@
+<h2>Release notes DNNReports 06.03.00</h2>
+<p>DNN Reports 06.03.00 will work for any DNNPlatform version <strong>9.4.0</strong> and up. 
+Full details on the changes can be found in great detail at <a href="https://github.com/DNNCommunity/DNN.Reports/releases">https://github.com/DNNCommunity/DNN.Reports/releases</a>. </p>
+
+<h2>DNN_Reports 06.03.00</h2>
+<h3>BUG FIXES</h3>
+<ul>
+	<li>Removed SQL code stripping in HTML visualizer</li>
+</ul>
+<h3>ENHANCEMENTS</h3>
+<ul>
+	<li>Changed base to DNNPlatform 9.4.0</li>
+	<li>Repaired project build structure</li>
+	<li>Remove outdated DNNReports install packs from App_Data\ExtensionPackages\</li>
+</ul>
+
+
+<h2>DNN_Reports 06.02.01</h2>
+<h3>BUG FIXES</h3>
+<ul>
+	<li>Made the Caching option working</li>
+	<li>Removed SQL code stripping in HTML visualizer</li>
+</ul>
+
+<h2>DNN_Reports 06.02.00</h2>
+<p>Repeated here for completeness</p>
+<h3>ENHANCEMENTS</h3>
+<ul>
+	<li>Added an option for Export to Excel</li>
+	<li>Added an option for DNN Token replacement</li>
+</ul>
+<h3>CHANGES</h3>
+<ul>
+	<li>Removed the js stripping from the HTML visualizer</li>	
+	<li>Code cleanup on several code files</li>
+</ul>

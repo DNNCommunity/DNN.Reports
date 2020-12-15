@@ -50,8 +50,9 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [ModuleDependencies(ModuleDependency.CoreVersion, "8.0.1")]
-    [ModuleControlProperties("", "", ControlType.View, "")]
+    
+    [DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "9.4.0")]
+    [ModuleControlProperties("", "Reports Container", ControlType.View, "https://github.com/DNNCommunity/DNN.Reports/wiki", true, false)]
     public partial class ViewReports : PortalModuleBase, IActionable
     {
         private ReportInfo Report;
@@ -80,10 +81,10 @@ namespace DotNetNuke.Modules.Reports
             if (IsEditable)
             {
                 Skin.AddModuleMessage(this,
-                                      string.Format(Localization.GetString("VisualizerError.Message",
-                                                                           LocalResourceFile),
-                                                    vex.LocalizedMessage),
-                                      ModuleMessage.ModuleMessageType.RedError);
+                    string.Format(Localization.GetString("VisualizerError.Message",
+                            LocalResourceFile),
+                        vex.LocalizedMessage),
+                    ModuleMessage.ModuleMessageType.RedError);
             }
         }
 
