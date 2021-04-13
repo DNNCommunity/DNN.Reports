@@ -6,6 +6,7 @@ Full details on the changes can be found in great detail at <a href="https://git
 <ul>
 	<li>Repaired the automatic release build for correct packaging</li>	
 	<li>Clean up previous tmp files and folders</li>
+	<li>Remove extraneous line breaks in the HTML visualizer</li>
 </ul>
 <h3>CHANGES</h3>
 <ul>
