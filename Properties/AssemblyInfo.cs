@@ -11,12 +11,12 @@ using System.Web.UI;
 [assembly:
     AssemblyDescription(
         "The ReportsModule allows users to quickly display data retrieved from many data sources. An extensible architecture allows the use of custom Data Sources and Visualization systems to display data from any tabular data source, in many ways.")]
-[assembly: AssemblyCompany("DNNCommunity")]
+[assembly: AssemblyCompany(".NET Foundation")]
 [assembly: AssemblyProduct("https://dnncommunity.org/")]
 [assembly:
     AssemblyCopyright(
-"")]
-[assembly: AssemblyTrademark("dnncommunity.org")]
+"Copyright (c) .NET Foundation. All rights reserved. All Rights Reserved")]
+[assembly: AssemblyTrademark("DotNetNuke")]
 
 [assembly: ComVisible(false)]
 
@@ -34,8 +34,8 @@ using System.Web.UI;
 // by using the '*' as shown below:
 // <Assembly: AssemblyVersion("1.0.*")>
 
-[assembly: AssemblyVersion("6.3.0.0")]
-[assembly: AssemblyFileVersion("6.3.0.0")]
+[assembly: AssemblyVersion("6.2.3.0")]
+[assembly: AssemblyFileVersion("6.2.3.0")]
 [assembly: WebResource("dnn.reports.js", "text/javascript")]
 [assembly: WebResource("CssForm.css", "test/css")]
 [assembly: WebResource("CssForm.debug.css", "text/css")]

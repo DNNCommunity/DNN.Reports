@@ -48,7 +48,6 @@ using DotNetNuke.Modules.Reports.Extensions;
 using DotNetNuke.Modules.Reports.Visualizers.Xslt;
 using DotNetNuke.Services.Search.Entities;
 using DotNetNuke.Services.Tokens;
-using DNNtc;
 
 namespace DotNetNuke.Modules.Reports
 {
@@ -62,7 +61,6 @@ namespace DotNetNuke.Modules.Reports
     ///     [anurse]	06/16/2006	Created
     /// </history>
     /// -----------------------------------------------------------------------------
-
     [DNNtc.BusinessControllerClass]
     public class ReportsController : ModuleSearchBase, IPortable
     {
@@ -717,8 +715,7 @@ namespace DotNetNuke.Modules.Reports
             reportsModuleSettings.ShowControls = objReport.ShowControls;
             reportsModuleSettings.AutoRunReport = objReport.AutoRunReport;
 			reportsModuleSettings.ExportExcel = objReport.ExportExcel;
-            reportsModuleSettings.TokenReplace = objReport.TokenReplace;
-            reportsModuleSettings.CacheDuration = objReport.CacheDuration;
+			reportsModuleSettings.TokenReplace = objReport.TokenReplace;
 
             //Update the visualizer setting
             reportsModuleSettings.Visualizer = objReport.Visualizer;

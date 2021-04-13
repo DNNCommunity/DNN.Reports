@@ -1,0 +1,7 @@
+'Remove old versions of the extension
+Install\Module\DNN_Reports_06.02.01_Install.zip
+'Tidy up debug files if any
+Bin\DotNetNuke.Modules.Reports.pdb
+'Remove incorrect tmp files from previous installs
+DesktopModules\Reports\tmpCompressCSS\module.css
+DesktopModules\Reports\tmpCompressCSS\

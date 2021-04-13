@@ -29,7 +29,7 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Grid
     using System.Collections.Generic;
     using System.Web.UI;
     using Components;
-    using Extensions;
+    using DotNetNuke.Modules.Reports.Extensions;
 
     /// -----------------------------------------------------------------------------
     /// <summary>
@@ -46,82 +46,82 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Grid
         {
             if (!ReportsClientAPI.IsSupported)
             {
-                chkPageData.AutoPostBack = true;
-                chkPageData.CheckedChanged += chkPageData_CheckedChanged;
+                this.chkPageData.AutoPostBack = true;
+                this.chkPageData.CheckedChanged += this.chkPageData_CheckedChanged;
             }
             else
             {
-                ReportsClientAPI.Import(Page);
-                ReportsClientAPI.ShowHideByCheckBox(Page, chkPageData, rowPageSize);
+                ReportsClientAPI.Import(this.Page);
+                ReportsClientAPI.ShowHideByCheckBox(this.Page, this.chkPageData, this.rowPageSize);
             }
         }
 
         public override void LoadSettings(Dictionary<string, string> VisualizerSettings)
         {
-            chkPageData.Checked =
+            this.chkPageData.Checked =
                 Convert.ToBoolean(
                     SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_EnablePaging,
                                                       false));
-            chkSortData.Checked =
+            this.chkSortData.Checked =
                 Convert.ToBoolean(
                     SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_EnableSorting,
                                                       false));
-            txtPageSize.Text =
+            this.txtPageSize.Text =
                 Convert.ToString(
                     SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_PageSize,
                                                       "10"));
-            chkShowHeader.Checked =
+            this.chkShowHeader.Checked =
                 Convert.ToBoolean(
                     SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_ShowHeader,
                                                       true));
-            txtAdditionalCSS.Text =
+            this.txtAdditionalCSS.Text =
                 Convert.ToString(
                     SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_AdditionalCSS,
                                                       ""));
-            txtCSSClass.Text =
+            this.txtCSSClass.Text =
                 Convert.ToString(
                     SettingsUtil.GetDictionarySetting(VisualizerSettings, ReportsConstants.SETTING_Grid_CSSClass, ""));
             var gridLines = Convert.ToString(Utilities.GetGridLinesSetting(VisualizerSettings).ToString());
-            DropDownUtils.TrySetValue(ddlGridLines, Convert.ToString(
+            DropDownUtils.TrySetValue(this.ddlGridLines, Convert.ToString(
                                           SettingsUtil.GetDictionarySetting(
                                               VisualizerSettings,
                                               ReportsConstants.SETTING_Grid_GridLines,
                                               ReportsConstants.DEFAULT_Grid_GridLines)),
                                       ReportsConstants.DEFAULT_Grid_GridLines);
-            UpdatePageSizeText();
+            this.UpdatePageSizeText();
         }
 
         public override void SaveSettings(Dictionary<string, string> VisualizerSettings)
         {
-            if (!typvalPageSize.IsValid)
+            if (!this.typvalPageSize.IsValid)
             {
-                txtPageSize.Text = "10";
+                this.txtPageSize.Text = "10";
             }
 
-            VisualizerSettings[ReportsConstants.SETTING_Grid_EnablePaging] = chkPageData.Checked.ToString();
-            VisualizerSettings[ReportsConstants.SETTING_Grid_EnableSorting] = chkSortData.Checked.ToString();
-            VisualizerSettings[ReportsConstants.SETTING_Grid_PageSize] = txtPageSize.Text;
-            VisualizerSettings[ReportsConstants.SETTING_Grid_ShowHeader] = chkShowHeader.Checked.ToString();
-            VisualizerSettings[ReportsConstants.SETTING_Grid_GridLines] = ddlGridLines.SelectedValue;
-            VisualizerSettings[ReportsConstants.SETTING_Grid_AdditionalCSS] = txtAdditionalCSS.Text;
-            VisualizerSettings[ReportsConstants.SETTING_Grid_CSSClass] = txtCSSClass.Text;
+            VisualizerSettings[ReportsConstants.SETTING_Grid_EnablePaging] = this.chkPageData.Checked.ToString();
+            VisualizerSettings[ReportsConstants.SETTING_Grid_EnableSorting] = this.chkSortData.Checked.ToString();
+            VisualizerSettings[ReportsConstants.SETTING_Grid_PageSize] = this.txtPageSize.Text;
+            VisualizerSettings[ReportsConstants.SETTING_Grid_ShowHeader] = this.chkShowHeader.Checked.ToString();
+            VisualizerSettings[ReportsConstants.SETTING_Grid_GridLines] = this.ddlGridLines.SelectedValue;
+            VisualizerSettings[ReportsConstants.SETTING_Grid_AdditionalCSS] = this.txtAdditionalCSS.Text;
+            VisualizerSettings[ReportsConstants.SETTING_Grid_CSSClass] = this.txtCSSClass.Text;
         }
 
         private void UpdatePageSizeText()
         {
-            if (chkPageData.Checked)
+            if (this.chkPageData.Checked)
             {
-                rowPageSize.Style[HtmlTextWriterStyle.Display] = string.Empty;
+                this.rowPageSize.Style[HtmlTextWriterStyle.Display] = string.Empty;
             }
             else
             {
-                rowPageSize.Style[HtmlTextWriterStyle.Display] = "none";
+                this.rowPageSize.Style[HtmlTextWriterStyle.Display] = "none";
             }
         }
 
         private void chkPageData_CheckedChanged(object sender, EventArgs args)
         {
-            UpdatePageSizeText();
+            this.UpdatePageSizeText();
         }
     }
 }

@@ -38,9 +38,9 @@
 	<!--####################################################################### -->
 	<!--Company properties-->
 	<PropertyGroup>
-		<CompanyName>DNNCommunity</CompanyName>
-		<CompanyUrl>https://www.dnncommunity.org</CompanyUrl>
-		<CompanyEmail>support@dnncommunity.org</CompanyEmail>
+		<CompanyName>DNNCorp</CompanyName>
+		<CompanyUrl>http://www.dnnsoftware.com</CompanyUrl>
+		<CompanyEmail>support@dnnsoftware.com</CompanyEmail>
 	</PropertyGroup>
 	<!--You may change these properties when needed-->
 	<PropertyGroup>
@@ -78,15 +78,17 @@
 	</PropertyGroup>
 	<!--Assembly file for version information: Do not modify-->
 	<ItemGroup>
-		<AssemblyInfoFiles Include="$(MSBuildProjectDirectory)\**\AssemblyInfo.*" />
+		<!-- <AssemblyInfoFiles Include="$(MSBuildProjectDirectory)\**\AssemblyInfo.*" /> -->
+		<AssemblyInfoFiles Include="$(MSBuildProjectDirectory)\Properties\AssemblyInfo.*" />
 	</ItemGroup>
 	<!--MAIN Actions -->
 	<Target Name="BeforeBuild">
 		<!--Determine the version info-->
-		<CallTarget Targets="SetVersionInfo" />
+		<!-- <CallTarget Targets="SetVersionInfo" /> -->
 	</Target>
 	<Target Name="AfterBuild">
 		<!--When the buildtype = release the package is created -->
+		<CallTarget Targets="SetVersionInfo" />
 		<CallTarget Targets="Release" />
 		<CallTarget Targets="CopyDeployFiles" />
 	</Target>
@@ -94,34 +96,37 @@
 	<!-- Set Version Number -->
 	<Target Name="SetVersionInfo" Condition="'$(ConfigurationName)'=='Release'">
 		<!--Get the Assemblyfile-->
-		<ReadLinesFromFile File="%(AssemblyInfoFiles.FullPath)">
-			<Output TaskParameter="Lines" ItemName="ItemsFromFile" />
+		<ReadLinesFromFile
+		  File="%(AssemblyInfoFiles.FullPath)" >
+		  <Output
+			TaskParameter="Lines"
+			ItemName="ItemsFromFile"/>
 		</ReadLinesFromFile>
 		<!--Update the properties with the updated Fileversion-->
 		<GetVersionInfo Version="%(ItemsFromFile.Identity)">
-			<Output TaskParameter="Major" PropertyName="Major" />
-			<Output TaskParameter="Minor" PropertyName="Minor" />
-			<Output TaskParameter="Build" PropertyName="Build" />
+		  <Output TaskParameter="Major" PropertyName="Major" />
+		  <Output TaskParameter="Minor" PropertyName="Minor" />
+		  <Output TaskParameter="Build" PropertyName="Build" />
 		</GetVersionInfo>
 		<!-- DNN == single digits to be prefixed with a zero -->
 		<CreateProperty Value="0$(Major)" Condition="$(Major) &lt;= 9" >
-			<Output TaskParameter="Value" PropertyName="FileMajor" />
+		  <Output TaskParameter="Value" PropertyName="FileMajor" />
 		</CreateProperty>
 		<CreateProperty Value="0$(Minor)" Condition="$(Minor) &lt;= 9" >
-			<Output TaskParameter="Value" PropertyName="FileMinor" />
+		  <Output TaskParameter="Value" PropertyName="FileMinor" />
 		</CreateProperty>
 		<CreateProperty Value="0$(Build)" Condition="$(Build) &lt;= 9" >
-			<Output TaskParameter="Value" PropertyName="FileBuild" />
+		  <Output TaskParameter="Value" PropertyName="FileBuild" />
 		</CreateProperty>
 		<!-- DNN == non-single digits not to be prefixed with a zero.. -->
 		<CreateProperty Value="$(Major)" Condition="$(Major) &gt; 9" >
-			<Output TaskParameter="Value" PropertyName="FileMajor" />
+		  <Output TaskParameter="Value" PropertyName="FileMajor" />
 		</CreateProperty>
 		<CreateProperty Value="$(Minor)" Condition="$(Minor) &gt; 9" >
-			<Output TaskParameter="Value" PropertyName="FileMinor" />
+		  <Output TaskParameter="Value" PropertyName="FileMinor" />
 		</CreateProperty>
 		<CreateProperty Value="$(Build)" Condition="$(Build) &gt; 9" >
-			<Output TaskParameter="Value" PropertyName="FileBuild" />
+		  <Output TaskParameter="Value" PropertyName="FileBuild" />
 		</CreateProperty>
 	</Target>
 	<!-- Release -->
@@ -203,7 +208,7 @@
 		<FileUpdate Files="@(ModulednnFile)" Regex="@SupportedFeatures@" ReplacementText="$(SupportedFeatures)" />
 		<FileUpdate Files="@(ModulednnFile)" Regex="@EventMessage@" ReplacementText="$(EventMessage)" />
 		<!--Replace the Permissions part-->
-		<CreateItem Include="$(MSBuildProjectDirectory)\**\*.cs;
+		<CreateItem Include="$(MSBuildProjectDirectory)\**\*.vb;
                 $(MSBuildProjectDirectory)\**\*.cs;">
 			<Output TaskParameter="Include" ItemName="permissions" />
 		</CreateItem>
@@ -238,12 +243,12 @@
 		<FileUpdate Files="@(ModulednnFile)" Regex="@CleanupFiles@" ReplacementText="$(cleanUpComponent)" />
 		<!--Update the Config section-->
 		<CreateItem Include="$(MSBuildProjectDirectory)\Installation\Config\Config.txt">
-			<Output TaskParameter="Include" ItemName="dnnConfigFiles" />
+			<Output TaskParameter="Include" ItemName="ConfigFiles" />
 		</CreateItem>
-		<ConfigComponent Files="@(dnnConfigFiles)" >
-			<Output TaskParameter="ResultString" PropertyName="dnnConfigComponent" />
+		<ConfigComponent Files="@(ConfigFiles)" >
+			<Output TaskParameter="ResultString" PropertyName="configComponent" />
 		</ConfigComponent>
-		<FileUpdate Files="@(ModulednnFile)" Regex="@ConfigItems@" ReplacementText="$(dnnConfigComponent)" />
+		<FileUpdate Files="@(ModulednnFile)" Regex="@ConfigItems@" ReplacementText="$(configComponent)" />
 	</Target>
 	<!--Replace the @tab@ string with a tab-->
 	<Target Name="RePlaceTabs">
@@ -302,23 +307,23 @@
 		<Attrib Files="%(StylesheetFilesToCompress.FullPath)" ReadOnly="false" />
 		<!-- Compress script files on original location, see http://yuicompressor.codeplex.com/ for details-->
 		<!-- Parameters: 
-			EnableCompression: (False/True), default True. Enables compression on all files or not.
-			IsVerboseLogging: (False/True), default False. Enables logging.
-			IsObfuscateJavascript: (False/True), default False. Obfuscates javascript.
-			PreserveAllSemicolons: (False/True), default False. Preserves semicolons in the script.
-			DisableOptimizations: (False/True), default False.
-			LineBreakPosition: a positive integer value where to break the line, for easy reading
-			Encoding options: if empty, Default encoding is used.
-				- Default (default)
-				- ASCII
-				- UTF7
-				- UTF8
-				- UTF32
-				- Unicode
-				- other values like "windows-1250"
-			ThreadCulture: "" (default empty), will select the CurrentCulture or a specified version, for example en-US.
-			IsEvalIgnored: (False/True), default False.
-		-->
+		EnableCompression: (False/True), default True. Enables compression on all files or not.
+		IsVerboseLogging: (False/True), default False. Enables logging.
+		IsObfuscateJavascript: (False/True), default False. Obfuscates javascript.
+		PreserveAllSemicolons: (False/True), default False. Preserves semicolons in the script.
+		DisableOptimizations: (False/True), default False.
+		LineBreakPosition: a positive integer value where to break the line, for easy reading
+		Encoding options: if empty, Default encoding is used.
+			- Default (default)
+			- ASCII
+			- UTF7
+			- UTF8
+			- UTF32
+			- Unicode
+			- other values like "windows-1250"
+		ThreadCulture: "" (default empty), will select the CurrentCulture or a specified version, for example en-US.
+		IsEvalIgnored: (False/True), default False.
+	-->
 		<CompressScriptComponent Files="@(ScriptsToCompressFiles)" 
 			EnableCompression="False"
 			IsVerboseLogging="False" 
@@ -339,7 +344,7 @@
 				- Hybrid
 				- MichaelAshRegexEnhancements (default)
 				- StockYuiCompressor
-		-->
+	-->
 		<CompressCssComponent Files="@(StylesheetsToCompressFiles)" 
 			EnableCompression="True"
 			LineBreakPosition="218" 
@@ -349,37 +354,31 @@
 		<!-- Get files -->
 		<CreateItem
           Exclude="**\.svn\**;
-            	$(MSBuildProjectDirectory)\_*\**;
-            	$(MSBuildProjectDirectory)\.git\**;
-		$(MSBuildProjectDirectory)\obj\**;
-		$(MSBuildProjectDirectory)\bin\**;
-		$(MSBuildProjectDirectory)\My Project\*.*;
-		$(MSBuildProjectDirectory)\Properties\*.*;
-		$(MSBuildProjectDirectory)\Dependencies\*.*; 
-		$(MSBuildProjectDirectory)\packages\**; 
-		$(MSBuildProjectDirectory)\wiki.images\*.*; 
-		$(MSBuildProjectDirectory)\*ReSharper*\**;
-            	$(MSBuildProjectDirectory)\Installation\*.png;
-            	$(MSBuildProjectDirectory)\tmpCompressScript\**;
-		MSBuildProjectDirectory)\tmpCompressCSS\**"
+			$(MSBuildProjectDirectory)\_*\**;
+			$(MSBuildProjectDirectory)\.git\**;
+			$(MSBuildProjectDirectory)\obj\**;
+			$(MSBuildProjectDirectory)\bin\**;
+			$(MSBuildProjectDirectory)\wiki.images\**;
+			$(MSBuildProjectDirectory)\My Project\*.*;
+			$(MSBuildProjectDirectory)\Properties\*.*;
+			$(MSBuildProjectDirectory)\Dependencies\*.*; 
+			$(MSBuildProjectDirectory)\*ReSharper*\**;
+			$(MSBuildProjectDirectory)\Installation\*.png;
+			$(MSBuildProjectDirectory)\tmpCompressScript\**;
+			$(MSBuildProjectDirectory)\tmpCompressCSS\**"
           Include="$(MSBuildProjectDirectory)\**\*.ascx;
-		$(MSBuildProjectDirectory)\**\*.aspx;
-		$(MSBuildProjectDirectory)\**\*.css;
-		$(MSBuildProjectDirectory)\**\*.htm;
-		$(MSBuildProjectDirectory)\**\*.html;
-		$(MSBuildProjectDirectory)\**\*.xml;
-		$(MSBuildProjectDirectory)\**\*.xslt;
-		$(MSBuildProjectDirectory)\**\*.resx;
-		$(MSBuildProjectDirectory)\**\*.rpt;
-		$(MSBuildProjectDirectory)\**\*.gif;
-		$(MSBuildProjectDirectory)\**\*.jpg;
-		$(MSBuildProjectDirectory)\**\*.png;
-		$(MSBuildProjectDirectory)\**\*.svg;
-		$(MSBuildProjectDirectory)\**\*.eot;
-		$(MSBuildProjectDirectory)\**\*.ttf;
-		$(MSBuildProjectDirectory)\**\*.woff;
-		$(MSBuildProjectDirectory)\**\*.js;">
-	<Output TaskParameter="Include" ItemName="resources" />
+			$(MSBuildProjectDirectory)\**\*.aspx;
+			$(MSBuildProjectDirectory)\**\*.css;
+			$(MSBuildProjectDirectory)\**\*.xml;
+			$(MSBuildProjectDirectory)\**\*.xslt;
+			$(MSBuildProjectDirectory)\**\*.resx;
+			$(MSBuildProjectDirectory)\**\*.rpt;
+			$(MSBuildProjectDirectory)\**\*.gif;
+			$(MSBuildProjectDirectory)\**\*.jpg;
+			$(MSBuildProjectDirectory)\**\*.png;
+			$(MSBuildProjectDirectory)\**\*.js;
+			$(MSBuildProjectDirectory)\**\*.html;">
+			<Output TaskParameter="Include" ItemName="resources" />
 		</CreateItem>
 		<!-- Include module png as IconFile in resources zip -->
 		<!-- First copy it to the root of the module because else the Installation folder will be in the Resources zip -->
@@ -476,8 +475,9 @@
             $(MSBuildProjectDirectory)\**\*.user;
             $(MSBuildProjectDirectory)\**\*.zip;
             $(MSBuildProjectDirectory)\_ReSharper.*\**;
-						$(MSBuildProjectDirectory)\obj\**;
-						$(MSBuildProjectDirectory)\bin\**"
+			$(MSBuildProjectDirectory)\obj\**;
+			$(MSBuildProjectDirectory)\bin\**;
+			$(MSBuildProjectDirectory)\tmpCompressCSS\**"
           Include="$(MSBuildProjectDirectory)\**\*.*" >
 			<Output TaskParameter="Include" ItemName="srcsources" />
 		</CreateItem>
@@ -552,8 +552,8 @@
 		</CreateItem>
 		<!--Copy the files-->
     <!-- Uncomment if you are developing in a running DNN site -->
-    <!-- 
-    <Copy SourceFiles="@(BinFiles)" DestinationFolder="..\..\bin\" SkipUnchangedFiles="true" ContinueOnError="false" /> 
-    -->
+	   
+    <!--<Copy SourceFiles="@(BinFiles)" DestinationFolder="..\..\bin\" SkipUnchangedFiles="true" ContinueOnError="false" />--> 
+    
   </Target>
 </Project>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Excel.aspx.cs" Inherits="DotNetNuke.Modules.Reports.Excel" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Excel.aspx.cs" Inherits="DotNetNuke.Modules.Reports.Excel"  EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 

@@ -1,20 +1,20 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DNN_Reports" type="Module" version="6.3.0">
+    <package name="DNN_Reports" type="Module" version="6.2.3">
       <friendlyName>Reports</friendlyName>
       <description>The ReportsModule allows users to quickly display data retrieved from many data sources. An extensible architecture allows the use of custom Data Sources and Visualization systems to display data from any tabular data source, in many ways.</description>
       <iconFile>DesktopModules\Reports\DNN_Reports.png</iconFile>
       <owner>
-        <name>DNNCommunity</name>
-        <organization>DNNCommunity</organization>
-        <url>https://www.dnncommunity.org</url>
-        <email>support@dnncommunity.org</email>
+        <name>DNNCorp</name>
+        <organization>DNNCorp</organization>
+        <url>http://www.dnnsoftware.com</url>
+        <email>support@dnnsoftware.com</email>
       </owner>
       <license src="License.txt"></license>
-      <releaseNotes src="Release.06.03.00.txt"></releaseNotes>
+      <releaseNotes src="Release.06.02.03.txt"></releaseNotes>
       <azureCompatible>true</azureCompatible>
       <dependencies>
-        <dependency type="CoreVersion">9.4.0</dependency>
+        <dependency type="CoreVersion">8.0.1</dependency>
       </dependencies>
       <components>
         <component type="Script">
@@ -71,7 +71,25 @@
                     <supportsPopUps>false</supportsPopUps>
                     <controlTitle>Add/Remove Extensions</controlTitle>
                     <controlType>Edit</controlType>
-                    <helpUrl></helpUrl>
+                    <helpUrl>https://github.com/DNNCommunity/DNN.Reports/wiki</helpUrl>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/Reports/Settings.ascx</controlSrc>
+                    <supportsPartialRendering>true</supportsPartialRendering>
+                    <supportsPopUps>true</supportsPopUps>
+                    <controlTitle>Reports Settings</controlTitle>
+                    <controlType>Edit</controlType>
+                    <helpUrl>https://github.com/DNNCommunity/DNN.Reports/wiki</helpUrl>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey></controlKey>
+                    <controlSrc>DesktopModules/Reports/ViewReports.ascx</controlSrc>
+                    <supportsPartialRendering>true</supportsPartialRendering>
+                    <supportsPopUps>true</supportsPopUps>
+                    <controlTitle>View Report</controlTitle>
+                    <controlType>View</controlType>
+                    <helpUrl>https://github.com/DNNCommunity/DNN.Reports/wiki</helpUrl>
                   </moduleControl>
                 </moduleControls>
                 <permissions></permissions>
@@ -102,7 +120,8 @@
         <component type="Cleanup" version="06.00.00" fileName="Installation\CleanUp\Cleanup.06.00.00.txt" />
         <component type="Cleanup" version="06.01.00" fileName="Installation\CleanUp\Cleanup.06.01.00.txt" />
         <component type="Cleanup" version="06.01.01" fileName="Installation\CleanUp\Cleanup.06.01.01.txt" />
-        <component type="Cleanup" version="06.03.00" fileName="Installation\CleanUp\Cleanup.06.03.00.txt" />
+        <component type="Cleanup" version="06.02.02" fileName="Installation\CleanUp\Cleanup.06.02.02.txt" />
+        <component type="Cleanup" version="06.02.03" fileName="Installation\CleanUp\Cleanup.06.02.03.txt" />
       </components>
     </package>
   </packages>

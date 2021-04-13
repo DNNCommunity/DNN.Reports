@@ -1,12 +1,18 @@
-<h2>Release notes DNN Reports 06.02.01</h2>
+<h2>Release notes DNN Reports 06.02.02</h2>
 <p>DNN Reports 06.02.01 will work for any DNN version <strong>8.0.1</strong> and up. 
 Full details on the changes can be found in great detail at <a href="https://github.com/DNNCommunity/DNN.Reports/releases">https://github.com/DNNCommunity/DNN.Reports/releases</a>. </p>
 
+<h3>BUG FIXES</h3>
+<ul>
+	<li>Repaired the automtaic release build for correct packaging</li>	
+	<li>Clean up previous tmp files and folder</li>
+</ul>
+
+<h2>Release notes on DNN Reports 06.02.01</h2>
 <h3>CHANGES</h3>
 <ul>
 	<li>Minimal requirement DNN 8.0.1</li>	
 </ul>
-
 
 <h2>Release notes on DNN Reports 06.02.00</h2>
 <h3>ENHANCEMENTS</h3>

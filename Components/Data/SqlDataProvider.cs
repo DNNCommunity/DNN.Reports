@@ -23,20 +23,19 @@
 #endregion
 
 
-using System.Collections.Generic;
-using System.Data.Common;
-using Microsoft.ApplicationBlocks.Data;
-using DotNetNuke.Framework.Providers;
-using DotNetNuke.Common.Utilities;
-using System.Data;
-using System.Data.SqlClient;
-using System.Transactions;
-using DotNetNuke.Modules.Reports.Visualizers.Xslt;
-using Components;
-
-
 namespace DotNetNuke.Modules.Reports.Data
 {
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Common;
+    using System.Data.SqlClient;
+    using System.Transactions;
+    using Components;
+    using DotNetNuke.Common.Utilities;
+    using DotNetNuke.Framework.Providers;
+    using DotNetNuke.Modules.Reports.Visualizers.Xslt;
+    using Microsoft.ApplicationBlocks.Data;
+
     /// -----------------------------------------------------------------------------
     /// <summary>
     ///     Implements the Reports Data Provider on Microsoft SQL Server
@@ -53,36 +52,36 @@ namespace DotNetNuke.Modules.Reports.Data
 
         public SqlDataProvider()
         {
-            _providerConfiguration = ProviderConfiguration.GetProviderConfiguration(ReportsConstants.ProviderType);
+            this._providerConfiguration = ProviderConfiguration.GetProviderConfiguration(ReportsConstants.ProviderType);
 
 
             // Read the configuration specific information for this provider
             var objProvider =
-                (Provider) _providerConfiguration.Providers[_providerConfiguration.DefaultProvider];
+                (Provider) this._providerConfiguration.Providers[this._providerConfiguration.DefaultProvider];
 
             // Read the attributes for this provider
 
             //Get Connection string from web.config
-            _connectionString = Config.GetConnectionString();
+            this._connectionString = Config.GetConnectionString();
 
-            if (string.IsNullOrEmpty(_connectionString))
+            if (string.IsNullOrEmpty(this._connectionString))
             {
                 // Use connection string specified in provider
-                _connectionString = objProvider.Attributes["connectionString"];
+                this._connectionString = objProvider.Attributes["connectionString"];
             }
 
-            _providerPath = objProvider.Attributes["providerPath"];
+            this._providerPath = objProvider.Attributes["providerPath"];
 
-            _objectQualifier = objProvider.Attributes["objectQualifier"];
-            if (!string.IsNullOrEmpty(_objectQualifier) && _objectQualifier.EndsWith("_") == false)
+            this._objectQualifier = objProvider.Attributes["objectQualifier"];
+            if (!string.IsNullOrEmpty(this._objectQualifier) && this._objectQualifier.EndsWith("_") == false)
             {
-                _objectQualifier += "_";
+                this._objectQualifier += "_";
             }
 
-            _databaseOwner = objProvider.Attributes["databaseOwner"];
-            if (!string.IsNullOrEmpty(_databaseOwner) && _databaseOwner.EndsWith(".") == false)
+            this._databaseOwner = objProvider.Attributes["databaseOwner"];
+            if (!string.IsNullOrEmpty(this._databaseOwner) && this._databaseOwner.EndsWith(".") == false)
             {
-                _databaseOwner += ".";
+                this._databaseOwner += ".";
             }
         }
 
@@ -98,14 +97,14 @@ namespace DotNetNuke.Modules.Reports.Data
             // HACK: Copy-pasted from Core SqlDataProvider - core doesn't provide a system for parameterized dynamic sql
 
             // TODO: Switch to Regex and use IgnoreCase (punting this fix in 5.1 due to testing burden)
-            strScript = strScript.Replace("{databaseOwner}", _databaseOwner);
-            strScript = strScript.Replace("{dO}", _databaseOwner);
-            strScript = strScript.Replace("{do}", _databaseOwner);
-            strScript = strScript.Replace("{Do}", _databaseOwner);
-            strScript = strScript.Replace("{objectQualifier}", _objectQualifier);
-            strScript = strScript.Replace("{oq}", _objectQualifier);
-            strScript = strScript.Replace("{oQ}", _objectQualifier);
-            strScript = strScript.Replace("{Oq}", _objectQualifier);
+            strScript = strScript.Replace("{databaseOwner}", this._databaseOwner);
+            strScript = strScript.Replace("{dO}", this._databaseOwner);
+            strScript = strScript.Replace("{do}", this._databaseOwner);
+            strScript = strScript.Replace("{Do}", this._databaseOwner);
+            strScript = strScript.Replace("{objectQualifier}", this._objectQualifier);
+            strScript = strScript.Replace("{oq}", this._objectQualifier);
+            strScript = strScript.Replace("{oQ}", this._objectQualifier);
+            strScript = strScript.Replace("{Oq}", this._objectQualifier);
 
             // Convert the db parameters to sql parameters
             var sqlParams = new SqlParameter[parameters.Length];
@@ -114,8 +113,7 @@ namespace DotNetNuke.Modules.Reports.Data
                 sqlParams[i] = (SqlParameter) parameters[i];
             }
 
-            return DotNetNuke.Data.DataProvider.Instance()
-                .ExecuteReader(_connectionString, CommandType.Text, strScript, sqlParams);
+            return SqlHelper.ExecuteReader(this._connectionString, CommandType.Text, strScript, sqlParams);
         }
 
         public override IDataReader GetXsltExtensionObjects(int tabModuleId)
@@ -130,11 +128,14 @@ namespace DotNetNuke.Modules.Reports.Data
             using (var transaction = new TransactionScope())
             {
                 DotNetNuke.Data.DataProvider.Instance()
-                    .ExecuteNonQuery("reports_ClearXsltExtensionObjects", tabModuleId);
+                          .ExecuteNonQuery("reports_ClearXsltExtensionObjects", tabModuleId);
+
                 foreach (var extensionObject in extensionObjects)
                 {
                     DotNetNuke.Data.DataProvider.Instance().ExecuteNonQuery("reports_AddXsltExtensionObject",
-                        tabModuleId, extensionObject.XmlNamespace, extensionObject.ClrType);
+                                                                            tabModuleId,
+                                                                            extensionObject.XmlNamespace,
+                                                                            extensionObject.ClrType);
                 }
 
                 transaction.Complete();

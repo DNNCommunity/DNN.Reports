@@ -22,14 +22,14 @@
 
 #endregion
 
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.Modules.Reports.Extensions;
 
 namespace DotNetNuke.Modules.Reports.DataSources
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using global::DotNetNuke.Entities.Modules;
+    using global::DotNetNuke.Modules.Reports.Extensions;
 
     /// <summary>
     ///     Base class for Data Sources
