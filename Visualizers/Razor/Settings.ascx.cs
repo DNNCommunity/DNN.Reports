@@ -37,23 +37,23 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Razor
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            this.LoadRazorSettingsControl();
-            this.EnsureEditScriptControlIsRegistered();
+            LoadRazorSettingsControl();
+            EnsureEditScriptControlIsRegistered();
         }
 
         public override void LoadSettings(Dictionary<string, string> Settings)
         {
-            this.RazorSettings.LoadSettings();
+            RazorSettings.LoadSettings();
         }
 
         public override void SaveSettings(Dictionary<string, string> Settings)
         {
-            this.RazorSettings.UpdateSettings();
+            RazorSettings.UpdateSettings();
         }
 
         private void EnsureEditScriptControlIsRegistered()
         {
-            var moduleDefId = this.ParentModule.ModuleConfiguration.ModuleDefID;
+            var moduleDefId = ParentModule.ModuleConfiguration.ModuleDefID;
             if (ReferenceEquals(ModuleControlController.GetModuleControlByControlKey("EditRazorScript", moduleDefId),
                                 null))
             {
@@ -72,11 +72,11 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Razor
 
         private void LoadRazorSettingsControl()
         {
-            this.RazorSettings =
-                (RazorHost.Settings) this.LoadControl("~/DesktopModules/RazorModules/RazorHost/Settings.ascx");
-            this.RazorSettings.ModuleConfiguration = this.ParentModule.ModuleConfiguration;
-            this.RazorSettings.LocalResourceFile = this.LocalResourceFile;
-            this.Controls.Add(this.RazorSettings);
+            RazorSettings =
+                (RazorHost.Settings) LoadControl("~/DesktopModules/RazorModules/RazorHost/Settings.ascx");
+            RazorSettings.ModuleConfiguration = ParentModule.ModuleConfiguration;
+            RazorSettings.LocalResourceFile = LocalResourceFile;
+            Controls.Add(RazorSettings);
         }
     }
 }

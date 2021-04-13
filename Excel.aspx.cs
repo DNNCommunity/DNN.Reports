@@ -23,38 +23,34 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace DotNetNuke.Modules.Reports
 {
-	public partial class Excel : System.Web.UI.Page
+	public partial class Excel : Page
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (Session["report_export"] != null)
 			{
-				grd.DataSource = (DataTable)Session["report_export"];
-				grd.DataBind();
+                grd.DataSource = (DataTable) Session["report_export"];
+                grd.DataBind();
 
-				Response.Clear();
-				Response.Buffer = true;
-				Response.ContentType = "application/vnd.ms-excel";
-				Response.Charset = "";
+                Response.Clear();
+                Response.Buffer = true;
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.Charset = "";
 
-				Response.AddHeader("Content-Disposition", "attachment;filename=Export.xls");
-				EnableViewState = false;
+                Response.AddHeader("Content-Disposition", "attachment;filename=Export.xls");
+                EnableViewState = false;
 
 				System.IO.StringWriter sw = new System.IO.StringWriter();
-				System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+				HtmlTextWriter hw = new HtmlTextWriter(sw);
 
-				grd.RenderControl(hw);
-				Response.Write(sw.ToString());
-				Response.End();
+                grd.RenderControl(hw);
+                Response.Write(sw.ToString());
+                Response.End();
 			}
 		}
 

@@ -32,7 +32,6 @@ using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Components;
-using DNNtc;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Modules.Reports.Converters;
@@ -42,10 +41,12 @@ using DotNetNuke.Modules.Reports.Extensions;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Utilities;
-using DotNetNuke.Web.Client.ClientResourceManagement;
+using DotNetNuke.Web.Client;
 
 namespace DotNetNuke.Modules.Reports
 {
+    using DotNetNuke.Web.Client.ClientResourceManagement;
+
     /// -----------------------------------------------------------------------------
     /// <summary>
     ///     The Settings class manages Module Settings
@@ -55,7 +56,7 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [ModuleControlProperties("Settings", "Reports Settings", ControlType.Edit, "")]
+    [DNNtc.ModuleControlProperties("Settings", "Reports Settings", DNNtc.ControlType.Edit, "https://github.com/DNNCommunity/DNN.Reports/wiki", true, true)]
     public partial class Settings : ModuleSettingsBase
     {
         #region  Properties
@@ -195,13 +196,13 @@ namespace DotNetNuke.Modules.Reports
             // Non-SuperUsers can change TabModuleSettings (display settings)
 
             // Update cache duration (0 => no caching)
-            var duration = 0;
+            var duration = "0";
             if (chkCaching.Checked)
             {
-                duration =  int.Parse(txtCacheDuration.Text);
+                duration = txtCacheDuration.Text;
             }
 
-            Report.CacheDuration = duration;
+            Report.CacheDuration = int.Parse(duration);
             Report.ShowInfoPane = chkShowInfoPane.Checked;
             Report.ShowControls = chkShowControls.Checked;
             Report.AutoRunReport = chkAutoRunReport.Checked;
@@ -248,6 +249,7 @@ namespace DotNetNuke.Modules.Reports
         {
             // Add module.css because it isn't loaded by default here (since the current module
             // is "Admin/Modules"
+            //TODO:
             ClientResourceManager.RegisterStyleSheet(Page, ResolveUrl("module.css"));
 
             // Update the selected extension on postback
@@ -651,7 +653,7 @@ namespace DotNetNuke.Modules.Reports
             }
             else
             {
-                spanCacheDuration.Style[HtmlTextWriterStyle.Display] = string.Empty; //"none";
+                spanCacheDuration.Style[HtmlTextWriterStyle.Display] = "none";
             }
         }
 

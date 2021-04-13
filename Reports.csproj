@@ -18,7 +18,7 @@
     <RootNamespace>
     </RootNamespace>
     <AssemblyName>DotNetNuke.Modules.Reports</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>On</OptionStrict>
@@ -61,9 +61,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetNuke, Version=8.0.0.809, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Dnn.Platform.8.0.0\lib\net40\DotNetNuke.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="DotNetNuke, Version=9.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.references\DotNetNuke.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DotNetNuke.Modules.RazorHost, Version=7.3.2.109, Culture=neutral, processorArchitecture=MSIL">
@@ -71,43 +71,38 @@
       <HintPath>.references\DotNetNuke.Modules.RazorHost.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.Web, Version=8.0.0.809, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Dnn.Platform.8.0.0\lib\net40\DotNetNuke.Web.dll</HintPath>
+    <Reference Include="DotNetNuke.Web.Client">
+      <HintPath>.references\DotNetNuke.Web.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.Web.Client, Version=8.0.0.809, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Dnn.Platform.8.0.0\lib\net40\DotNetNuke.Web.Client.dll</HintPath>
-      <Private>True</Private>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DotNetNuke.Web.Razor, Version=8.0.0.809, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Dnn.Platform.8.0.0\lib\net40\DotNetNuke.Web.Razor.dll</HintPath>
+    <Reference Include="DotNetNuke.Web.Razor">
+      <HintPath>.references\DotNetNuke.Web.Razor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Dnn.Platform.8.0.0\lib\net40\DotNetNuke.WebUtility.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.references\DotNetNuke.WebUtility.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Dnn.Platform.8.0.0\lib\net40\Microsoft.ApplicationBlocks.Data.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.references\Microsoft.ApplicationBlocks.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Core" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Installation\Visualizers\" />
@@ -116,7 +111,10 @@
     <Content Include=".build\DNNtc.MSBuild.Tasks.dll" />
     <Content Include=".build\EcmaScript.NET.modified.dll" />
     <Content Include=".build\Yahoo.Yui.Compressor.dll" />
+    <Content Include=".references\DotNetNuke.dll" />
     <Content Include=".references\DotNetNuke.Modules.RazorHost.dll" />
+    <Content Include=".references\DotNetNuke.Web.Client.dll" />
+    <Content Include=".references\DotNetNuke.Web.Razor.dll" />
     <Content Include=".references\DotNetNuke.WebUtility.dll" />
     <Content Include=".references\Microsoft.ApplicationBlocks.Data.dll" />
     <Content Include="App_LocalResources\Packages.ascx.resx">
@@ -149,6 +147,24 @@
       <SubType>Designer</SubType>
     </Content>
     <EmbeddedResource Include="js\dnn.reports.js" />
+    <Content Include="Installation\CleanUp\Cleanup.05.06.00.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.05.07.00.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.05.07.01.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.06.00.00.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.06.01.00.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.06.01.01.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.06.02.02.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.06.02.03.txt" />
+    <Content Include="Installation\DNN_Reports.png" />
+    <Content Include="Installation\ReleaseNotes\Release.05.06.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.05.07.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.05.07.01.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.06.00.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.06.01.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.06.02.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.06.02.01.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.06.02.02.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.06.02.03.txt" />
     <Content Include="Settings.ascx" />
     <Content Include="ViewReports.ascx" />
     <Content Include="Visualizers\Razor\App_LocalResources\Settings.ascx.resx" />
@@ -164,7 +180,6 @@
     <Compile Include="Components\Extensions\ExtensionType.cs" />
     <Compile Include="Components\ReportsConstants.cs" />
     <Compile Include="Components\ReportsModuleSettings.cs" />
-    <Compile Include="Components\Tests\ReportsControllerTests.cs" />
     <Compile Include="Excel.aspx.cs">
       <DependentUpon>Excel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -350,7 +365,8 @@
     <Content Include="DataSources\SqlServer\Settings.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="LICENSE" />
+    <Content Include="README.md" />
     <SourcePackage Include=".build\MSBuild.Community.Tasks.dll" />
     <Content Include="Packages.ascx" />
     <Content Include="Controls\SqlDataSourceCommonSettingsControl.ascx" />

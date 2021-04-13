@@ -1,0 +1,16 @@
+'Remove old versions of the extension
+Install\Module\DNN_Reports_06.02.02_Install.zip
+
+'Tidy up debug files if any
+Bin\DotNetNuke.Modules.Reports.pdb
+
+'Remove the old install packages that are saved by the DNN installer
+App_Data\ExtensionPackages\Module_DNN_Reports_5.5.0.resources
+App_Data\ExtensionPackages\Module_DNN_Reports_5.6.0.resources
+App_Data\ExtensionPackages\Module_DNN_Reports_5.7.0.resources
+App_Data\ExtensionPackages\Module_DNN_Reports_5.7.1.resources
+App_Data\ExtensionPackages\Module_DNN_Reports_6.0.0.resources
+App_Data\ExtensionPackages\Module_DNN_Reports_6.1.0.resources
+App_Data\ExtensionPackages\Module_DNN_Reports_6.2.0.resources
+App_Data\ExtensionPackages\Module_DNN_Reports_6.2.1.resources
+App_Data\ExtensionPackages\Module_DNN_Reports_6.2.2.resources

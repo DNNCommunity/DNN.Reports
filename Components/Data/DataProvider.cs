@@ -23,14 +23,14 @@
 #endregion
 
 
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using DotNetNuke.Framework;
-using DotNetNuke.Modules.Reports.Visualizers.Xslt;
-
 namespace DotNetNuke.Modules.Reports.Data
 {
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Common;
+    using DotNetNuke.Framework;
+    using DotNetNuke.Modules.Reports.Visualizers.Xslt;
+
     /// -----------------------------------------------------------------------------
     /// <summary>
     ///     Provides an abstract base class for Reports Data Providers
