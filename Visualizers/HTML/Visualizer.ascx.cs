@@ -55,9 +55,9 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Html
         /// -----------------------------------------------------------------------------
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (this.IsFirstRun)
+            if (IsFirstRun)
             {
-                this.DataBind();
+                DataBind();
             }
         }
 
@@ -68,30 +68,30 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Html
         public override void DataBind()
         {
             // Get the report for this module
-            if (!this.ValidateDataSource() || !this.ValidateResults())
+            if (!ValidateDataSource() || !ValidateResults())
             {
-                this.pnlContent.Visible = false;
+                pnlContent.Visible = false;
             }
             else
             {
-                this.pnlContent.Visible = true;
+                pnlContent.Visible = true;
                 var sFileID =
-                    Convert.ToString(SettingsUtil.GetDictionarySetting(this.Report.VisualizerSettings,
+                    Convert.ToString(SettingsUtil.GetDictionarySetting(Report.VisualizerSettings,
                                                                        ReportsConstants.SETTING_Html_TemplateFile,
                                                                        string.Empty));
                 if (!string.IsNullOrEmpty(sFileID))
                 {
-                    var sFile = Utilities.MapFileIdPath(this.ParentModule.PortalSettings, sFileID);
+                    var sFile = Utilities.MapFileIdPath(ParentModule.PortalSettings, sFileID);
                     if (!string.IsNullOrEmpty(sFile))
                     {
                         var sHtml = File.ReadAllText(sFile);
                         if (!string.IsNullOrEmpty(sHtml))
                         {
                             // Iterate over each row
-                            foreach (DataRow row in this.ReportResults.Rows)
+                            foreach (DataRow row in ReportResults.Rows)
                             {
                                 var rowHtml = sHtml;
-                                foreach (DataColumn dcol in this.ReportResults.Columns)
+                                foreach (DataColumn dcol in ReportResults.Columns)
                                 {
                                     rowHtml = rowHtml.Replace(string.Format("[{0}]", dcol.ColumnName),
                                                               Convert.ToString(row[dcol].ToString()));
@@ -101,8 +101,8 @@ namespace DotNetNuke.Modules.Reports.Visualizers.Html
                                 var divContent = new HtmlGenericControl("div");
                                 divContent.Attributes["class"] = "DNN_Reports_HTML_Item";
                                 divContent.InnerHtml =
-                                    objSec.InputFilter(rowHtml, PortalSecurity.FilterFlag.MultiLine|PortalSecurity.FilterFlag.NoSQL);
-                                this.pnlContent.Controls.Add(divContent);
+                                    objSec.InputFilter(rowHtml, PortalSecurity.FilterFlag.NoScripting); //     .MultiLine|PortalSecurity.FilterFlag.NoSQL
+                                pnlContent.Controls.Add(divContent);
                             }
                         }
                         base.DataBind();
