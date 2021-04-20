@@ -12,6 +12,8 @@ Full details on the changes can be found in great detail at <a href="https://git
 <ul>
 	<li>Minimal requirement DNN 9.4.0</li>
 	<li>DNN 9.4.0 requires .NET Framework 4.7.2</li>
+	<li>Removed the option to install new visualizers and/or datasources</li>
+	<li>Added return command button in Manage Add-Ins</li>
 </ul>
 
 <h2>Release notes on DNN Reports 06.02.01</h2>

@@ -67,8 +67,8 @@
                   <moduleControl>
                     <controlKey>ManagePackages</controlKey>
                     <controlSrc>DesktopModules/Reports/Packages.ascx</controlSrc>
-                    <supportsPartialRendering>false</supportsPartialRendering>
-                    <supportsPopUps>false</supportsPopUps>
+                    <supportsPartialRendering>true</supportsPartialRendering>
+                    <supportsPopUps>true</supportsPopUps>
                     <controlTitle>Add/Remove Extensions</controlTitle>
                     <controlType>Edit</controlType>
                     <helpUrl>https://github.com/DNNCommunity/DNN.Reports/wiki</helpUrl>

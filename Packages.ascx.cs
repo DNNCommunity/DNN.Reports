@@ -30,6 +30,7 @@ namespace DotNetNuke.Modules.Reports
     using System.Linq;
     using System.Reflection;
     using Components;
+    using DotNetNuke.Common;
     using DotNetNuke.Common.Utilities;
     using DotNetNuke.Entities.Modules;
     using DotNetNuke.Services.Installer;
@@ -45,26 +46,25 @@ namespace DotNetNuke.Modules.Reports
     /// <history>
     /// </history>
     /// -----------------------------------------------------------------------------
-    [DNNtc.ModuleControlProperties("ManagePackages", "Add/Remove Extensions", DNNtc.ControlType.Edit, "https://github.com/DNNCommunity/DNN.Reports/wiki", false, false)]
+    [DNNtc.ModuleControlProperties("ManagePackages", "Add/Remove Extensions", DNNtc.ControlType.Edit, "https://github.com/DNNCommunity/DNN.Reports/wiki", true, true)]
     public partial class Packages : PortalModuleBase
     {
         private static readonly Version BuiltInVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
         public void Page_Load(object sender, EventArgs args)
         {
-            this.InstallVisualizerLink.NavigateUrl =
-                Util.InstallURL(this.TabId, ReportsConstants.PACKAGETYPE_Visualizer);
-            this.InstallDataSourceLink.NavigateUrl =
-                Util.InstallURL(this.TabId, ReportsConstants.PACKAGETYPE_DataSource);
+            // Install plug-in packages does not work with the PB
+            // InstallVisualizerLink.NavigateUrl = Util.InstallURL(TabId, ReportsConstants.PACKAGETYPE_Visualizer);
+            // InstallDataSourceLink.NavigateUrl = Util.InstallURL(TabId, ReportsConstants.PACKAGETYPE_DataSource);
 
-            Localization.LocalizeGridView(ref this.PackagesGrid, this.LocalResourceFile);
+            Localization.LocalizeGridView(ref PackagesGrid, LocalResourceFile);
 
-            if (!this.IsPostBack)
+            if (!IsPostBack)
             {
-                this.DataBind();
+                DataBind();
             }
 
-            Localization.LocalizeGridView(ref this.PackagesGrid, this.LocalResourceFile);
+            Localization.LocalizeGridView(ref PackagesGrid, LocalResourceFile);
         }
 
         public override void DataBind()
@@ -72,35 +72,26 @@ namespace DotNetNuke.Modules.Reports
             base.DataBind();
 
             var visualizers = PackageController
-                .Instance.GetExtensionPackages(Null.NullInteger,
-                                               arg => arg.PackageType == ReportsConstants.PACKAGETYPE_Visualizer)
+                .Instance.GetExtensionPackages(Null.NullInteger, arg => arg.PackageType == ReportsConstants.PACKAGETYPE_Visualizer)
                 .ToList();
             var dataSources = PackageController
-                .Instance.GetExtensionPackages(Null.NullInteger,
-                                               arg => arg.PackageType == ReportsConstants.PACKAGETYPE_DataSource)
+                .Instance.GetExtensionPackages(Null.NullInteger, arg => arg.PackageType == ReportsConstants.PACKAGETYPE_DataSource)
                 .ToList();
 
             var allExtensions = new List<PackageInfo>(visualizers);
             allExtensions.AddRange(dataSources);
 
             // Add Built-in packages
-            allExtensions.Add(this.CreateBuiltInPackage("Grid", BuiltInVersion,
-                                                        ReportsConstants.PACKAGETYPE_Visualizer, "Grid"));
-            allExtensions.Add(this.CreateBuiltInPackage("HTML", BuiltInVersion,
-                                                        ReportsConstants.PACKAGETYPE_Visualizer, "HTML"));
-            allExtensions.Add(this.CreateBuiltInPackage("XSLT", BuiltInVersion,
-                                                        ReportsConstants.PACKAGETYPE_Visualizer, "XSLT"));
-            allExtensions.Add(this.CreateBuiltInPackage("Razor", BuiltInVersion,
-                                                        ReportsConstants.PACKAGETYPE_Visualizer, "Razor"));
-            allExtensions.Add(this.CreateBuiltInPackage("Generic ADO.Net Provider", BuiltInVersion,
-                                                        ReportsConstants.PACKAGETYPE_DataSource, "ADO"));
-            allExtensions.Add(this.CreateBuiltInPackage("DotNetNuke", BuiltInVersion,
-                                                        ReportsConstants.PACKAGETYPE_DataSource, "DNN"));
-            allExtensions.Add(this.CreateBuiltInPackage("Microsoft SQL Server", BuiltInVersion,
-                                                        ReportsConstants.PACKAGETYPE_DataSource, "SqlServer"));
+            allExtensions.Add(CreateBuiltInPackage("Grid", BuiltInVersion, ReportsConstants.PACKAGETYPE_Visualizer, "Grid"));
+            allExtensions.Add(CreateBuiltInPackage("HTML", BuiltInVersion, ReportsConstants.PACKAGETYPE_Visualizer, "HTML"));
+            allExtensions.Add(CreateBuiltInPackage("XSLT", BuiltInVersion, ReportsConstants.PACKAGETYPE_Visualizer, "XSLT"));
+            allExtensions.Add(CreateBuiltInPackage("Razor", BuiltInVersion, ReportsConstants.PACKAGETYPE_Visualizer, "Razor"));
+            allExtensions.Add(CreateBuiltInPackage("Generic ADO.Net Provider", BuiltInVersion, ReportsConstants.PACKAGETYPE_DataSource, "ADO"));
+            allExtensions.Add(CreateBuiltInPackage("DotNetNuke", BuiltInVersion, ReportsConstants.PACKAGETYPE_DataSource, "DNN"));
+            allExtensions.Add(CreateBuiltInPackage("Microsoft SQL Server", BuiltInVersion, ReportsConstants.PACKAGETYPE_DataSource, "SqlServer"));
 
-            this.PackagesGrid.DataSource = allExtensions;
-            this.PackagesGrid.DataBind();
+            PackagesGrid.DataSource = allExtensions;
+            PackagesGrid.DataBind();
         }
 
         private PackageInfo CreateBuiltInPackage(string Name, Version Version, string Type, string DescriptionKey)
@@ -111,7 +102,7 @@ namespace DotNetNuke.Modules.Reports
             pkg.Version = Version;
             pkg.PackageType = Type;
             pkg.Description =
-                Localization.GetString(string.Concat(DescriptionKey, ".Description"), this.LocalResourceFile);
+                Localization.GetString(string.Concat(DescriptionKey, ".Description"), LocalResourceFile);
             return pkg;
         }
 
@@ -119,9 +110,9 @@ namespace DotNetNuke.Modules.Reports
         {
             if (id < 0)
             {
-                return this.ResolveUrl("images/BuiltInPackage.gif");
+                return ResolveUrl("images/BuiltInPackage.gif");
             }
-            return this.ResolveUrl("~/images/delete.gif");
+            return ResolveUrl("~/images/delete.gif");
         }
 
         protected bool IsBuiltIn(int id)
@@ -136,7 +127,13 @@ namespace DotNetNuke.Modules.Reports
 
         protected string InstallUrl(int id)
         {
-            return Util.UnInstallURL(this.TabId, id);
+            return Util.UnInstallURL(TabId, id);
         }
+
+        protected void returnButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(Globals.NavigateURL(), false);
+        }
+
     }
 }

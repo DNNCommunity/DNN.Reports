@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DotNetNuke.Modules.Reports {
-    
-    
-    public partial class Packages {
-        
+namespace DotNetNuke.Modules.Reports
+{
+
+
+    public partial class Packages
+    {
+
         /// <summary>
         /// PackagesLabel control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace DotNetNuke.Modules.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UserControl PackagesLabel;
-        
+
         /// <summary>
         /// PackagesGrid control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace DotNetNuke.Modules.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView PackagesGrid;
-        
+
         /// <summary>
         /// imgBuiltIn control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace DotNetNuke.Modules.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgBuiltIn;
-        
+
         /// <summary>
         /// BuiltInAddInNotice control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace DotNetNuke.Modules.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label BuiltInAddInNotice;
-        
+
         /// <summary>
         /// InstallVisualizerLink control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace DotNetNuke.Modules.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink InstallVisualizerLink;
-        
+
         /// <summary>
         /// InstallDataSourceLink control.
         /// </summary>
@@ -65,5 +67,14 @@ namespace DotNetNuke.Modules.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink InstallDataSourceLink;
+
+        /// <summary>
+        /// returnButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton returnButton;
     }
 }
