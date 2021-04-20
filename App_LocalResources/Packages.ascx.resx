@@ -171,4 +171,7 @@
   <data name="Razor.Description" xml:space="preserve">
     <value>This is an add-on to DNN Reports which allows you to use Razor as a visualizer-engine</value>
   </data>
+  <data name="returnButton.Text" xml:space="preserve">
+    <value>Return</value>
+  </data>
 </root>
