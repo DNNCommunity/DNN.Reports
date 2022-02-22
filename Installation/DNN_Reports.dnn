@@ -5,10 +5,10 @@
       <description>The ReportsModule allows users to quickly display data retrieved from many data sources. An extensible architecture allows the use of custom Data Sources and Visualization systems to display data from any tabular data source, in many ways.</description>
       <iconFile>DesktopModules\Reports\DNN_Reports.png</iconFile>
       <owner>
-        <name>DNNCorp</name>
-        <organization>DNNCorp</organization>
-        <url>http://www.dnnsoftware.com</url>
-        <email>support@dnnsoftware.com</email>
+        <name>DNNCommunity.org</name>
+        <organization>DNNCommunity.org</organization>
+        <url>https://dnncommunity.org/</url>
+        <email>info@dnncommunity.org</email>
       </owner>
       <license src="License.txt"></license>
       <releaseNotes src="Release.06.02.04.txt"></releaseNotes>

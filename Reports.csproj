@@ -111,7 +111,7 @@
   <ItemGroup>
     <Content Include=".build\DNNtc.MSBuild.Tasks.dll" />
     <Content Include=".build\EcmaScript.NET.modified.dll" />
-    <Content Include=".build\Microsoft.Build.Utilities.v3.5.dll" />
+    <Content Include=".build\ICSharpCode.SharpZipLib.dll" />
     <Content Include=".build\Yahoo.Yui.Compressor.dll" />
     <Content Include=".references\DotNetNuke.dll" />
     <Content Include=".references\DotNetNuke.Modules.RazorHost.dll" />
@@ -382,6 +382,7 @@
     <Package Include="Installation\License.txt" />
     <Content Include="module.css" />
     <Content Include="Installation\06.02.04.SqlDataProvider" />
+    <Content Include=".build\DNNtc.MSBuild.Tasks.targets" />
     <None Include="Installation\Project.targets">
       <SubType>Designer</SubType>
     </None>
