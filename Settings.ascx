@@ -85,9 +85,9 @@ TagPrefix="dnn" %>
             </div>
             <%-- Test Data Source and Show Xml Source Button --%>
             <div style="text-align: right; width: 90%;">
-                <asp:LinkButton ID="btnTestDataSource" CssClass="CommandButton" runat="server" ResourceKey="btnTestDataSource"
+                <asp:LinkButton ID="btnTestDataSource" CssClass="dnnSecondaryAction" runat="server" ResourceKey="btnTestDataSource"
                                 CausesValidation="false" OnClick="btnTestQuery_Click"/>
-                <asp:LinkButton ID="btnShowXml" CssClass="CommandButton" runat="server" ResourceKey="btnShowXml"
+                <asp:LinkButton ID="btnShowXml" CssClass="dnnSecondaryAction" runat="server" ResourceKey="btnShowXml"
                                 CausesValidation="false" OnClick="btnShowXml_Click"/>
             </div>
             <%-- Test Data Source Results Host --%>
@@ -97,7 +97,7 @@ TagPrefix="dnn" %>
                 </div>
                 <asp:Label ID="lblQueryResults" runat="server"/>
                 <br/>
-                <asp:LinkButton ID="btnHideTestResults" runat="server" CssClass="CommandButton" ResourceKey="btnHideTestResults" OnClick="btnHideTestResults_Click"/>
+                <asp:LinkButton ID="btnHideTestResults" runat="server" CssClass="dnnSecondaryAction" ResourceKey="btnHideTestResults" OnClick="btnHideTestResults_Click"/>
             </div>
             <%-- Show Xml Source Host --%>
             <div runat="server" id="rowXmlSource" visible="false" class="dnn_rpt_test_results">
@@ -106,7 +106,7 @@ TagPrefix="dnn" %>
                              TextMode="MultiLine" Rows="7" Width="90%"/>
                 <br/>
                 <div style="text-align: center">
-                    <asp:LinkButton ID="btnHideXmlSource" runat="server" CssClass="CommandButton" ResourceKey="btnHideXmlSource" OnClick="btnHideXmlSource_Click"/>
+                    <asp:LinkButton ID="btnHideXmlSource" runat="server" CssClass="dnnSecondaryAction" ResourceKey="btnHideXmlSource" OnClick="btnHideXmlSource_Click"/>
                 </div>
             </div>
             <%-- Data Converters Settings Section Header --%>

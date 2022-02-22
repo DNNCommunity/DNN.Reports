@@ -7,7 +7,7 @@
         </td>
         <td class="dnn_rpt_form_field">
             <asp:FileUpload id="QueryUploadControl" cssclass="NormalTextBox" width="90%" runat="server"/>
-            <asp:LinkButton id="QueryUploadButton" cssclass="CommandButton" resourcekey="QueryUploadButton" runat="server"/>
+            <asp:LinkButton id="QueryUploadButton" cssclass="dnnPrimaryAction" resourcekey="QueryUploadButton" runat="server"/>
         </td>
     </tr>
     <tr>
