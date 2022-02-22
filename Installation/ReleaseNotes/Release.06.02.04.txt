@@ -1,33 +1,10 @@
-
-
-
-
-
-
-<h2>Release notes DNN Reports 06.02.04</h2>
-<p>DNN Reports 06.02.04 will work for any DNN version <strong>9.4.0</strong> and up. 
-Full details on the changes can be found in great detail at <a href="https://github.com/DNNCommunity/DNN.Reports/releases">https://github.com/DNNCommunity/DNN.Reports/releases</a>. </p>
-
-<h3>BUG FIXES</h3>
-<ul>
-	<li>DNN 9.4+ uses UTC date/time in TabModuleSettings, the current DNNReport settings are overwitten with 01-01-2022 to prevent errors</li>	
-</ul>
-<h3>ENHANCEMENTS</h3>
-<ul>
-	<li>Change command links to standard DNN buttons</li>
-</ul>
-<h3>CHANGES</h3>
-<ul>
-	<li>Upgraded the development project to VS2022</li>
-</ul>
 <style>
 	div.uv-install-wrapper h3, div.uv-install-wrapper h4, div.uv-install-wrapper p, div.uv-install-wrapper hr, div.uv-install-wrapper ul { margin-bottom: 0.5em; }
 	div.uv-install-wrapper ul { padding-left: 2em; }
 </style>
 <div class="uv-install-wrapper">
 	<h2>DNN Reports Module for DNN</h2>
-	<p>DNN Reports 06.02.04 will work for any DNN version<strong>9.4.0</strong>and up. 
-Full details on the changes can be found in great detail at		<a href="https://github.com/DNNCommunity/DNN.Reports/releases">https://github.com/DNNCommunity/DNN.Reports/releases</a>.</p>
+	<p>DNN Reports 06.02.04 will work for any DNN version<strong>9.4.0</strong>and up. Full details on the changes can be found in great detail at	<a href="https://github.com/DNNCommunity/DNN.Reports/releases">https://github.com/DNNCommunity/DNN.Reports/releases</a>.</p>
 	<br/><hr/>
 	<div class="dnnClear">
 		<h4>Release notes DNN Reports 06.02.04</h4>
