@@ -9,9 +9,9 @@
 </asp:Panel>
 <asp:PlaceHolder ID="ControlsPane" runat="server" Visible="false" EnableViewState="false">
     <p>
-        <asp:LinkButton ID="RunReportButton" runat="server" ResourceKey="RunReportButton" CssClass="CommandButton" EnableViewState="false" OnClick="RunReportButton_Click"/>&nbsp;
-        <asp:LinkButton ID="ClearReportButton" runat="server" ResourceKey="ClearReportButton" CssClass="CommandButton" Visible="false" EnableViewState="false" OnClick="ClearReportButton_Click"/>&nbsp;
-		<asp:LinkButton ID="ExportExcelButton" runat="server" ResourceKey="ExportExcelButton" CssClass="CommandButton" Visible="true" EnableViewState="false" OnClick="ExportExcelButton_Click" />
+        <asp:LinkButton ID="RunReportButton" runat="server" ResourceKey="RunReportButton" CssClass="dnnPrimaryAction" EnableViewState="false" OnClick="RunReportButton_Click"/>&nbsp;
+        <asp:LinkButton ID="ClearReportButton" runat="server" ResourceKey="ClearReportButton" CssClass="dnnSecondaryAction" Visible="false" EnableViewState="false" OnClick="ClearReportButton_Click"/>&nbsp;
+		<asp:LinkButton ID="ExportExcelButton" runat="server" ResourceKey="ExportExcelButton" CssClass="dnnSecondaryAction" Visible="true" EnableViewState="false" OnClick="ExportExcelButton_Click" />
     </p>
 </asp:PlaceHolder>
 <asp:PlaceHolder ID="VisualizerSection" runat="server"/>

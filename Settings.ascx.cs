@@ -213,10 +213,7 @@ namespace DotNetNuke.Modules.Reports
             Report.Visualizer = VisualizerDropDown.SelectedValue;
             Report.VisualizerSettings.Clear();
             var settings = GetSettingsControlFromView(VisualizerSettings.GetActiveView());
-            if (settings != null)
-            {
-                settings.SaveSettings(Report.VisualizerSettings);
-            }
+            settings?.SaveSettings(Report.VisualizerSettings);
 
             // Save the report view and clear the cache
             ReportsController.UpdateReportView(TabModuleId, Report);

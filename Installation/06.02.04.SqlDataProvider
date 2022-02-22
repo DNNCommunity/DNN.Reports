@@ -1,0 +1,18 @@
+/************************************************************/
+/*****                                                  *****/
+/*****      SqlDataProvider Install/Upgrade for         *****/
+/*****      Reports module 06.02.04                     *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search AND replace operation     *****/
+/*****       for {databaseOwner} AND {objectQualifier}  *****/
+/*****       or use 'SQL' FROM Host Menu AND run this.  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/***** Correct date/time field in the settings for the new DNN version ****/
+/***** Overwrite with 01-01-2022 to prevent errors                     ****/
+
+UPDATE {databaseOwner}[{objectQualifier}ModuleSettings]
+SET    [SettingValue] = '2022-01-01T00:00:01.000000+01:00'
+WHERE  [SettingName] = 'dnn_Reports_CreatedOn';

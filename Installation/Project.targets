@@ -4,9 +4,10 @@
 	<PropertyGroup>
 		<MSBuildCommunityTasksPath>$(SolutionDir)\.build</MSBuildCommunityTasksPath>
 		<MSBuildDNNtcTasksPath>$(SolutionDir)\.build</MSBuildDNNtcTasksPath>
+		<MSBuildCommunityTasksLib>$(SolutionDir)\.build\MSBuild.Community.Tasks.dll</MSBuildCommunityTasksLib>
 	</PropertyGroup>
 	<Import Project="$(MSBuildDNNtcTasksPath)\DNNtc.MSBuild.Tasks.targets" />
-	<PropertyGroup>
+  	<PropertyGroup>
 		<BinDir>$(MSBuildProjectDirectory)\bin</BinDir>
 	</PropertyGroup>
 	<!--####################################################################### -->
@@ -38,9 +39,9 @@
 	<!--####################################################################### -->
 	<!--Company properties-->
 	<PropertyGroup>
-		<CompanyName>DNNCorp</CompanyName>
-		<CompanyUrl>http://www.dnnsoftware.com</CompanyUrl>
-		<CompanyEmail>support@dnnsoftware.com</CompanyEmail>
+		<CompanyName>DNNCommunity.org</CompanyName>
+		<CompanyUrl>https://dnncommunity.org/</CompanyUrl>
+		<CompanyEmail>info@dnncommunity.org</CompanyEmail>
 	</PropertyGroup>
 	<!--You may change these properties when needed-->
 	<PropertyGroup>
